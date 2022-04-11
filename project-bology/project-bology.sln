@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "project-bology", "project-bology\project-bology.vcxproj", "{E6B3EBB5-574A-4020-8E14-B73B9B2776BD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pb.consoleApp", "pb.consoleApp\pb.consoleApp.vcxproj", "{250D6797-AFB8-4D8A-B2FB-32917F53666D}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pb.bll", "pb.bll\pb.bll.vcxproj", "{62214906-7EE4-4DDB-9313-F886AFFB09BC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pb.dal", "pb.dal\pb.dal.vcxproj", "{EAD1C34C-A42A-493C-94A8-17D31B1A3174}"
@@ -27,14 +25,6 @@ Global
 		{E6B3EBB5-574A-4020-8E14-B73B9B2776BD}.Release|x64.Build.0 = Release|x64
 		{E6B3EBB5-574A-4020-8E14-B73B9B2776BD}.Release|x86.ActiveCfg = Release|Win32
 		{E6B3EBB5-574A-4020-8E14-B73B9B2776BD}.Release|x86.Build.0 = Release|Win32
-		{250D6797-AFB8-4D8A-B2FB-32917F53666D}.Debug|x64.ActiveCfg = Debug|x64
-		{250D6797-AFB8-4D8A-B2FB-32917F53666D}.Debug|x64.Build.0 = Debug|x64
-		{250D6797-AFB8-4D8A-B2FB-32917F53666D}.Debug|x86.ActiveCfg = Debug|Win32
-		{250D6797-AFB8-4D8A-B2FB-32917F53666D}.Debug|x86.Build.0 = Debug|Win32
-		{250D6797-AFB8-4D8A-B2FB-32917F53666D}.Release|x64.ActiveCfg = Release|x64
-		{250D6797-AFB8-4D8A-B2FB-32917F53666D}.Release|x64.Build.0 = Release|x64
-		{250D6797-AFB8-4D8A-B2FB-32917F53666D}.Release|x86.ActiveCfg = Release|Win32
-		{250D6797-AFB8-4D8A-B2FB-32917F53666D}.Release|x86.Build.0 = Release|Win32
 		{62214906-7EE4-4DDB-9313-F886AFFB09BC}.Debug|x64.ActiveCfg = Debug|x64
 		{62214906-7EE4-4DDB-9313-F886AFFB09BC}.Debug|x64.Build.0 = Debug|x64
 		{62214906-7EE4-4DDB-9313-F886AFFB09BC}.Debug|x86.ActiveCfg = Debug|Win32
