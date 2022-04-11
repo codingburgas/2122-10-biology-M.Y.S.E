@@ -1,0 +1,94 @@
+ButtonPlay {
+        BackgroundColor = #B4B4B400;
+        BackgroundColorDown = #96969600;
+        BackgroundColorHover = #3CE13C3C;
+        BorderColor = #F0F0F000;
+        Borders = (0, 0, 0, 0);
+        TextColor = #FFFFFF00;
+        TextColorDown = rgba(255, 255, 255, 235);
+        TextColorHover = rgba(255, 255, 255, 235);
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "button-play.png" Smooth;
+}
+
+ButtonSettings {
+        BackgroundColor = #B4B4B400;
+        BackgroundColorDown = #96969600;
+        BackgroundColorHover = #3CE13C3C;
+        BorderColor = #F0F0F000;
+        Borders = (0, 0, 0, 0);
+        TextColor = #FFFFFF00;
+        TextColorDown = rgba(255, 255, 255, 235);
+        TextColorHover = rgba(255, 255, 255, 235);
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "button-settings.png" Smooth;
+}
+
+ButtonHelp {
+        BackgroundColor = #B4B4B400;
+        BackgroundColorDown = #96969600;
+        BackgroundColorHover = #3CE13C3C;
+        BorderColor = #F0F0F000;
+        Borders = (0, 0, 0, 0);
+        TextColor = #FFFFFF00;
+        TextColorDown = rgba(255, 255, 255, 235);
+        TextColorHover = rgba(255, 255, 255, 235);
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "button-help.png" Smooth;
+}
+
+ButtonQuit {
+        BackgroundColor = #B4B4B400;
+        BackgroundColorDown = #96969600;
+        BackgroundColorHover = #3CE13C3C;
+        BorderColor = #F0F0F000;
+        Borders = (0, 0, 0, 0);
+        TextColor = #FFFFFF00;
+        TextColorDown = rgba(255, 255, 255, 235);
+        TextColorHover = rgba(255, 255, 255, 235);
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "button-quit.png" Smooth;
+}
+
+LoginField{
+        BackgroundColor = #F5F5F5;
+        BackgroundColorDisabled = #E6E6E6;
+        BackgroundColorHover = white;
+        BorderColor = #3C3C3C;
+        BorderColorDisabled = #7D7D7D;
+        BorderColorHover = black;
+        Borders = (0, 0, 0, 0);
+        CaretColor = black;
+        CaretWidth = 1;
+        DefaultTextColor = #A0A0A0;
+        Padding = (0, 0, 0, 0);
+        SelectedTextBackgroundColor = #006EFF;
+        SelectedTextColor = white;
+        TextColor = #28323E;
+        TextColorDisabled = #7D7D7D;
+        Texture = None;
+        TextureDisabled = None;
+        TextureFocused = None;
+        TextureHover = None;
+}
+
+LoginButton {
+        Borders = (0, 0, 0, 0);
+        TextColor = #28323E;
+}
