@@ -1,6 +1,46 @@
 #include "front-end.h"
 
 
+void loadWidgets(tgui::BackendGui& gui)
+{
+    updateTextSize(gui);
+
+    gui.onViewChange([&gui] { updateTextSize(gui); });
+
+    gui.removeAllWidgets();
+
+    auto picture = tgui::Picture::create("../src/ui.png");
+    picture->setSize({ "100%", "100%" });
+    gui.add(picture);
+
+    tgui::Theme menuTheme{ "../src/theme-menu.txt" };
+
+    auto buttonPlay = tgui::Button::create("");
+    buttonPlay->setSize({ "24.1%", "32.1%" });
+    buttonPlay->setPosition({ "25.4%", "17.2%" });
+    buttonPlay->onPress([&gui] { showScreen2(gui); });
+    buttonPlay->setRenderer(menuTheme.getRenderer("ButtonPlay"));
+    gui.add(buttonPlay);
+
+    auto buttonSettings = tgui::Button::create("");
+    buttonSettings->setSize({ "24.1%", "32.1%" });
+    buttonSettings->setPosition({ "50.5%", "17.2%" });
+    buttonSettings->setRenderer(menuTheme.getRenderer("ButtonSettings"));
+    gui.add(buttonSettings);
+
+    auto buttonHelp = tgui::Button::create("");
+    buttonHelp->setSize({ "24.1%", "32.1%" });
+    buttonHelp->setPosition({ "25.4%", "50.6%" });
+    buttonHelp->setRenderer(menuTheme.getRenderer("ButtonHelp"));
+    gui.add(buttonHelp);
+
+    auto buttonQuit = tgui::Button::create("");
+    buttonQuit->setSize({ "24.1%", "32.1%" });
+    buttonQuit->setPosition({ "50.5%", "50.6%" });
+    buttonQuit->onPress([&gui] { logInScreen(gui); });
+    buttonQuit->setRenderer(menuTheme.getRenderer("ButtonQuit"));
+    gui.add(buttonQuit);
+}
 
 void logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password)
 {
