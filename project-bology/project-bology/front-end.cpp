@@ -1,16 +1,21 @@
 #include "front-end.h"
 
+void updateTextSize(tgui::BackendGui& gui)
+{
+    const float windowHeight = gui.getView().getRect().height;
+    gui.setTextSize(static_cast<unsigned int>(0.04f * windowHeight));
+}
 
 void showScreen2(tgui::BackendGui& gui)
 {
     gui.removeAllWidgets();
 
     auto button2 = tgui::Button::create("Switch to sceen 1");
-    button2->onPress([&gui] { loadWidgets(gui); });
+    button2->onPress([&gui] { mainMenu(gui); });
     gui.add(button2);
 }
 
-void loadWidgets(tgui::BackendGui& gui)
+void mainMenu(tgui::BackendGui& gui)
 {
     updateTextSize(gui);
 
@@ -90,7 +95,7 @@ void logInScreen(tgui::BackendGui& gui)
     gui.add(buttonLogin);
 
     buttonLogin->onPress(&logIn, logInUsername, logInPassword);
-    buttonLogin->onPress([&gui] { loadWidgets(gui); });
+    buttonLogin->onPress([&gui] { mainMenu(gui); });
 
     // Register widgets
     auto registerUsername = tgui::EditBox::create();
@@ -113,7 +118,7 @@ void logInScreen(tgui::BackendGui& gui)
     gui.add(buttonRegister);
 
     buttonRegister->onPress(&logIn, registerUsername, registerPassword);
-    buttonRegister->onPress([&gui] { loadWidgets(gui); });
+    buttonRegister->onPress([&gui] { mainMenu(gui); });
 }
 
 bool runExample(tgui::BackendGui& gui)
