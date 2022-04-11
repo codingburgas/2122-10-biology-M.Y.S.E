@@ -1,5 +1,13 @@
 #include "front-end.h"
 
+
+
+void logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password)
+{
+    std::cout << "Username: " << username->getText() << std::endl;
+    std::cout << "Password: " << password->getText() << std::endl;
+}
+
 void logInScreen(tgui::BackendGui& gui)
 {
     updateTextSize(gui);
