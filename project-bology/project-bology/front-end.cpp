@@ -1,6 +1,15 @@
 #include "front-end.h"
 
 
+void showScreen2(tgui::BackendGui& gui)
+{
+    gui.removeAllWidgets();
+
+    auto button2 = tgui::Button::create("Switch to sceen 1");
+    button2->onPress([&gui] { loadWidgets(gui); });
+    gui.add(button2);
+}
+
 void loadWidgets(tgui::BackendGui& gui)
 {
     updateTextSize(gui);
