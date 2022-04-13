@@ -1,6 +1,15 @@
 #pragma once
 
 #include "pch.h"
-#include "../pb.bll/register.h"
+
+struct USER
+{
+	int id = 0;
+	std::string fName = "";
+	std::string lName = "";
+	std::string username = "";
+	std::string password = "";
+};
 
 void addUserInfo(USER);
+int getLastId();

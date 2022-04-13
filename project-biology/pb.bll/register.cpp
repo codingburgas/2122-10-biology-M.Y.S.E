@@ -3,7 +3,7 @@
 
 void registerUser()
 {
-	int id = file::getLastId();
+	int id = getLastId();
 	std::string fName, lName, username, password;
 
 	std::cin >> fName >> lName >> username >> password;
@@ -12,5 +12,5 @@ void registerUser()
 
 	USER tempUser = { id, fName, lName, username, password };
 
-	file::addUserInfo(tempUser);
+	addUserInfo(tempUser);
 }
