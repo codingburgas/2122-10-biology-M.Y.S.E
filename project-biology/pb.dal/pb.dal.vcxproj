@@ -152,11 +152,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="files.h" />
+    <ClInclude Include="login-files.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="register-files.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="files.cpp" />
+    <ClCompile Include="login-files.cpp" />
     <ClCompile Include="pb.dal.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -37,11 +37,7 @@ int getLastId()
 
 	while (getline(userFile, line))
 	{
-		if (line.find("Id") != std::string::npos)
-		{
-			line = line.erase(0, 3);
-			lastId = std::stoi(line) + 1;
-		}
+		lastId = std::stoi(line) + 1;
 	}
 
 	return lastId;
