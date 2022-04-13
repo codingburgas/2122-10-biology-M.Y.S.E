@@ -7,6 +7,8 @@
 #ifndef PCH_H_DAL
 #define PCH_H_DAL
 
-// add headers that you want to pre-compile here
+#include <iostream>
+#include <string>
+#include <fstream>
 
 #endif //PCH_Hs
