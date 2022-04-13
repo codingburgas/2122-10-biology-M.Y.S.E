@@ -1,11 +1,8 @@
 #include "pch.h"
 #include "login.h"
 
-void loginUser()
+void loginUser(std::string username, std::string password)
 {
-	std::string username, password;
-	std::cin >> username >> password;
-
 	//TODO: Call password hashing function
 
 	if (userExists(username, password))

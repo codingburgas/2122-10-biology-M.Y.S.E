@@ -1,5 +1,6 @@
 #pragma once
 #include "pch.h"
+#include "../../2122-10-biology-SSUzunov19/project-biology/pb.bll/login.h"
 
 void updateTextSize(tgui::BackendGui& gui);
 void showScreen2(tgui::BackendGui& gui);
