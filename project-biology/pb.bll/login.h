@@ -3,4 +3,4 @@
 #include "pch.h"
 #include "../pb.dal/login-files.h"
 
-void loginUser();
+void loginUser(std::string, std::string);

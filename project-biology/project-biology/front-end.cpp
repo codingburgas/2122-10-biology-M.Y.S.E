@@ -61,8 +61,10 @@ void logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password)
     std::cout << "Username: " << username->getText() << std::endl;
     std::cout << "Password: " << password->getText() << std::endl;
 
-    // I need "username->getText()" and "password->getText()"
-    // to be converted to a string so we can call the logIn function
+    std::string loginUsername = username->getText().toStdString();
+    std::string loginPassword = password->getText().toStdString();
+
+    loginUser(loginUsername, loginPassword);
 }
 
 void logInScreen(tgui::BackendGui& gui)
