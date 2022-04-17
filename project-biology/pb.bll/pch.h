@@ -10,5 +10,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <thread>
+#include <vector>
 
 #endif //PCH_H
