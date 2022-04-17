@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{9a4e29f4-6c11-41cc-8ed3-3b720c35c3b8}</ProjectGuid>
-    <RootNamespace>pbbll</RootNamespace>
+    <ProjectGuid>{0ff8e55a-4b64-4000-af9d-f5ce812ccc60}</ProjectGuid>
+    <RootNamespace>pbtypes</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -151,32 +151,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="back-end.h" />
-    <ClInclude Include="logic-for-objects.h" />
-    <ClInclude Include="login.h" />
+    <ClInclude Include="bio-object.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="register.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="back-end.cpp" />
-    <ClCompile Include="logic-for-objects.cpp" />
-    <ClCompile Include="login.cpp" />
-    <ClCompile Include="pb.bll.cpp" />
+    <ClCompile Include="pb.types.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="register.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\pb.dal\pb.dal.vcxproj">
-      <Project>{70033307-cf12-44bf-b182-19e67f1c935c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\pb.types\pb.types.vcxproj">
-      <Project>{0ff8e55a-4b64-4000-af9d-f5ce812ccc60}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

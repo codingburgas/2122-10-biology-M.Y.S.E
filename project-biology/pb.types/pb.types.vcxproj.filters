@@ -18,36 +18,15 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="back-end.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="register.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="login.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="logic-for-objects.h">
+    <ClInclude Include="bio-object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pb.bll.cpp">
+    <ClCompile Include="pb.types.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="back-end.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="register.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="login.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="logic-for-objects.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

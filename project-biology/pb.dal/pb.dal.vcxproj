@@ -152,12 +152,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="files.h" />
+    <ClInclude Include="info-for-objects.h" />
     <ClInclude Include="login-files.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="register-files.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="files.cpp" />
+    <ClCompile Include="info-for-objects.cpp" />
     <ClCompile Include="login-files.cpp" />
     <ClCompile Include="pb.dal.cpp" />
     <ClCompile Include="pch.cpp">
@@ -167,6 +169,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="register-files.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\pb.types\pb.types.vcxproj">
+      <Project>{0ff8e55a-4b64-4000-af9d-f5ce812ccc60}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -8,5 +8,6 @@ int main()
 
     if (runExample(gui))
         gui.mainLoop();*/
-    registerUser();
+    //registerUser();
+    simulation();
 }
