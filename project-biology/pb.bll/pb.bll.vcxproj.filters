@@ -30,6 +30,9 @@
     <ClInclude Include="logic-for-objects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="simulation-date.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pb.bll.cpp">
@@ -48,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="logic-for-objects.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="simulation-date.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

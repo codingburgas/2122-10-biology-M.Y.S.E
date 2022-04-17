@@ -156,6 +156,7 @@
     <ClInclude Include="login.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="register.h" />
+    <ClInclude Include="simulation-date.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="back-end.cpp" />
@@ -169,6 +170,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="register.cpp" />
+    <ClCompile Include="simulation-date.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\pb.dal\pb.dal.vcxproj">
