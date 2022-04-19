@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "simulation-date.h"
 
-void switchDate(int& day, std::string& month)
+void switchDate(unsigned short int& day, std::string& month)
 {
     std::vector<std::string> months = {
         "January",
@@ -17,7 +17,7 @@ void switchDate(int& day, std::string& month)
         "November",
         "December"
     };
-    std::vector<int> days = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    std::vector<unsigned short int> days = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
     int i = 0;
     while (i < 12)
@@ -37,7 +37,7 @@ void switchDate(int& day, std::string& month)
     day++;
 }
 
-void timer(int& day, std::string& month, bool isPaused)
+void timer(unsigned short int& day, std::string& month, bool isPaused)
 {
 	using namespace std::literals::chrono_literals;
 
