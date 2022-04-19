@@ -14,7 +14,7 @@ void simulation() {
 			++days;
 		}
 		
-		for (auto i = 0; i != objectsInSimulation.size(); i++) {
+		for (auto i = 0; i != objectsInSimulation.size(); i++) { // i = 1 what.. = 0
 			switch (whatIsDoingInDaysOptions) {
 			case 0 :
 				if (objectsInSimulation[i] == "Grass") {
@@ -47,7 +47,7 @@ void simulation() {
 			}
 		}
 
-		if (whatIsDoingInDaysOptions == 1) {
+		if (whatIsDoingInDaysOptions == 0) {
 			std::cout << "all animals deaths\n";
 		}
 		else {

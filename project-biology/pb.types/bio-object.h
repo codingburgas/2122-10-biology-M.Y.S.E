@@ -12,6 +12,6 @@ struct Object {
 	unsigned short int hunger;
 	float hungerRateByDays;
 	unsigned short int maleCount;
-	unsigned short int menCount;
+	unsigned short int femaleCount;
 	unsigned short int pregnancy;
 };
