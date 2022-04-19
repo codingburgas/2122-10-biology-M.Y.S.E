@@ -37,11 +37,11 @@ void switchDate(int& day, std::string& month)
     day++;
 }
 
-void timer(int& day, std::string& month)
+void timer(int& day, std::string& month, bool isPaused)
 {
 	using namespace std::literals::chrono_literals;
 
-	while (true)
+	while (!isPaused)
 	{
 		switchDate(day, month);
 
