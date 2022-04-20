@@ -3,57 +3,49 @@
 
 void simulation() {
 	std::vector<Object> objects = infoObjects();
+	std::vector<std::string> objectsInSimulation;
 
 	unsigned short int days = 0;
-	unsigned short int whatIsDoingInDaysOptions = 0;
+	unsigned short int choice;
 
-	//while (true) {
-		std::vector<std::string> objectsInSimulation = { "Mouse" , "Grass", "Grasshoper"};
+	while (true) {
 
-		if (!objectsInSimulation.empty()) {
-			++days;
-		}
+		std::cout << "Add 1.Grass 2.Grasshoper 3.Mouse - ";
+		std::cin >> choice;
+
+		++days;
+		objectsInSimulation.push_back(objects[choice-1].name);
 		
-		for (auto i = 0; i != objectsInSimulation.size(); i++) { // i = 1 what.. = 0
-			switch (whatIsDoingInDaysOptions) {
-			case 0 :
-				if (objectsInSimulation[i] == "Grass") {
-					std::cout << "is there Grass\n";
-					++whatIsDoingInDaysOptions;
-					i = -1;
+		for (auto i = 0; i != objectsInSimulation.size(); i++) 
+		{
+			for (auto m = 0; m != objectsInSimulation.size(); m++) {
+				if (!(objectsInSimulation[i] == objects[m].name && objects[m].food.empty()))
+				{
+					for (int j = 0, n = 0; j != objectsInSimulation.size(); j++, n++)
+					{
+						if (objectsInSimulation[i] == objects[n].name && objects[n].food[j] == objectsInSimulation[j])
+						{
+							for (int k = 0; k != objectsInSimulation.size(); k++)
+							{
+								if (objectsInSimulation[k] == objectsInSimulation[j])
+								{
+									objectsInSimulation.erase(objectsInSimulation.begin() + k);
+									break;
+								}
+							}
+							objectsInSimulation.erase(objectsInSimulation.begin() + j);
+							break;
+						}
+					}
 				}
-				break;
-			case 1:
-				if (objectsInSimulation[i] == "Grasshoper") {
-					std::cout << "is there Grasshoper\n";
-					++whatIsDoingInDaysOptions;
-					i = -1;
-				}
-				break;
-			case 2:
-				if (objectsInSimulation[i] == "Mouse") {
-					std::cout << "is there Mouse\n";
-					++whatIsDoingInDaysOptions;
-					i = -1;
-				}
-				break;
-			case 3:
-				if (objectsInSimulation[i] == "Owl") {
-					std::cout << "is there Owl\n";
-					++whatIsDoingInDaysOptions;
-					i = -1;
-				}
-				break;
 			}
 		}
 
-		if (whatIsDoingInDaysOptions == 0) {
-			std::cout << "all animals deaths\n";
-		}
-		else {
-			std::cout << "whatIsDoingInDaysOptions: " << whatIsDoingInDaysOptions << std::endl;
-		}
+		std::cout << "Sega imash slednite obekti: ";
+		for (auto i : objectsInSimulation)
+			std::cout << i << ' ';
+		std::cout << std::endl;
 
-		std::cout << "Days: " << days;
-	//}
+		std::cout << "Days: " << days << std::endl;
+	}
 }
