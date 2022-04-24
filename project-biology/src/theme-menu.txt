@@ -67,20 +67,20 @@ ButtonQuit {
 }
 
 LoginField{
-        BackgroundColor = #F5F5F5;
+        BackgroundColor = #364741;
         BackgroundColorDisabled = #E6E6E6;
-        BackgroundColorHover = white;
+        BackgroundColorHover = #364741;
         BorderColor = #3C3C3C;
         BorderColorDisabled = #7D7D7D;
         BorderColorHover = black;
         Borders = (0, 0, 0, 0);
         CaretColor = black;
         CaretWidth = 1;
-        DefaultTextColor = #A0A0A0;
+        DefaultTextColor = #ACCDB8;
         Padding = (0, 0, 0, 0);
         SelectedTextBackgroundColor = #006EFF;
         SelectedTextColor = white;
-        TextColor = #28323E;
+        TextColor = #FFFFFF;
         TextColorDisabled = #7D7D7D;
         Texture = None;
         TextureDisabled = None;
@@ -89,6 +89,35 @@ LoginField{
 }
 
 LoginButton {
+        BackgroundColor = #364741;
         Borders = (0, 0, 0, 0);
-        TextColor = #28323E;
+        TextColor = #FFFFFF;
+}
+
+RegisterButton {
+        BackgroundColor = #349C85;
+        Borders = (0, 0, 0, 0);
+        TextColor = #FFFFFF;
+}
+
+ButtonStart {
+        BackgroundColor = #B4B4B400;
+        BackgroundColorDown = #96969600;
+        BackgroundColorHover = #3CE13C3C;
+        BorderColor = #F0F0F000;
+        Borders = (0, 0, 0, 0);
+        TextColor = #FFFFFF00;
+        TextColorDown = rgba(255, 255, 255, 235);
+        TextColorHover = rgba(255, 255, 255, 235);
+        Texture = "button-start.png" Smooth;
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "button-start-hover.png" Smooth;
+}
+
+LabelTime {
+        TextColor = #5C7F69;
 }

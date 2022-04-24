@@ -6,13 +6,65 @@ void updateTextSize(tgui::BackendGui& gui)
     gui.setTextSize(static_cast<unsigned int>(0.04f * windowHeight));
 }
 
-void showScreen2(tgui::BackendGui& gui)
+void symulationScreen(tgui::BackendGui& gui)
 {
     gui.removeAllWidgets();
 
-    auto button2 = tgui::Button::create("Switch to sceen 1");
-    button2->onPress([&gui] { mainMenu(gui); });
-    gui.add(button2);
+    updateTextSize(gui);
+
+    gui.onViewChange([&gui] { updateTextSize(gui); });
+
+    tgui::Theme menuTheme{ "src/theme-menu.txt" };
+
+    tgui::Theme objectsTheme{ "src/objects/objects.txt" };
+
+    auto picture = tgui::Picture::create("src/sym-ui.png");
+    picture->setSize({ "100%", "100%" });
+    gui.add(picture);
+
+    auto buttonStart = tgui::Button::create("");
+    buttonStart->setSize({ "8.85%", "15.74%" });
+    buttonStart->setPosition({ "1.25%", "81.84%" });
+    buttonStart->setRenderer(menuTheme.getRenderer("ButtonStart"));
+    gui.add(buttonStart);
+
+    auto label = tgui::Label::create();
+    label->setText("Time is:");
+    label->setPosition({ "10.25%", "81.84%" });
+    label->setRenderer(menuTheme.getRenderer("LabelTime"));
+    label->setTextSize(16);
+    gui.add(label);
+
+    auto buttonObjRabbit = tgui::Button::create("");
+    buttonObjRabbit->setSize({ "4.68%", "8.33%" });
+    buttonObjRabbit->setPosition({ "89.37%", "4.35%" });
+    buttonObjRabbit->setRenderer(objectsTheme.getRenderer("ButtonObjRabbit"));
+    gui.add(buttonObjRabbit);
+
+    auto buttonObjMouse = tgui::Button::copy(buttonObjRabbit);
+    buttonObjMouse->setPosition({ "94.47%", "4.35%" });
+    buttonObjMouse->setRenderer(objectsTheme.getRenderer("ButtonObjMouse"));
+    gui.add(buttonObjMouse);
+
+    auto buttonObjBear = tgui::Button::copy(buttonObjRabbit);
+    buttonObjBear->setPosition({ "89.37%", "13.42%" });
+    buttonObjBear->setRenderer(objectsTheme.getRenderer("ButtonObjBear"));
+    gui.add(buttonObjBear);
+
+    auto buttonObjFox = tgui::Button::copy(buttonObjRabbit);
+    buttonObjFox->setPosition({ "94.47%", "13.42%" });
+    buttonObjFox->setRenderer(objectsTheme.getRenderer("ButtonObjFox"));
+    gui.add(buttonObjFox);
+
+    auto buttonObjGrasshopper = tgui::Button::copy(buttonObjRabbit);
+    buttonObjGrasshopper->setPosition({ "89.37%", "22.50%" });
+    buttonObjGrasshopper->setRenderer(objectsTheme.getRenderer("ButtonObjGrasshopper"));
+    gui.add(buttonObjGrasshopper);
+
+    auto buttonObjOwl = tgui::Button::copy(buttonObjRabbit);
+    buttonObjOwl->setPosition({ "94.47%", "22.50%" });
+    buttonObjOwl->setRenderer(objectsTheme.getRenderer("ButtonObjOwl"));
+    gui.add(buttonObjOwl);
 }
 
 void mainMenu(tgui::BackendGui& gui)
@@ -21,36 +73,31 @@ void mainMenu(tgui::BackendGui& gui)
 
     gui.onViewChange([&gui] { updateTextSize(gui); });
 
-    gui.removeAllWidgets();
+    tgui::Theme menuTheme{ "src/theme-menu.txt" };
 
-    auto picture = tgui::Picture::create("../src/ui.png");
+    auto picture = tgui::Picture::create("src/main-ui.png");
     picture->setSize({ "100%", "100%" });
     gui.add(picture);
 
-    tgui::Theme menuTheme{ "../src/theme-menu.txt" };
-
     auto buttonPlay = tgui::Button::create("");
-    buttonPlay->setSize({ "24.1%", "32.1%" });
-    buttonPlay->setPosition({ "25.4%", "17.2%" });
-    buttonPlay->onPress([&gui] { showScreen2(gui); });
+    buttonPlay->setSize({ "18.7%", "33.3%" });
+    buttonPlay->setPosition({ "30.9%", "16%" });
+    buttonPlay->onPress([&gui] { symulationScreen(gui); });
     buttonPlay->setRenderer(menuTheme.getRenderer("ButtonPlay"));
     gui.add(buttonPlay);
 
-    auto buttonSettings = tgui::Button::create("");
-    buttonSettings->setSize({ "24.1%", "32.1%" });
-    buttonSettings->setPosition({ "50.5%", "17.2%" });
+    auto buttonSettings = tgui::Button::copy(buttonPlay);
+    buttonSettings->setPosition({ "50.4%", "16%" });
     buttonSettings->setRenderer(menuTheme.getRenderer("ButtonSettings"));
     gui.add(buttonSettings);
 
-    auto buttonHelp = tgui::Button::create("");
-    buttonHelp->setSize({ "24.1%", "32.1%" });
-    buttonHelp->setPosition({ "25.4%", "50.6%" });
+    auto buttonHelp = tgui::Button::copy(buttonPlay);
+    buttonHelp->setPosition({ "30.9%", "50.7%" });
     buttonHelp->setRenderer(menuTheme.getRenderer("ButtonHelp"));
     gui.add(buttonHelp);
 
-    auto buttonQuit = tgui::Button::create("");
-    buttonQuit->setSize({ "24.1%", "32.1%" });
-    buttonQuit->setPosition({ "50.5%", "50.6%" });
+    auto buttonQuit = tgui::Button::copy(buttonPlay);
+    buttonQuit->setPosition({ "50.4%", "50.7%" });
     buttonQuit->onPress([&gui] { logInScreen(gui); });
     buttonQuit->setRenderer(menuTheme.getRenderer("ButtonQuit"));
     gui.add(buttonQuit);
@@ -73,57 +120,40 @@ void logInScreen(tgui::BackendGui& gui)
 
     gui.onViewChange([&gui] { updateTextSize(gui); });
 
-    auto picture = tgui::Picture::create("../src/login.png");
+    auto picture = tgui::Picture::create("src/log-in-ui.png");
     picture->setSize({ "100%", "100%" });
     gui.add(picture);
 
-    tgui::Theme menuTheme{ "../src/theme-menu.txt" };
+    tgui::Theme menuTheme{ "src/theme-menu.txt" };
 
     // Log in widgets
     auto logInUsername = tgui::EditBox::create();
-    logInUsername->setSize({ "20%", "6.6%" });
-    logInUsername->setPosition({ "10.5%", "28.4%" });
+    logInUsername->setSize({ "28.1%", "9.2%" });
+    logInUsername->setPosition({ "35.9%", "24.1%" });
     logInUsername->setDefaultText("Username");
     logInUsername->setRenderer(menuTheme.getRenderer("LoginField"));
     gui.add(logInUsername);
 
     auto logInPassword = tgui::EditBox::copy(logInUsername);
-    logInPassword->setPosition({ "10.5%", "40%" });
+    logInPassword->setPosition({ "35.9%", "40.8%" });
     logInPassword->setPasswordCharacter('*');
     logInPassword->setDefaultText("Password");
     gui.add(logInPassword);
 
     auto buttonLogin = tgui::Button::create("LOG IN");
-    buttonLogin->setSize({ "20%", "6.6%" });
-    buttonLogin->setPosition({ "10.5%", "65%" });
+    buttonLogin->setSize({ "15.3%", "9.2%" });
+    buttonLogin->setPosition({ "42.3%", "57.4%" });
     buttonLogin->setRenderer(menuTheme.getRenderer("LoginButton"));
     gui.add(buttonLogin);
 
     buttonLogin->onPress(&logIn, logInUsername, logInPassword);
     buttonLogin->onPress([&gui] { mainMenu(gui); });
 
-    // Register widgets
-    auto registerUsername = tgui::EditBox::create();
-    registerUsername->setSize({ "20%", "6.6%" });
-    registerUsername->setPosition({ "40%", "28.4%" });
-    registerUsername->setDefaultText("Username");
-    registerUsername->setRenderer(menuTheme.getRenderer("LoginField"));
-    gui.add(registerUsername);
-
-    auto registerPassword = tgui::EditBox::copy(registerUsername);
-    registerPassword->setPosition({ "40%", "40%" });
-    registerPassword->setPasswordCharacter('*');
-    registerPassword->setDefaultText("Password");
-    gui.add(registerPassword);
-
     auto buttonRegister = tgui::Button::create("REGISTER");
-    buttonRegister->setSize({ "20%", "6.6%" });
-    buttonRegister->setPosition({ "40%", "65%" });
-    buttonRegister->setRenderer(menuTheme.getRenderer("LoginButton"));
+    buttonRegister->setSize({ "15.3%", "5.5%" });
+    buttonRegister->setPosition({ "42.3%", "68.5%" });
+    buttonRegister->setRenderer(menuTheme.getRenderer("RegisterButton"));
     gui.add(buttonRegister);
-
-    buttonRegister->onPress(&logIn, registerUsername, registerPassword);
-    buttonRegister->onPress([&gui] { mainMenu(gui); });
 }
 
 bool runExample(tgui::BackendGui& gui)

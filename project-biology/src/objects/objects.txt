@@ -1,0 +1,29 @@
+ButtonObjRabbit {
+        Texture = "rabbit.png" Smooth;
+        TextureHover = "rabbit-hover.png" Smooth;
+}
+
+ButtonObjMouse {
+        Texture = "mouse.png" Smooth;
+        TextureHover = "mouse-hover.png" Smooth;
+}
+
+ButtonObjBear {
+        Texture = "bear.png" Smooth;
+        TextureHover = "bear-hover.png" Smooth;
+}
+
+ButtonObjFox {
+        Texture = "fox.png" Smooth;
+        TextureHover = "fox-hover.png" Smooth;
+}
+
+ButtonObjGrasshopper {
+        Texture = "grasshopper.png" Smooth;
+        TextureHover = "grasshopper-hover.png" Smooth;
+}
+
+ButtonObjOwl {
+        Texture = "owl.png" Smooth;
+        TextureHover = "owl-hover.png" Smooth;
+}
