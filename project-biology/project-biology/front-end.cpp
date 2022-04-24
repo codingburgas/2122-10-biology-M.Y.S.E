@@ -14,11 +14,11 @@ void symulationScreen(tgui::BackendGui& gui)
 
     gui.onViewChange([&gui] { updateTextSize(gui); });
 
-    tgui::Theme menuTheme{ "src/theme-menu.txt" };
+    tgui::Theme menuTheme{ "../src/theme-menu.txt" };
 
-    tgui::Theme objectsTheme{ "src/objects/objects.txt" };
+    tgui::Theme objectsTheme{ "../src/objects/objects.txt" };
 
-    auto picture = tgui::Picture::create("src/sym-ui.png");
+    auto picture = tgui::Picture::create("../src/sym-ui.png");
     picture->setSize({ "100%", "100%" });
     gui.add(picture);
 
@@ -73,9 +73,9 @@ void mainMenu(tgui::BackendGui& gui)
 
     gui.onViewChange([&gui] { updateTextSize(gui); });
 
-    tgui::Theme menuTheme{ "src/theme-menu.txt" };
+    tgui::Theme menuTheme{ "../src/theme-menu.txt" };
 
-    auto picture = tgui::Picture::create("src/main-ui.png");
+    auto picture = tgui::Picture::create("../src/main-ui.png");
     picture->setSize({ "100%", "100%" });
     gui.add(picture);
 
@@ -120,11 +120,11 @@ void logInScreen(tgui::BackendGui& gui)
 
     gui.onViewChange([&gui] { updateTextSize(gui); });
 
-    auto picture = tgui::Picture::create("src/log-in-ui.png");
+    auto picture = tgui::Picture::create("../src/log-in-ui.png");
     picture->setSize({ "100%", "100%" });
     gui.add(picture);
 
-    tgui::Theme menuTheme{ "src/theme-menu.txt" };
+    tgui::Theme menuTheme{ "../src/theme-menu.txt" };
 
     // Log in widgets
     auto logInUsername = tgui::EditBox::create();
