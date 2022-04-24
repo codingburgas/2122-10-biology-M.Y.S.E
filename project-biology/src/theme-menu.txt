@@ -121,3 +121,7 @@ ButtonStart {
 LabelTime {
         TextColor = #5C7F69;
 }
+
+LabelUserName {
+	TextColor = #FC0303;
+}

@@ -19,6 +19,7 @@ void symulationScreen(tgui::BackendGui& gui)
     tgui::Theme objectsTheme{ "../src/objects/objects.txt" };
 
     auto picture = tgui::Picture::create("../src/sym-ui.png");
+
     picture->setSize({ "100%", "100%" });
     gui.add(picture);
 
@@ -65,15 +66,20 @@ void symulationScreen(tgui::BackendGui& gui)
     buttonObjOwl->setPosition({ "94.47%", "22.50%" });
     buttonObjOwl->setRenderer(objectsTheme.getRenderer("ButtonObjOwl"));
     gui.add(buttonObjOwl);
+
 }
 
-void mainMenu(tgui::BackendGui& gui)
+void mainMenu(tgui::BackendGui& gui, tgui::Label::Ptr userName)
 {
     updateTextSize(gui);
 
     gui.onViewChange([&gui] { updateTextSize(gui); });
 
     tgui::Theme menuTheme{ "../src/theme-menu.txt" };
+
+    userName->setSize({ "10%", "10%" });
+    userName->setPosition({ "20%", "20%" });
+    userName->setRenderer(menuTheme.getRenderer("LabelUserName"));
 
     auto picture = tgui::Picture::create("../src/main-ui.png");
     picture->setSize({ "100%", "100%" });
@@ -101,6 +107,8 @@ void mainMenu(tgui::BackendGui& gui)
     buttonQuit->onPress([&gui] { logInScreen(gui); });
     buttonQuit->setRenderer(menuTheme.getRenderer("ButtonQuit"));
     gui.add(buttonQuit);
+
+    gui.add(userName);
 }
 
 void logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password)
@@ -123,8 +131,10 @@ void logInScreen(tgui::BackendGui& gui)
     auto picture = tgui::Picture::create("../src/log-in-ui.png");
     picture->setSize({ "100%", "100%" });
     gui.add(picture);
-
+    
     tgui::Theme menuTheme{ "../src/theme-menu.txt" };
+
+    auto userName = tgui::Label::create();
 
     // Log in widgets
     auto logInUsername = tgui::EditBox::create();
@@ -146,8 +156,9 @@ void logInScreen(tgui::BackendGui& gui)
     buttonLogin->setRenderer(menuTheme.getRenderer("LoginButton"));
     gui.add(buttonLogin);
 
+    buttonLogin->onPress([=] { userName->setText(logInUsername->getText()); });
     buttonLogin->onPress(&logIn, logInUsername, logInPassword);
-    buttonLogin->onPress([&gui] { mainMenu(gui); });
+    buttonLogin->onPress([&gui, userName] { mainMenu(gui, userName); });
 
     auto buttonRegister = tgui::Button::create("REGISTER");
     buttonRegister->setSize({ "15.3%", "5.5%" });

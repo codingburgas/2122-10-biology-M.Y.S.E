@@ -1,6 +1,10 @@
 #include "pch.h"
 #include "logic-for-objects.h"
 
+std::string displayGosho() {
+	return "Gosho";
+}
+
 void displayProducts(std::vector<Object> objectsInSimulation)
 {
 	if (objectsInSimulation.empty())
