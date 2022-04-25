@@ -70,6 +70,34 @@ std::vector<Object> removeObjectByHungerRateByDays(std::vector<Object> objectsIn
 	return objectsInSimulation;
 }
 
+std::vector<Object> removeObjectByFood(std::vector<Object> objectsInSimulation, int i, unsigned short int days) {
+
+	srand(time(NULL));
+
+	int whoWillEat = rand() % 1 + 1;
+
+	if (objectsInSimulation[i].maleCount == 0) {
+		--objectsInSimulation[i].femaleCount;
+	}
+	else if (objectsInSimulation[i].femaleCount == 0) {
+		--objectsInSimulation[i].maleCount;
+	}
+	else {
+		if (whoWillEat) {
+			--objectsInSimulation[i].maleCount;
+		}
+		else {
+			--objectsInSimulation[i].femaleCount;
+		}
+	}
+
+	if (objectsInSimulation[i].femaleCount == 0 && objectsInSimulation[i].maleCount == 0) {
+		objectsInSimulation.erase(objectsInSimulation.begin() + i);
+	}
+
+	return objectsInSimulation;
+}
+
 std::vector<Object> removeObjectByLifeExpInWeeks(std::vector<Object> objectsInSimulation, unsigned short int days) {
 
 	srand(time(NULL));
