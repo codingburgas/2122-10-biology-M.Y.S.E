@@ -6,7 +6,7 @@ void updateTextSize(tgui::BackendGui& gui)
     gui.setTextSize(static_cast<unsigned int>(0.04f * windowHeight));
 }
 
-void symulationScreen(tgui::BackendGui& gui)
+void simulationScreen(tgui::BackendGui& gui)
 {
     gui.removeAllWidgets();
 
@@ -88,7 +88,7 @@ void mainMenu(tgui::BackendGui& gui, tgui::Label::Ptr userName)
     auto buttonPlay = tgui::Button::create("");
     buttonPlay->setSize({ "18.7%", "33.3%" });
     buttonPlay->setPosition({ "30.9%", "16%" });
-    buttonPlay->onPress([&gui] { symulationScreen(gui); });
+    buttonPlay->onPress([&gui] { simulationScreen(gui); });
     buttonPlay->setRenderer(menuTheme.getRenderer("ButtonPlay"));
     gui.add(buttonPlay);
 

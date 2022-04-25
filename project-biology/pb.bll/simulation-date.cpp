@@ -37,16 +37,11 @@ void switchDate(unsigned short int& day, std::string& month)
     day++;
 }
 
-void timer(unsigned short int& day, std::string& month, bool isPaused)
+void timer(unsigned short int& day, std::string& month, bool isPaused, unsigned short int &choice)
 {
     using namespace std::literals::chrono_literals;
-
-    while (!isPaused)
-    {
-        switchDate(day, month);
-
-        std::this_thread::sleep_for(5s);
-    }
+    switchDate(day, month);
+    std::this_thread::sleep_for(0.1s);
 }
 
 int getMonthsIndex(std::vector<std::string> months, std::string month)
