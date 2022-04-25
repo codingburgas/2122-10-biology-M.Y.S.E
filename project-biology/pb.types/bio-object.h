@@ -4,6 +4,7 @@
 
 struct Object {
 	std::string name;
+	//std::string gender;
 	std::string information;
 	std::size_t lifeExpInWeeks;
 	std::vector<std::string> food;

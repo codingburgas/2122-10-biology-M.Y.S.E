@@ -67,6 +67,38 @@ std::vector<Object> removeObjectByHungerRateByDays(std::vector<Object> objectsIn
 		}
 	}
 
+	return objectsInSimulation;
+}
+
+std::vector<Object> removeObjectByLifeExpInWeeks(std::vector<Object> objectsInSimulation, unsigned short int days) {
+
+	srand(time(NULL));
+
+	bool whoWillDead = rand() % 1 + 1;
+
+	for (int i = 0; i < objectsInSimulation.size(); i++) {
+		if (days % objectsInSimulation[i].lifeExpInWeeks * 7 == 0) {
+			objectsInSimulation.erase(objectsInSimulation.begin() + i);
+
+			if (objectsInSimulation[i].maleCount == 0) {
+				--objectsInSimulation[i].femaleCount;
+			}
+			else if (objectsInSimulation[i].femaleCount == 0) {
+				--objectsInSimulation[i].maleCount;
+			}
+			else {
+				if (whoWillDead) {
+					--objectsInSimulation[i].maleCount;
+				}
+				else {
+					--objectsInSimulation[i].femaleCount;
+				}
+			}
+
+		}
+	}
+
+	return objectsInSimulation;
 }
 
 void simulation() {
