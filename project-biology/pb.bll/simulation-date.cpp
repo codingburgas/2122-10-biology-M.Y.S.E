@@ -86,3 +86,47 @@ std::string getSeason(unsigned short int day, std::string month)
         return "Autumn";
     return "Winter";
 }
+
+int getTemperature(std::string month)
+{
+    srand(time(NULL) + rand());
+
+    std::vector<std::string> months = {
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    };
+
+    int monthIndex = getMonthsIndex(months, month);
+
+    float temperature = 0;
+
+    switch (monthIndex)
+    {
+    case 0: temperature = 4 - (rand() % 11); break;
+    case 1: temperature = 10 - (rand() % 16); break;
+    case 2: temperature = 14 - (rand() % 17); break;
+    case 3: temperature = 18 - (rand() % 13); break;
+    case 4: temperature = 13 - (rand() % 7); break;
+    case 5: temperature = 30 - (rand() % 20); break;
+    case 6: temperature = 30 - (rand() % 14); break;
+    case 7: temperature = 31 - (rand() % 7); break;
+    case 8: temperature = 28 - (rand() % 7); break;
+    case 9: temperature = 21 - (rand() % 20); break;
+    case 10: temperature = 13 - (rand() % 16); break;
+    case 11: temperature = 7 - (rand() % 11); break;
+    }
+
+    temperature += ((rand() % 5) / 10);
+
+    return temperature;
+}
