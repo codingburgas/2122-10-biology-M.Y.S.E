@@ -4,9 +4,9 @@
 
 struct Object {
 	std::string name;
-	//std::string gender;
 	std::string information;
-	std::size_t lifeExpInWeeks;
+	std::string gender;
+	float lifeExpInYears;
 	std::vector<std::string> food;
 	short int maxTemp;
 	short int minTemp;
@@ -14,5 +14,5 @@ struct Object {
 	float hungerRateByDays;
 	unsigned short int maleCount;
 	unsigned short int femaleCount;
-	unsigned short int pregnancy;
+	float pregnancy;
 };

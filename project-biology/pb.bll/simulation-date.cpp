@@ -41,7 +41,7 @@ void timer(unsigned short int& day, std::string& month, bool isPaused, unsigned 
 {
     using namespace std::literals::chrono_literals;
     switchDate(day, month);
-    std::this_thread::sleep_for(0.1s);
+    std::this_thread::sleep_for(0.5s);
 }
 
 int getMonthsIndex(std::vector<std::string> months, std::string month)
