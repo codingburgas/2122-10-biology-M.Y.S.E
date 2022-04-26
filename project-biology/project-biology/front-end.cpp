@@ -6,6 +6,11 @@ void updateTextSize(tgui::BackendGui& gui)
     gui.setTextSize(static_cast<unsigned int>(0.04f * windowHeight));
 }
 
+void removeLockedOverlay(tgui::BackendGui& gui, tgui::Picture::Ptr pic)
+{
+    gui.remove(pic);
+}
+
 void simulationScreen(tgui::BackendGui& gui)
 {
     gui.removeAllWidgets();
@@ -18,14 +23,13 @@ void simulationScreen(tgui::BackendGui& gui)
 
     tgui::Theme objectsTheme{ "../src/objects/objects.txt" };
 
-    auto picture = tgui::Picture::create("../src/sym-ui.png");
-
-    picture->setSize({ "100%", "100%" });
-    gui.add(picture);
+    auto symulationBackground = tgui::Picture::create("../src/sym-ui.png");
+    symulationBackground->setSize({ "100%", "100%" });
+    gui.add(symulationBackground);
 
     auto buttonStart = tgui::Button::create("");
-    buttonStart->setSize({ "8.85%", "15.74%" });
-    buttonStart->setPosition({ "1.25%", "81.84%" });
+    buttonStart->setSize({ "8.85%", "17.17%" });
+    buttonStart->setPosition({ "1.25%", "80.10%" });
     buttonStart->setRenderer(menuTheme.getRenderer("ButtonStart"));
     gui.add(buttonStart);
 
@@ -36,37 +40,44 @@ void simulationScreen(tgui::BackendGui& gui)
     label->setTextSize(16);
     gui.add(label);
 
+    // Locked items
+    auto rabbitLocked = tgui::Picture::create("../src/objects/locked.png");
+    rabbitLocked->setSize({ "21.61%", "12.62%" });
+    rabbitLocked->setPosition({ "22.65%", "10.60%" });
+    gui.add(rabbitLocked);
+
+    // Object buttons
     auto buttonObjRabbit = tgui::Button::create("");
-    buttonObjRabbit->setSize({ "4.68%", "8.33%" });
-    buttonObjRabbit->setPosition({ "89.37%", "4.35%" });
+    buttonObjRabbit->setSize({ "4.68%", "9.09%" });
+    buttonObjRabbit->setPosition({ "89.37%", "4.74%" });
     buttonObjRabbit->setRenderer(objectsTheme.getRenderer("ButtonObjRabbit"));
+    buttonObjRabbit->onPress([&gui, rabbitLocked] { removeLockedOverlay(gui, rabbitLocked); });
     gui.add(buttonObjRabbit);
 
     auto buttonObjMouse = tgui::Button::copy(buttonObjRabbit);
-    buttonObjMouse->setPosition({ "94.47%", "4.35%" });
+    buttonObjMouse->setPosition({ "94.47%", "4.74%" });
     buttonObjMouse->setRenderer(objectsTheme.getRenderer("ButtonObjMouse"));
     gui.add(buttonObjMouse);
 
     auto buttonObjBear = tgui::Button::copy(buttonObjRabbit);
-    buttonObjBear->setPosition({ "89.37%", "13.42%" });
+    buttonObjBear->setPosition({ "89.37%", "14.64%" });
     buttonObjBear->setRenderer(objectsTheme.getRenderer("ButtonObjBear"));
     gui.add(buttonObjBear);
 
     auto buttonObjFox = tgui::Button::copy(buttonObjRabbit);
-    buttonObjFox->setPosition({ "94.47%", "13.42%" });
+    buttonObjFox->setPosition({ "94.47%", "14.64%" });
     buttonObjFox->setRenderer(objectsTheme.getRenderer("ButtonObjFox"));
     gui.add(buttonObjFox);
 
     auto buttonObjGrasshopper = tgui::Button::copy(buttonObjRabbit);
-    buttonObjGrasshopper->setPosition({ "89.37%", "22.50%" });
+    buttonObjGrasshopper->setPosition({ "89.37%", "24.54%" });
     buttonObjGrasshopper->setRenderer(objectsTheme.getRenderer("ButtonObjGrasshopper"));
     gui.add(buttonObjGrasshopper);
 
     auto buttonObjOwl = tgui::Button::copy(buttonObjRabbit);
-    buttonObjOwl->setPosition({ "94.47%", "22.50%" });
+    buttonObjOwl->setPosition({ "94.47%", "24.54%" });
     buttonObjOwl->setRenderer(objectsTheme.getRenderer("ButtonObjOwl"));
     gui.add(buttonObjOwl);
-
 }
 
 void mainMenu(tgui::BackendGui& gui, tgui::Label::Ptr userName)

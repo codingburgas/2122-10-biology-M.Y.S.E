@@ -2,13 +2,13 @@
 
 int main()
 {
-    /*
-    sf::RenderWindow window{ {1920, 950}, "TGUI example - SFML_GRAPHICS backend" };
+    
+    sf::RenderWindow window{ {1920, 990}, "Ecosystem Symolation" };
 
     tgui::Gui gui{ window };
 
     if (runExample(gui))
         gui.mainLoop();
-        */
-    simulation();
+        
+    //simulation();
 }
