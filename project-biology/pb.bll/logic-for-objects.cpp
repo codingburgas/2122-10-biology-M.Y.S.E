@@ -191,6 +191,19 @@ std::vector<Object> pregnancyObjectInSimulation(std::vector<Object> objectsInSim
 	return objectsInSimulation;
 }
 
+std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, std::vector<bool> active, unsigned short int choice, unsigned short int days)
+{
+	for (int i = 0; i < objects.size(); i++) {
+		if (active[i] == 1) {
+			objectsInSimulation = startingAddObjectInSimulation(objectsInSimulation, objects, counterInSimulation, choice, days);
+		}
+	}
+
+	objectsInSimulation = pregnancyObjectInSimulation(objectsInSimulation, objects, counterInSimulation);
+
+	return objectsInSimulation;
+}
+
 void simulation() {
 	std::vector<Object> objects = infoObjects();
 	std::vector<Object> objectsInSimulation;
@@ -221,11 +234,12 @@ void simulation() {
 
 		if (days == 2) {
 			choice = 0;
-			objectsInSimulation = startingAddObjectInSimulation(objectsInSimulation, objects, counterInSimulation, choice, days);
 			active[choice] = true;
 		}
 
-		objectsInSimulation = pregnancyObjectInSimulation(objectsInSimulation, objects, counterInSimulation);
+		objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, active, choice, days);
+
+		active[choice] = false;
 
 		/*
 		for (int i = 0; i < objectsInSimulation.size(); i++) {
