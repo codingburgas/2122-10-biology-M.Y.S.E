@@ -9,7 +9,6 @@ int main()
 
     if (runExample(gui))
         gui.mainLoop();
-        
     */
 
     simulation();
