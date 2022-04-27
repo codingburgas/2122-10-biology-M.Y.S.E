@@ -6,25 +6,25 @@ void displayObjects(std::vector<Object> objectsInSimulation, std::vector<Object>
 {
 	int count = 0;
 	//for (int count = 0; count < objects.size() - 7; count++) {
-		std::cout << "Name: " << objects[count].name << "\n";
-		//if (active[count] == 1) {
-			//std::cout << "Live: " << objects[count].lifeExpInWeeks << "\n"; // How much time he leaves them to live
-			//std::cout << "Hunger: " << objectsInSimulation[count].hungerRateByDays << "\n"; // How hungry they are
-			//std::cout << "Weather: " << objects[count].lifeExpInWeeks << "\n"; // How it feels about the weather
-			//std::cout << "Born: " << objectsInSimulation[count].pregnancy << "\n"; //     How much time is left for a new generation to be born
-			if (objects[count].food.empty()) {
-				std::cout << "Plants: " << counterInSimulation[count].maleCount << "\n\n";
-			}
-			else {
-				std::cout << "Men: " << counterInSimulation[count].maleCount << "\n";
-				std::cout << "Women: " << counterInSimulation[count].femaleCount << "\n\n";
-			}
+	std::cout << "Name: " << objects[count].name << "\n";
+	//if (active[count] == 1) {
+		//std::cout << "Live: " << objects[count].lifeExpInWeeks << "\n"; // How much time he leaves them to live
+		//std::cout << "Hunger: " << objectsInSimulation[count].hungerRateByDays << "\n"; // How hungry they are
+		//std::cout << "Weather: " << objects[count].lifeExpInWeeks << "\n"; // How it feels about the weather
+		//std::cout << "Born: " << objectsInSimulation[count].pregnancy << "\n"; //     How much time is left for a new generation to be born
+	if (objects[count].food.empty()) {
+		std::cout << "Plants: " << counterInSimulation[count].maleCount << "\n\n";
+	}
+	else {
+		std::cout << "Men: " << counterInSimulation[count].maleCount << "\n";
+		std::cout << "Women: " << counterInSimulation[count].femaleCount << "\n\n";
+	}
 
-		//}
-		//else {
-			//std::cout << "You can't see this information\n\n";
-		//}
 	//}
+	//else {
+		//std::cout << "You can't see this information\n\n";
+	//}
+//}
 
 	std::cout << "Days: " << days << std::endl;
 	std::cout << "Mouth: " << mouth << std::endl;
@@ -122,8 +122,8 @@ std::vector<Object> removeObjectByLifeExpInWeeks(std::vector<Object> objectsInSi
 	return objectsInSimulation;
 }
 */
-std::vector<Object> startingAddObjectInSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects> &counterInSimulation,unsigned short int choice, unsigned short int days) {
-	
+std::vector<Object> startingAddObjectInSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, unsigned short int choice, unsigned short int days) {
+
 	if (objects[choice].food.empty()) {
 		counterInSimulation[choice].maleCount += 6;
 		for (auto i = 0; i < 6; i++) {
@@ -134,12 +134,57 @@ std::vector<Object> startingAddObjectInSimulation(std::vector<Object> objectsInS
 		++counterInSimulation[choice].maleCount;
 		++counterInSimulation[choice].femaleCount;
 		for (auto i = 0; i < 2; i++) {
-			if(objects[choice].gender != "Male")
+			if (objects[choice].gender != "Male")
 				objects[choice].gender = "Male";
 			else
 				objects[choice].gender = "Female";
 
 			objectsInSimulation.push_back(objects[choice]);
+		}
+	}
+
+	return objectsInSimulation;
+}
+
+std::vector<Object> pregnancyObjectInSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation)
+{
+	srand(time(NULL));
+	int kids;
+	bool gender, itIsPlant;
+	float pregn;
+
+	for (int i = 0; i < objects.size(); i++) {
+		if (counterInSimulation[i].maleCount != 0) {
+			if (objects[i].food.empty())
+				itIsPlant = true;
+			else
+				itIsPlant = false;
+
+			pregn = round(objectsInSimulation[i].pregnancy * 365);
+
+			if (objectsInSimulation[i].remainingDaysToGiveBirth == pregn) {
+
+				kids = rand() % 3 + 1;
+				gender = rand() % 2;
+
+				for (int j = 0; j < kids; j++) {
+					if (gender == 0 || itIsPlant) {
+						objects[i].gender = "Male";
+						++counterInSimulation[i].maleCount;
+					}
+					else {
+						objects[i].gender = "Female";
+						++counterInSimulation[i].femaleCount;
+					}
+
+					objectsInSimulation.push_back(objects[i]);
+				}
+
+				objectsInSimulation[i].remainingDaysToGiveBirth = 0;
+			}
+			else {
+				++objectsInSimulation[i].remainingDaysToGiveBirth;
+			}
 		}
 	}
 
@@ -179,6 +224,8 @@ void simulation() {
 			objectsInSimulation = startingAddObjectInSimulation(objectsInSimulation, objects, counterInSimulation, choice, days);
 			active[choice] = true;
 		}
+
+		objectsInSimulation = pregnancyObjectInSimulation(objectsInSimulation, objects, counterInSimulation);
 
 		/*
 		for (int i = 0; i < objectsInSimulation.size(); i++) {
