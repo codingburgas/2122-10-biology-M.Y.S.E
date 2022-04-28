@@ -6,12 +6,14 @@ void updateTextSize(tgui::BackendGui& gui)
     gui.setTextSize(static_cast<unsigned int>(0.04f * windowHeight));
 }
 
-void removeLockedOverlay(tgui::BackendGui& gui, tgui::Picture::Ptr pic)
+size_t removeLockedOverlay(tgui::BackendGui& gui, tgui::Picture::Ptr pic, size_t id)
 {
     gui.remove(pic);
+
+    return id;
 }
 
-void simulationScreen(tgui::BackendGui& gui)
+void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName)
 {
     gui.removeAllWidgets();
 
@@ -27,6 +29,7 @@ void simulationScreen(tgui::BackendGui& gui)
     symulationBackground->setSize({ "100%", "100%" });
     gui.add(symulationBackground);
 
+    // Sistem manipulation
     auto buttonStart = tgui::Button::create("");
     buttonStart->setSize({ "8.85%", "17.17%" });
     buttonStart->setPosition({ "1.25%", "80.10%" });
@@ -40,18 +43,52 @@ void simulationScreen(tgui::BackendGui& gui)
     label->setTextSize(16);
     gui.add(label);
 
+    auto buttonExit = tgui::Button::copy(buttonStart);
+    buttonExit->setPosition({ "78.95%", "80.10%" });
+    buttonExit->setRenderer(menuTheme.getRenderer("ButtonExit"));
+    buttonExit->onPress([&gui, userName] { mainMenu(gui, userName); });
+    gui.add(buttonExit);
+
     // Locked items
-    auto rabbitLocked = tgui::Picture::create("../src/objects/locked.png");
-    rabbitLocked->setSize({ "21.61%", "12.62%" });
-    rabbitLocked->setPosition({ "22.65%", "10.60%" });
+    auto grassLocked = tgui::Picture::create("../src/objects/locked.png");
+    grassLocked->setSize({ "21.61%", "12.62%" });
+    grassLocked->setPosition({ "0.52%", "10.60%" });
+    gui.add(grassLocked);
+
+    auto blueberryLocked = tgui::Picture::copy(grassLocked);
+    blueberryLocked->setPosition({ "0.52%", "24.24%" });
+    gui.add(blueberryLocked);
+
+    auto grasshopperLocked = tgui::Picture::copy(grassLocked);
+    grasshopperLocked->setPosition({ "22.65%", "10.60%" });
+    gui.add(grasshopperLocked);
+
+    auto rabbitLocked = tgui::Picture::copy(grassLocked);
+    rabbitLocked->setPosition({ "22.65%", "37.87%" });
     gui.add(rabbitLocked);
+
+    auto mouseLocked = tgui::Picture::copy(grassLocked);
+    mouseLocked->setPosition({ "44.79%", "10.60%" });
+    gui.add(mouseLocked);
+
+    auto owlLocked = tgui::Picture::copy(grassLocked);
+    owlLocked->setPosition({ "44.79%", "37.87%" });
+    gui.add(owlLocked);
+
+    auto foxLocked = tgui::Picture::copy(grassLocked);
+    foxLocked->setPosition({ "44.79%", "51.51%" });
+    gui.add(foxLocked);
+
+    auto bearLocked = tgui::Picture::copy(grassLocked);
+    bearLocked->setPosition({ "66.92%", "10.60%" });
+    gui.add(bearLocked);
 
     // Object buttons
     auto buttonObjRabbit = tgui::Button::create("");
     buttonObjRabbit->setSize({ "4.68%", "9.09%" });
     buttonObjRabbit->setPosition({ "89.37%", "4.74%" });
     buttonObjRabbit->setRenderer(objectsTheme.getRenderer("ButtonObjRabbit"));
-    buttonObjRabbit->onPress([&gui, rabbitLocked] { removeLockedOverlay(gui, rabbitLocked); });
+    buttonObjRabbit->onPress([&gui, rabbitLocked] { removeLockedOverlay(gui, rabbitLocked, 1); });
     gui.add(buttonObjRabbit);
 
     auto buttonObjMouse = tgui::Button::copy(buttonObjRabbit);
@@ -99,7 +136,7 @@ void mainMenu(tgui::BackendGui& gui, tgui::Label::Ptr userName)
     auto buttonPlay = tgui::Button::create("");
     buttonPlay->setSize({ "18.7%", "33.3%" });
     buttonPlay->setPosition({ "30.9%", "16%" });
-    buttonPlay->onPress([&gui] { simulationScreen(gui); });
+    buttonPlay->onPress([&gui, userName] { simulationScreen(gui, userName); });
     buttonPlay->setRenderer(menuTheme.getRenderer("ButtonPlay"));
     gui.add(buttonPlay);
 
@@ -115,8 +152,8 @@ void mainMenu(tgui::BackendGui& gui, tgui::Label::Ptr userName)
 
     auto buttonQuit = tgui::Button::copy(buttonPlay);
     buttonQuit->setPosition({ "50.4%", "50.7%" });
-    buttonQuit->onPress([&gui] { logInScreen(gui); });
     buttonQuit->setRenderer(menuTheme.getRenderer("ButtonQuit"));
+    buttonQuit->onPress([] { return; });
     gui.add(buttonQuit);
 
     gui.add(userName);
@@ -142,7 +179,7 @@ void logInScreen(tgui::BackendGui& gui)
     auto picture = tgui::Picture::create("../src/log-in-ui.png");
     picture->setSize({ "100%", "100%" });
     gui.add(picture);
-    
+
     tgui::Theme menuTheme{ "../src/theme-menu.txt" };
 
     auto userName = tgui::Label::create();
