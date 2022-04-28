@@ -1,4 +1,5 @@
 #include "front-end.h"
+#include "front-to-back-end.h"
 
 void updateTextSize(tgui::BackendGui& gui)
 {
@@ -6,14 +7,22 @@ void updateTextSize(tgui::BackendGui& gui)
     gui.setTextSize(static_cast<unsigned int>(0.04f * windowHeight));
 }
 
-size_t removeLockedOverlay(tgui::BackendGui& gui, tgui::Picture::Ptr pic, size_t id)
+void removeLockedOverlay(tgui::BackendGui& gui, tgui::Picture::Ptr pic)
 {
     gui.remove(pic);
+}
 
+size_t getId(size_t id)
+{
     return id;
 }
 
-void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName)
+bool startSimulation(bool start) 
+{
+    return start;
+}
+
+void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool& start)
 {
     gui.removeAllWidgets();
 
@@ -34,6 +43,19 @@ void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName)
     buttonStart->setSize({ "8.85%", "17.17%" });
     buttonStart->setPosition({ "1.25%", "80.10%" });
     buttonStart->setRenderer(menuTheme.getRenderer("ButtonStart"));
+
+    if (start)
+        start = true;
+    else 
+        start = false;
+    
+    buttonStart->onPress([&start] {
+            if (start == false)
+                start = true;
+            else
+                start = false;
+            startSimulation(start); });
+
     gui.add(buttonStart);
 
     auto label = tgui::Label::create();
@@ -88,7 +110,8 @@ void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName)
     buttonObjRabbit->setSize({ "4.68%", "9.09%" });
     buttonObjRabbit->setPosition({ "89.37%", "4.74%" });
     buttonObjRabbit->setRenderer(objectsTheme.getRenderer("ButtonObjRabbit"));
-    buttonObjRabbit->onPress([&gui, rabbitLocked] { removeLockedOverlay(gui, rabbitLocked, 1); });
+    buttonObjRabbit->onPress([&gui, rabbitLocked] { removeLockedOverlay(gui, rabbitLocked); });
+    buttonObjRabbit->onPress([] { getId(1); });
     gui.add(buttonObjRabbit);
 
     auto buttonObjMouse = tgui::Button::copy(buttonObjRabbit);
@@ -117,7 +140,7 @@ void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName)
     gui.add(buttonObjOwl);
 }
 
-void mainMenu(tgui::BackendGui& gui, tgui::Label::Ptr userName)
+void mainMenu(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool &start)
 {
     updateTextSize(gui);
 
@@ -136,7 +159,7 @@ void mainMenu(tgui::BackendGui& gui, tgui::Label::Ptr userName)
     auto buttonPlay = tgui::Button::create("");
     buttonPlay->setSize({ "18.7%", "33.3%" });
     buttonPlay->setPosition({ "30.9%", "16%" });
-    buttonPlay->onPress([&gui, userName] { simulationScreen(gui, userName); });
+    buttonPlay->onPress([&gui, userName, &start] { simulationScreen(gui, userName, start); });
     buttonPlay->setRenderer(menuTheme.getRenderer("ButtonPlay"));
     gui.add(buttonPlay);
 
@@ -170,7 +193,7 @@ void logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password)
     loginUser(loginUsername, loginPassword);
 }
 
-void logInScreen(tgui::BackendGui& gui)
+void logInScreen(tgui::BackendGui& gui, bool& start)
 {
     updateTextSize(gui);
 
@@ -215,11 +238,11 @@ void logInScreen(tgui::BackendGui& gui)
     gui.add(buttonRegister);
 }
 
-bool runExample(tgui::BackendGui& gui)
+bool runExample(tgui::BackendGui& gui, bool& start)
 {
     try
     {
-        logInScreen(gui);
+        logInScreen(gui, start);
         return true;
     }
     catch (const tgui::Exception& e)

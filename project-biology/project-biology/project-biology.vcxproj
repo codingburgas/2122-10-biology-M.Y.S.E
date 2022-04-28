@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="front-end.h" />
+    <ClInclude Include="front-to-back-end.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>

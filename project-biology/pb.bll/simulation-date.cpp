@@ -37,7 +37,7 @@ void switchDate(unsigned short int& day, std::string& month)
     day++;
 }
 
-void timer(unsigned short int& day, std::string& month, bool isPaused, unsigned short int &choice)
+void timer(unsigned short int& day, std::string& month, bool isPaused, size_t&choice)
 {
     using namespace std::literals::chrono_literals;
     switchDate(day, month);

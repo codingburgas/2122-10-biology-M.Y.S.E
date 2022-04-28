@@ -6,7 +6,9 @@ int main()
 
     tgui::Gui gui{ window };
 
-    if (runExample(gui))
+    bool start = false;
+
+    if (runExample(gui, start))
         gui.mainLoop();
 
     //simulation();

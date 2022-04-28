@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "logic-for-objects.h"
+#include "../project-biology/front-to-back-end.h"
 #include <stdlib.h>
 
 void displayObjects(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, std::vector<unsigned short int> active, unsigned short int days, std::string mouth, std::string season, int temp)
@@ -156,7 +157,7 @@ std::vector<Object> removeObjectByTempeture(std::vector<Object> objectsInSimulat
 	return objectsInSimulation;
 }
 
-std::vector<Object> startingAddObjectInSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, unsigned short int choice, unsigned short int days) {
+std::vector<Object> startingAddObjectInSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, size_t choice, unsigned short int days) {
 
 	if (objects[choice].food.empty()) {
 		counterInSimulation[choice].maleCount += 6;
@@ -266,13 +267,19 @@ void simulation() {
 		active.push_back(0);
 	}
 
-	unsigned short int choice;
+	size_t choice;
+	bool start = true;
 	unsigned short int days = 1, daysTimer = days;
 	std::string mouth = "January";
 	std::string season = "Winter";
 	int tempeture = 1;
 
-	while (true) {
+	while (start) {
+
+		start = startSimulation(start);
+		
+		if (start == false)
+			continue;
 
 		displayObjects(objectsInSimulation, objects, counterInSimulation, active, daysTimer, mouth, season, tempeture);
 
@@ -281,10 +288,15 @@ void simulation() {
 		tempeture = getTemperature(mouth);
 		season = getSeason(daysTimer, mouth);
 
+		choice = getId(choice);
+		active[choice] = 1;
+
+		/*
 		if (days == 2) {
 			choice = 4;
 			active[choice] = 1;
 		}
+		*/
 
 		objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, active, choice, days, tempeture);
 
