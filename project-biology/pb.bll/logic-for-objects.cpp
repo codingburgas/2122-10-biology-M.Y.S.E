@@ -91,7 +91,7 @@ std::vector<Object> removeObjectByFood(std::vector<Object> objectsInSimulation, 
 	return objectsInSimulation;
 }
 */
-std::vector<Object> removeObjectByLifeExpInWeeks(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation)
+std::vector<Object> removeObjectByLifeExpInYears(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation)
 {
 	float life;
 
@@ -117,6 +117,41 @@ std::vector<Object> removeObjectByLifeExpInWeeks(std::vector<Object> objectsInSi
 			}
 		}
 	}
+
+	return objectsInSimulation;
+}
+
+std::vector<Object> removeObjectByTempeture(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, int temp)
+{
+	std::vector<std::string> deadObjects;
+	bool rip = true;
+	
+	/*
+	for (int i = 0; i < objectsInSimulation.size(); i++) {
+		if (!(objectsInSimulation[i].food.empty())) {
+			for (int j = 0; j < objects.size(); j++) {
+				if (temp > objectsInSimulation[i].maxTemp || temp < objectsInSimulation[i].minTemp) {
+					for (int m = 0; m < deadObjects.size(); m++) {
+						if (objectsInSimulation[i].name == deadObjects[m])
+							rip = false;
+					}
+
+					if (rip) {
+						if (objectsInSimulation[i].gender == "Male")
+							--counterInSimulation[j].maleCount;
+						else
+							--counterInSimulation[j].femaleCount;
+
+						objectsInSimulation.erase(objectsInSimulation.begin() + i);
+						deadObjects.push_back(objectsInSimulation[i].name);
+					}
+
+					rip = true;
+				}
+			}
+		}
+	}
+	*/
 
 	return objectsInSimulation;
 }
@@ -196,7 +231,7 @@ std::vector<Object> pregnancyObjectInSimulation(std::vector<Object> objectsInSim
 	return objectsInSimulation;
 }
 
-std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, std::vector<unsigned short int> &active, unsigned short int choice, unsigned short int days)
+std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, std::vector<unsigned short int> &active, unsigned short int choice, unsigned short int days, int &temp)
 {
 	for (int i = 0; i < objects.size(); i++) {
 		if (active[i] == 1) {
@@ -206,7 +241,8 @@ std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std
 	}
 
 	objectsInSimulation = pregnancyObjectInSimulation(objectsInSimulation, objects, counterInSimulation);
-	objectsInSimulation = removeObjectByLifeExpInWeeks(objectsInSimulation, objects, counterInSimulation);
+	objectsInSimulation = removeObjectByLifeExpInYears(objectsInSimulation, objects, counterInSimulation);
+	objectsInSimulation = removeObjectByTempeture(objectsInSimulation, objects, counterInSimulation, temp);
 
 	return objectsInSimulation;
 }
@@ -244,7 +280,7 @@ void simulation() {
 			active[choice] = 1;
 		}
 
-		objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, active, choice, days);
+		objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, active, choice, days, tempeture);
 
 		/*
 		for (int i = 0; i < objectsInSimulation.size(); i++) {
