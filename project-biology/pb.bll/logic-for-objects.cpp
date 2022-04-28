@@ -252,6 +252,12 @@ void simulation() {
 	std::vector<Object> objectsInSimulation;
 	std::vector<CountObjects> counterInSimulation;
 
+
+	/*
+	
+	*/
+
+
 	counterInSimulation.resize(objects.size(), { 0, 0 });
 
 	std::vector<unsigned short int> active;
@@ -281,6 +287,10 @@ void simulation() {
 		}
 
 		objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, active, choice, days, tempeture);
+
+		/*
+		
+		*/
 
 		/*
 		for (int i = 0; i < objectsInSimulation.size(); i++) {
