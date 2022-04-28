@@ -7,6 +7,7 @@ struct Object {
 	std::string information;
 	std::string gender;
 	float lifeExpInYears;
+	float remainingDaysToDead;
 	std::vector<std::string> food;
 	short int maxTemp;
 	short int minTemp;
