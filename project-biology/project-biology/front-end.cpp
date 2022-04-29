@@ -68,7 +68,7 @@ void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool& st
     auto buttonExit = tgui::Button::copy(buttonStart);
     buttonExit->setPosition({ "78.95%", "80.10%" });
     buttonExit->setRenderer(menuTheme.getRenderer("ButtonExit"));
-    buttonExit->onPress([&gui, userName] { mainMenu(gui, userName); });
+    buttonExit->onPress([&gui, userName, &start] { mainMenu(gui, userName, start); });
     gui.add(buttonExit);
 
     // Locked items
@@ -229,7 +229,7 @@ void logInScreen(tgui::BackendGui& gui, bool& start)
 
     buttonLogin->onPress([=] { userName->setText(logInUsername->getText()); });
     buttonLogin->onPress(&logIn, logInUsername, logInPassword);
-    buttonLogin->onPress([&gui, userName] { mainMenu(gui, userName); });
+    buttonLogin->onPress([&gui, userName, &start] { mainMenu(gui, userName, start); });
 
     auto buttonRegister = tgui::Button::create("REGISTER");
     buttonRegister->setSize({ "15.3%", "5.5%" });
