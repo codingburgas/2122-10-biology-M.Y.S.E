@@ -154,5 +154,5 @@ LabelTime {
 }
 
 LabelUserName {
-	TextColor = #FC0303;
+	TextColor = #FFFFFF;
 }

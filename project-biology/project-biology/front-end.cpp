@@ -72,6 +72,8 @@ void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool& st
     gui.add(buttonExit);
 
     // Locked items
+
+    // First column
     auto grassLocked = tgui::Picture::create("../src/objects/locked.png");
     grassLocked->setSize({ "21.61%", "12.62%" });
     grassLocked->setPosition({ "0.52%", "10.60%" });
@@ -81,17 +83,35 @@ void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool& st
     blueberryLocked->setPosition({ "0.52%", "24.24%" });
     gui.add(blueberryLocked);
 
+    auto flowerLocked = tgui::Picture::copy(grassLocked);
+    flowerLocked->setPosition({ "0.52%", "37.87%" });
+    gui.add(flowerLocked);
+
+    // Second column
     auto grasshopperLocked = tgui::Picture::copy(grassLocked);
     grasshopperLocked->setPosition({ "22.65%", "10.60%" });
     gui.add(grasshopperLocked);
+
+    auto butterflyLocked = tgui::Picture::copy(grassLocked);
+    butterflyLocked->setPosition({ "22.65%", "24.24%" });
+    gui.add(butterflyLocked);
 
     auto rabbitLocked = tgui::Picture::copy(grassLocked);
     rabbitLocked->setPosition({ "22.65%", "37.87%" });
     gui.add(rabbitLocked);
 
+    auto beeLocked = tgui::Picture::copy(grassLocked);
+    beeLocked->setPosition({ "22.65%", "51.51%" });
+    gui.add(beeLocked);
+
+    // Third column
     auto mouseLocked = tgui::Picture::copy(grassLocked);
     mouseLocked->setPosition({ "44.79%", "10.60%" });
     gui.add(mouseLocked);
+
+    auto lizardLocked = tgui::Picture::copy(grassLocked);
+    lizardLocked->setPosition({ "44.79%", "24.24%" });
+    gui.add(lizardLocked);
 
     auto owlLocked = tgui::Picture::copy(grassLocked);
     owlLocked->setPosition({ "44.79%", "37.87%" });
@@ -101,6 +121,11 @@ void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool& st
     foxLocked->setPosition({ "44.79%", "51.51%" });
     gui.add(foxLocked);
 
+    auto snakeLocked = tgui::Picture::copy(grassLocked);
+    snakeLocked->setPosition({ "44.79%", "65.15%" });
+    gui.add(snakeLocked);
+
+    // Fourth column
     auto bearLocked = tgui::Picture::copy(grassLocked);
     bearLocked->setPosition({ "66.92%", "10.60%" });
     gui.add(bearLocked);
@@ -148,8 +173,8 @@ void mainMenu(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool &start)
 
     tgui::Theme menuTheme{ "../src/theme-menu.txt" };
 
-    userName->setSize({ "10%", "10%" });
-    userName->setPosition({ "20%", "20%" });
+    userName->setSize({ "100%", "8%" });
+    userName->setPosition({ "0.52%", "1.01%" });
     userName->setRenderer(menuTheme.getRenderer("LabelUserName"));
 
     auto picture = tgui::Picture::create("../src/main-ui.png");
