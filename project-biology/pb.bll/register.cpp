@@ -59,16 +59,23 @@ bool passwordIsGood(std::string password)
 void registerUser()
 {
 	int id = getLastId();
-	std::string fName, lName, username, password;
+	std::string username, password, confirmPass;
 
-	std::cin >> fName >> lName >> username >> password;
+	std::cin >> username >> password >> confirmPass;
 
 	while (!passwordIsGood(password))
 		std::cin >> password;
 
-	//TODO: password = Call passwording hashing function(password)
+	if (password == confirmPass)
+	{
+		//TODO: password = Call passwording hashing function(password)
 
-	USER tempUser = { id, fName, lName, username, password };
+		USER tempUser = { id, username, password };
 
-	addUserInfo(tempUser);
+		addUserInfo(tempUser);
+	}
+	else
+	{
+		std::cout << "Password's don't match\n";
+	}
 }
