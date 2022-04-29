@@ -182,6 +182,49 @@ void mainMenu(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool &start)
     gui.add(userName);
 }
 
+void registerScreen(tgui::BackendGui& gui)
+{
+    updateTextSize(gui);
+
+    gui.onViewChange([&gui] { updateTextSize(gui); });
+
+    auto background = tgui::Picture::create("../src/register-ui.png");
+    background->setSize({ "100%", "100%" });
+    gui.add(background);
+
+    tgui::Theme menuTheme{ "../src/theme-menu.txt" };
+
+    auto userName = tgui::Label::create();
+
+    // Register widgets
+    auto registerUsername = tgui::EditBox::create();
+    registerUsername->setSize({ "28.12%", "10.10%" });
+    registerUsername->setPosition({ "35.9%", "21.71%" });
+    registerUsername->setDefaultText("Enter Username");
+    registerUsername->setRenderer(menuTheme.getRenderer("LoginField"));
+    gui.add(registerUsername);
+
+    auto registerPassword = tgui::EditBox::copy(registerUsername);
+    registerPassword->setPosition({ "35.9%", "38.88%" });
+    registerPassword->setPasswordCharacter('*');
+    registerPassword->setDefaultText("Enter Password");
+    gui.add(registerPassword);
+
+    auto confirmPassword = tgui::EditBox::copy(registerPassword);
+    confirmPassword->setPosition({ "35.9%", "57.07%" });
+    confirmPassword->setDefaultText("Confirm Password");
+    gui.add(confirmPassword);
+
+    auto buttonConfirm = tgui::Button::create();
+    buttonConfirm->setSize({ "18.22%", "10.10%" });
+    buttonConfirm->setPosition({ "40.88%", "72.42%" });
+    buttonConfirm->setRenderer(menuTheme.getRenderer("ConfirmButton"));
+    gui.add(buttonConfirm);
+
+    buttonConfirm->onPress([=] { userName->setText(registerUsername->getText()); });
+    buttonConfirm->onPress([&gui, userName] { mainMenu(gui, userName); });
+}
+
 void logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password)
 {
     std::cout << "Username: " << username->getText() << std::endl;
@@ -236,6 +279,8 @@ void logInScreen(tgui::BackendGui& gui, bool& start)
     buttonRegister->setPosition({ "42.3%", "68.5%" });
     buttonRegister->setRenderer(menuTheme.getRenderer("RegisterButton"));
     gui.add(buttonRegister);
+
+    buttonRegister->onPress([&gui] { registerScreen(gui); });
 }
 
 bool runExample(tgui::BackendGui& gui, bool& start)

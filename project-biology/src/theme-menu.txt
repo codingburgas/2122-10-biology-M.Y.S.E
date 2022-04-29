@@ -100,6 +100,19 @@ RegisterButton {
         TextColor = #FFFFFF;
 }
 
+ConfirmButton {
+        BackgroundColor = #349C85;
+        Borders = (0, 0, 0, 0);
+        TextColor = #FFFFFF;
+        Texture = "button-confirm.png" Smooth;
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "button-confirm-hover.png" Smooth;
+}
+
 ButtonStart {
         BackgroundColor = #B4B4B400;
         BackgroundColorDown = #96969600;
