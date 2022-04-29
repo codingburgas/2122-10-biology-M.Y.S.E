@@ -156,6 +156,7 @@
     <ClInclude Include="login-files.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="register-files.h" />
+    <ClInclude Include="user-simulation-info.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="files.cpp" />
@@ -169,6 +170,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="register-files.cpp" />
+    <ClCompile Include="user-simulation-info.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\pb.types\pb.types.vcxproj">

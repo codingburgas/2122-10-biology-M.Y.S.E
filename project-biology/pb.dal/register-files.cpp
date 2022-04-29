@@ -6,16 +6,12 @@ void addUserInfo(USER user)
 	std::ofstream userFile("userInfo.txt", std::ios::out | std::ios::app);
 
 	std::string Id = std::to_string(user.id);
-	std::string fName = user.fName;
-	std::string lName = user.lName;
 	std::string username = user.username;
 	std::string password = user.password;
 
 	if (userFile.is_open())
 	{
 		userFile << Id << ',';
-		userFile << fName << ',';
-		userFile << lName << ',';
 		userFile << username << ',';
 		userFile << password << '\n';
 	}
