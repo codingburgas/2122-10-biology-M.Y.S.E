@@ -182,7 +182,7 @@ void mainMenu(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool &start)
     gui.add(userName);
 }
 
-void registerScreen(tgui::BackendGui& gui)
+void registerScreen(tgui::BackendGui& gui, bool& start)
 {
     updateTextSize(gui);
 
@@ -222,7 +222,7 @@ void registerScreen(tgui::BackendGui& gui)
     gui.add(buttonConfirm);
 
     buttonConfirm->onPress([=] { userName->setText(registerUsername->getText()); });
-    buttonConfirm->onPress([&gui, userName] { mainMenu(gui, userName); });
+    buttonConfirm->onPress([&gui, userName, &start] { mainMenu(gui, userName, start); });
 }
 
 void logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password)
@@ -280,7 +280,7 @@ void logInScreen(tgui::BackendGui& gui, bool& start)
     buttonRegister->setRenderer(menuTheme.getRenderer("RegisterButton"));
     gui.add(buttonRegister);
 
-    buttonRegister->onPress([&gui] { registerScreen(gui); });
+    buttonRegister->onPress([&gui, &start] { registerScreen(gui, start); });
 }
 
 bool runExample(tgui::BackendGui& gui, bool& start)

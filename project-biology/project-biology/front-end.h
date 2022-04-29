@@ -8,7 +8,7 @@ void updateTextSize(tgui::BackendGui& gui);
 void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool& start);
 void mainMenu(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool &start);
 void logInScreen(tgui::BackendGui& gui, bool &start);
-void registerScreen(tgui::BackendGui& gui);
+void registerScreen(tgui::BackendGui& gui, bool& start);
 void logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password);
 void removeLockedOverlay(tgui::BackendGui& gui, tgui::Picture::Ptr pic);
 bool runExample(tgui::BackendGui& gui, bool &start);
