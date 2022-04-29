@@ -274,7 +274,7 @@ void simulation() {
 	std::string season = "Winter";
 	int tempeture = 1;
 
-	while (true) {
+	while (start) {
 
 		start = startSimulation(start);
 		
