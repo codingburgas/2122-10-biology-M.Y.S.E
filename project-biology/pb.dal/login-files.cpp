@@ -1,9 +1,18 @@
 #include "pch.h"
 #include "login-files.h"
 
+std::string getCurrentUser()
+{
+	std::ifstream currentUser("currentUser.txt");
+	std::string line;
+	getline(currentUser, line);
+
+	return line;
+}
+
 void currentUser(std::string username)
 {
-	std::ofstream currentUser("currentuser.txt", std::ios::trunc);
+	std::ofstream currentUser("currentUser.txt", std::ios::trunc);
 
 	currentUser << username << "\n";
 

@@ -1,11 +1,11 @@
 #include "pch.h"
 #include "user-simulation-info.h"
 
-bool accIsSaved(std::string firstName, std::string lastName)
+bool accIsSaved(std::string username)
 {
 	std::ifstream simulationFile("simulationInfo.txt");
 	std::string line;
-	std::string user = firstName + lastName;
+	std::string user = username;
 
 	while (getline(simulationFile, line))
 	{
@@ -17,15 +17,17 @@ bool accIsSaved(std::string firstName, std::string lastName)
 	return false;
 }
 
-void saveSimulationToFile(std::string firstName, std::string lastName, std::vector<Object> objectsInSimulation)
+void saveSimulationToFile(std::string username, std::vector<Object> objectsInSimulation, std::vector<CountObjects> counterInSimulation)
 {
-	std::ofstream simulationFile;
+	std::ofstream simulationFile("simulationInfo.txt");
 
 	if (!accIsSaved)
 	{
-		simulationFile.open("simulationInfo.txt", std::ios::app);
-		
-		simulationFile << "User:" + firstName + lastName << "\n";
+		while (!simulationFile.eof())
+		{
+			getline(simulationFile, line)
+		}
+		simulationFile << "User:" + username << "\n";
 
 		for (size_t i = 0; i < objectsInSimulation.size(); i++)
 		{

@@ -3,5 +3,7 @@
 #include "pch.h"
 #include "../pb.types/bio-object.h"
 
-bool accIsSaved(std::string, std::string);
-void saveSimulationToFile(std::string, std::string);
+std::string getCurrentUser();
+void addCurrentUser(std::string);
+bool accIsSaved(std::string);
+void saveSimulationToFile(std::string, std::vector<Object>, std::vector<CountObjects>);
