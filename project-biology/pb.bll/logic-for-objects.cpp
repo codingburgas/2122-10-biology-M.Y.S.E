@@ -31,45 +31,51 @@ void displayObjects(std::vector<Object> objectsInSimulation, std::vector<Object>
 	std::cout << "Season: " << season << "\n";
 	std::cout << "Temperature: " << temp << "\n\n";
 }
-
-void removeObjectByHungerRateByDays(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation) {
+/*
+bool removeObjectByHungerRateByDays(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation) {
 	
-	for (int i = 0; i < objectsInSimulation.size(); i++) {
+	std::vector<Object>::iterator it;
 
+	for (int i = 0; i < objectsInSimulation.size(); i++) {
+		if (!(objectsInSimulation[i].food.empty())) {
+			for (int j = 0; j < objectsInSimulation[i].food.size(); j++)
+			{
+				it = std::find(objectsInSimulation.begin(), objectsInSimulation.end(), objectsInSimulation[i].food[j]);
+				if (it == objectsInSimulation.end()) {
+
+				}
+			}
+			
+		}
 	}
 
 }
 
-/*
-std::vector<Object> removeObjectByFood(std::vector<Object> objectsInSimulation, int i, unsigned short int days) {
+void removeObjectByFood(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation) {
+	std::vector<Object>::iterator it;
 
-	srand(time(NULL));
+	for (int i = 0; i < objectsInSimulation.size(); i++) {
+		if (!(objectsInSimulation[i].food.empty())) {
+			for (int j = 0; j < objectsInSimulation[i].food.size(); j++) {
+				it = std::find(objectsInSimulation.begin(), objectsInSimulation.end(), objectsInSimulation[i].food[j]);
+				for (int m = 0; m < objectsInSimulation.size(); m++)
+				{
+					if (it != objectsInSimulation.end() && objectsInSimulation[i].food[j] == objectsInSimulation[m].name) {
+						if (objectsInSimulation[i].gender == "Male")
+							--counterInSimulation[j].maleCount;
+						else
+							--counterInSimulation[j].femaleCount;
 
-	int whoWillEat = rand() % 1 + 1;
+						++counterInSimulation[j].deadCount;
 
-	if (objectsInSimulation[i].maleCount == 0) {
-		--objectsInSimulation[i].femaleCount;
-	}
-	else if (objectsInSimulation[i].femaleCount == 0) {
-		--objectsInSimulation[i].maleCount;
-	}
-	else {
-		if (whoWillEat) {
-			--objectsInSimulation[i].maleCount;
+						objectsInSimulation.erase(objectsInSimulation.begin() + m);
+					}
+				}
+			}
 		}
-		else {
-			--objectsInSimulation[i].femaleCount;
-		}
 	}
-
-	if (objectsInSimulation[i].femaleCount == 0 && objectsInSimulation[i].maleCount == 0) {
-		objectsInSimulation.erase(objectsInSimulation.begin() + i);
-	}
-
-	return objectsInSimulation;
 }
 */
-
 void removeObjectByLifeExpInYears(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation)
 {
 	float life;
@@ -244,7 +250,6 @@ std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std
 	pregnancyObjectInSimulation(objectsInSimulation, objects, counterInSimulation);
 	removeObjectByLifeExpInYears(objectsInSimulation, objects, counterInSimulation);
 	removeObjectByTempeture(objectsInSimulation, objects, counterInSimulation, temp);
-	removeObjectByHungerRateByDays(objectsInSimulation, objects, counterInSimulation);
 
 	return objectsInSimulation;
 }
