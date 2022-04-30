@@ -10,7 +10,7 @@ std::string getCurrentUser()
 	return line;
 }
 
-void currentUser(std::string username)
+void addCurrentUser(std::string username)
 {
 	std::ofstream currentUser("currentUser.txt", std::ios::trunc);
 
