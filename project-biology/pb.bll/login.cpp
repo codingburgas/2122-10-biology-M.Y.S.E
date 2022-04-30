@@ -8,6 +8,7 @@ void loginUser(std::string username, std::string password)
 	if (userExists(username, password))
 	{
 		std::cout << "You are logged in!\n";
+		currentUser(username);
 		return;
 	}
 	std::cout << "There is no such user!\n";

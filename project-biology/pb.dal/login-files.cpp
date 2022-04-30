@@ -1,6 +1,15 @@
 #include "pch.h"
 #include "login-files.h"
 
+void currentUser(std::string username)
+{
+	std::ofstream currentUser("currentuser.txt", std::ios::trunc);
+
+	currentUser << username << "\n";
+
+	currentUser.close();
+}
+
 int getId(std::string username, std::string password)
 {
 	std::ifstream userFile("userInfo.txt");
