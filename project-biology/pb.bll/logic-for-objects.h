@@ -5,6 +5,7 @@
 #include "../pb.bll/simulation-date.h"
 
 void simulation();
+void time(unsigned short& days, unsigned short& daysTimer, std::string& mouth, size_t& choice, int& tempeture, std::string& season);
 void displayObjects(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, std::vector<unsigned short int> active, unsigned short int days, std::string mouth, std::string season, int temp);
 void removeObjectByLifeExpInYears(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation);
 void removeObjectByTempeture(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, int temp);

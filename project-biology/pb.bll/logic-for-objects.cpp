@@ -222,6 +222,15 @@ void pregnancyObjectInSimulation(std::vector<Object>& objectsInSimulation, std::
 
 }
 
+void time(unsigned short& days, unsigned short& daysTimer, std::string& mouth, size_t& choice, int& tempeture, std::string& season)
+{
+
+	++days;
+	timer(daysTimer, mouth, false, choice);
+	tempeture = getTemperature(mouth);
+	season = getSeason(daysTimer, mouth);
+}
+
 std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, std::vector<unsigned short int> &active, size_t choice, unsigned short int days, int &temp)
 {
 	
@@ -262,7 +271,7 @@ void simulation() {
 	while (start) {
 		
 		displayObjects(objectsInSimulation, objects, counterInSimulation, active, daysTimer, mouth, season, tempeture);
-		//time(days, daysTimer, mouth, choice, tempeture, season);
+		time(days, daysTimer, mouth, choice, tempeture, season);
 
 		
 		//choice = getId(choice);
