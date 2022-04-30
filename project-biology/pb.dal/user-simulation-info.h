@@ -2,6 +2,7 @@
 
 #include "pch.h"
 #include "../pb.types/bio-object.h"
+#include "../pb.dal/login-files.h"
 
-bool accIsSaved(std::string);
-void saveSimulationToFile(std::string, std::vector<Object>, std::vector<CountObjects>);
+bool accIsSaved();
+void saveSimulationToFile(std::vector<Object>, std::vector<CountObjects>);
