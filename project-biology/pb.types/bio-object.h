@@ -20,4 +20,5 @@ struct Object {
 struct CountObjects {
 	unsigned short int maleCount;
 	unsigned short int femaleCount;
+	unsigned short int deadCount;
 };

@@ -5,8 +5,7 @@
 
 void displayObjects(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, std::vector<unsigned short int> active, unsigned short int days, std::string mouth, std::string season, int temp)
 {
-	int count = 4;
-	//for (int count = 0; count < objects.size() - 7; count++) {
+	for (int count = 0; count < 6; count++) {
 	std::cout << "Name: " << objects[count].name << "\n";
 	//if (active[count] == 1) {
 		//std::cout << "Live: " << objects[count].lifeExpInWeeks << "\n"; // How much time he leaves them to live
@@ -21,7 +20,7 @@ void displayObjects(std::vector<Object> objectsInSimulation, std::vector<Object>
 		std::cout << "Women: " << counterInSimulation[count].femaleCount << "\n\n";
 	}
 
-	//}
+	}
 	//else {
 		//std::cout << "You can't see this information\n\n";
 	//}
@@ -32,38 +31,16 @@ void displayObjects(std::vector<Object> objectsInSimulation, std::vector<Object>
 	std::cout << "Season: " << season << "\n";
 	std::cout << "Temperature: " << temp << "\n\n";
 }
-/*
-std::vector<Object> removeObjectByHungerRateByDays(std::vector<Object> objectsInSimulation, unsigned short int days) {
 
-	srand(time(NULL));
-
-	bool whoWillDead = rand() % 1 + 1;
-
+void removeObjectByHungerRateByDays(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation) {
+	
 	for (int i = 0; i < objectsInSimulation.size(); i++) {
-		//if (days % objectsInSimulation[i].lifeExpInWeeks * 7 == 0) {
-			objectsInSimulation.erase(objectsInSimulation.begin() + i);
 
-			if (objectsInSimulation[i].maleCount == 0) {
-				--objectsInSimulation[i].femaleCount;
-			}
-			else if (objectsInSimulation[i].femaleCount == 0) {
-				--objectsInSimulation[i].maleCount;
-			}
-			else {
-				if (whoWillDead) {
-					--objectsInSimulation[i].maleCount;
-				}
-				else {
-					--objectsInSimulation[i].femaleCount;
-				}
-			}
-
-		//}
 	}
 
-	return objectsInSimulation;
 }
 
+/*
 std::vector<Object> removeObjectByFood(std::vector<Object> objectsInSimulation, int i, unsigned short int days) {
 
 	srand(time(NULL));
@@ -92,7 +69,8 @@ std::vector<Object> removeObjectByFood(std::vector<Object> objectsInSimulation, 
 	return objectsInSimulation;
 }
 */
-std::vector<Object> removeObjectByLifeExpInYears(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation)
+
+void removeObjectByLifeExpInYears(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation)
 {
 	float life;
 
@@ -110,6 +88,8 @@ std::vector<Object> removeObjectByLifeExpInYears(std::vector<Object> objectsInSi
 					else
 						--counterInSimulation[j].femaleCount;
 
+					++counterInSimulation[j].deadCount;
+
 					objectsInSimulation.erase(objectsInSimulation.begin() + i);
 				}
 				else {
@@ -118,46 +98,53 @@ std::vector<Object> removeObjectByLifeExpInYears(std::vector<Object> objectsInSi
 			}
 		}
 	}
-
-	return objectsInSimulation;
 }
 
-std::vector<Object> removeObjectByTempeture(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, int temp)
+void removeObjectByTempeture(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, int temp)
 {
 	std::vector<std::string> deadObjects;
 	bool rip = true;
-	
-	/*
+	srand(time(NULL));
+	int willDead;
+
 	for (int i = 0; i < objectsInSimulation.size(); i++) {
 		if (!(objectsInSimulation[i].food.empty())) {
 			for (int j = 0; j < objects.size(); j++) {
-				if (temp > objectsInSimulation[i].maxTemp || temp < objectsInSimulation[i].minTemp) {
-					for (int m = 0; m < deadObjects.size(); m++) {
-						if (objectsInSimulation[i].name == deadObjects[m])
-							rip = false;
+				if (!(objectsInSimulation.empty())) {
+					if (temp > objectsInSimulation[i].maxTemp || temp < objectsInSimulation[i].minTemp) {
+						for (int m = 0; m < deadObjects.size(); m++) {
+							if (objectsInSimulation[i].name == deadObjects[m])
+								rip = false;
+						}
+
+						if (objects[j].name == objectsInSimulation[i].name) {
+							if (counterInSimulation[j].maleCount > 6) {
+								if (rip) {
+									willDead = rand() % 3 + 1;
+									if (willDead == 1) {
+										if (objectsInSimulation[i].gender == "Male")
+											--counterInSimulation[j].maleCount;
+										else
+											--counterInSimulation[j].femaleCount;
+
+										++counterInSimulation[j].deadCount;
+
+										deadObjects.push_back(objectsInSimulation[i].name);
+										objectsInSimulation.erase(objectsInSimulation.begin() + i);
+									}
+								}
+							}
+							rip = true;
+						}
 					}
-
-					if (rip) {
-						if (objectsInSimulation[i].gender == "Male")
-							--counterInSimulation[j].maleCount;
-						else
-							--counterInSimulation[j].femaleCount;
-
-						objectsInSimulation.erase(objectsInSimulation.begin() + i);
-						deadObjects.push_back(objectsInSimulation[i].name);
-					}
-
-					rip = true;
 				}
 			}
 		}
 	}
-	*/
 
-	return objectsInSimulation;
 }
 
-std::vector<Object> startingAddObjectInSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, size_t choice, unsigned short int days) {
+void startingAddObjectInSimulation(std::vector<Object> &objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, size_t choice, unsigned short int days) {
 
 	if (objects[choice].food.empty()) {
 		counterInSimulation[choice].maleCount += 6;
@@ -166,31 +153,30 @@ std::vector<Object> startingAddObjectInSimulation(std::vector<Object> objectsInS
 		}
 	}
 	else {
-		++counterInSimulation[choice].maleCount;
-		++counterInSimulation[choice].femaleCount;
-		for (auto i = 0; i < 2; i++) {
-			if (objects[choice].gender != "Male")
+		for (auto i = 0; i < 20; i++) {
+			if (objects[choice].gender != "Male") {
 				objects[choice].gender = "Male";
-			else
+				++counterInSimulation[choice].maleCount;
+			}
+			else {
 				objects[choice].gender = "Female";
+				++counterInSimulation[choice].femaleCount;
+			}
 
 			objectsInSimulation.push_back(objects[choice]);
 		}
 	}
-
-	return objectsInSimulation;
 }
 
-std::vector<Object> pregnancyObjectInSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation)
+void pregnancyObjectInSimulation(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation)
 {
 	srand(time(NULL));
 	int kids;
-	bool gender, itIsPlant;
+	bool Gender, itIsPlant;
 	float pregn;
 
 	for (int i = 0; i < objectsInSimulation.size(); i++) {
 		for (int j = 0; j < objects.size(); j++) {
-			if (objectsInSimulation[i].gender == "Female") {
 				if (objectsInSimulation[i].name == objects[j].name) {
 					if (counterInSimulation[j].maleCount != 0) {
 						if (objectsInSimulation[i].food.empty())
@@ -202,20 +188,26 @@ std::vector<Object> pregnancyObjectInSimulation(std::vector<Object> objectsInSim
 
 						if (objectsInSimulation[i].remainingDaysToGiveBirth == pregn) {
 
-							kids = rand() % 3 + 1;
-							gender = rand() % 2;
+							if (!(itIsPlant)) {
+								kids = rand() % 3 + 1;
+								Gender = rand() % 2;
+							}
+							else {
+								kids = 1;
+								Gender = false;
+							}
 
 							for (int m = 0; m < kids; m++) {
-								if (gender == 0 || itIsPlant) {
-									objects[i].gender = "Male";
+								if (Gender == false) {
+									objects[j].gender = "Male";
 									++counterInSimulation[j].maleCount;
 								}
 								else {
-									objects[i].gender = "Female";
+									objects[j].gender = "Female";
 									++counterInSimulation[j].femaleCount;
 								}
 
-								objectsInSimulation.push_back(objects[i]);
+								objectsInSimulation.push_back(objects[j]);
 							}
 
 							objectsInSimulation[i].remainingDaysToGiveBirth = 0;
@@ -225,25 +217,25 @@ std::vector<Object> pregnancyObjectInSimulation(std::vector<Object> objectsInSim
 						}
 					}
 				}
-			}
 		}
 	}
 
-	return objectsInSimulation;
 }
 
-std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, std::vector<unsigned short int> &active, unsigned short int choice, unsigned short int days, int &temp)
+std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, std::vector<unsigned short int> &active, size_t choice, unsigned short int days, int &temp)
 {
+	
 	for (int i = 0; i < objects.size(); i++) {
 		if (active[i] == 1) {
-			objectsInSimulation = startingAddObjectInSimulation(objectsInSimulation, objects, counterInSimulation, choice, days);
+			startingAddObjectInSimulation(objectsInSimulation, objects, counterInSimulation, choice, days);
 			active[i] = 2;
 		}
 	}
 
-	objectsInSimulation = pregnancyObjectInSimulation(objectsInSimulation, objects, counterInSimulation);
-	objectsInSimulation = removeObjectByLifeExpInYears(objectsInSimulation, objects, counterInSimulation);
-	objectsInSimulation = removeObjectByTempeture(objectsInSimulation, objects, counterInSimulation, temp);
+	pregnancyObjectInSimulation(objectsInSimulation, objects, counterInSimulation);
+	removeObjectByLifeExpInYears(objectsInSimulation, objects, counterInSimulation);
+	removeObjectByTempeture(objectsInSimulation, objects, counterInSimulation, temp);
+	removeObjectByHungerRateByDays(objectsInSimulation, objects, counterInSimulation);
 
 	return objectsInSimulation;
 }
@@ -252,22 +244,15 @@ void simulation() {
 	std::vector<Object> objects = infoObjects();
 	std::vector<Object> objectsInSimulation;
 	std::vector<CountObjects> counterInSimulation;
-
-
-	/*
-	
-	*/
-
-
-	counterInSimulation.resize(objects.size(), { 0, 0 });
-
 	std::vector<unsigned short int> active;
+
+	counterInSimulation.resize(objects.size(), { 0, 0, 0});
 
 	for (int i = 0; i < objects.size(); i++) {
 		active.push_back(0);
 	}
 
-	size_t choice;
+	size_t choice = -1;
 	bool start = true;
 	unsigned short int days = 1, daysTimer = days;
 	std::string mouth = "January";
@@ -275,46 +260,21 @@ void simulation() {
 	int tempeture = 1;
 
 	while (start) {
-
-		start = startSimulation(start);
 		
-		if (start == false)
-			continue;
-
 		displayObjects(objectsInSimulation, objects, counterInSimulation, active, daysTimer, mouth, season, tempeture);
+		//time(days, daysTimer, mouth, choice, tempeture, season);
 
-		++days;
-		timer(daysTimer, mouth, false, choice);
-		tempeture = getTemperature(mouth);
-		season = getSeason(daysTimer, mouth);
+		
+		//choice = getId(choice);
+		//active[choice] = 1;
 
-		choice = getId(choice);
-		active[choice] = 1;
-
-		/*
-		if (days == 2) {
-			choice = 4;
+		if (choice != 5) {
+			++choice;
 			active[choice] = 1;
 		}
-		*/
+
 
 		objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, active, choice, days, tempeture);
-
-		/*
-		
-		*/
-
-		/*
-		for (int i = 0; i < objectsInSimulation.size(); i++) {
-
-		}
-		*/
-
-		/*
-		if (active[--choice] != true)
-			active[choice] = true;
-		else
-			break;
 
 		/*
 		for (auto i = 0; i < objectsInSimulation.size(); i++) {
