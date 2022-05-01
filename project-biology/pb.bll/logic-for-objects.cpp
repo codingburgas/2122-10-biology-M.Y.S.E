@@ -71,18 +71,45 @@ std::vector<std::string> objectFeelingByHunger(std::vector<Object> objects, std:
 		}
 	}
 
-
-
 	return feeling;
 }
 
-std::vector<std::string> objectFeelingByTempeture(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, int temp)
+std::vector<std::string> objectFeelingByTempeture(std::vector<Object> objects, int temp)
 {
 	std::vector<std::string> feeling;
+	int sum, helper;
+	bool isWarm = false;
 
 	for (int i = 0; i < objects.size(); i++)
 	{
+		sum = (objects[i].maxTemp + objects[i].minTemp) / 2;
 
+		if (objects[i].maxTemp < temp) {
+			feeling.push_back("too hot");
+		}
+		else {
+			if (temp > sum) {
+				feeling.push_back("warm");
+			}
+			else {
+				for (int i = 2; i >= -2; i--) {
+					if (temp == sum + 2)
+						isWarm = true;
+				}
+				
+				if (isWarm) {
+					feeling.push_back("well");
+				}
+				else {
+					if (sum > temp && temp > objects[i].minTemp) {
+						feeling.push_back("cold");
+					}
+					else {
+						feeling.push_back("too cold");
+					}
+				}
+			}
+		}
 	}
 
 	return feeling;
