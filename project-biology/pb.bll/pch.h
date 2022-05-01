@@ -12,7 +12,7 @@
 #include <fstream>
 #include <thread>
 #include <vector>
-#include <stdlib.h>     
-#include <time.h>       
+#include <stdlib.h>
+#include <time.h>
 
 #endif //PCH_H

@@ -1,27 +1,6 @@
 #include "pch.h"
 #include "logic-for-objects.h"
 #include "../project-biology/front-to-back-end.h"
-#include <stdlib.h>
-
-void displayObjects(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, std::vector<unsigned short int> active, unsigned short int days, std::string mouth, std::string season, int temp)
-{
-	for (int count = 0; count < 4; count++) {
-		std::cout << "Name: " << objects[count].name << "\n";
-		if (objects[count].food.empty()) {
-			std::cout << "Plants: " << counterInSimulation[count].maleCount << "\n\n";
-		}
-		else {
-			std::cout << "Men: " << counterInSimulation[count].maleCount << "\n";
-			std::cout << "Women: " << counterInSimulation[count].femaleCount << "\n\n";
-		}
-
-	}
-
-	std::cout << "Days: " << days << std::endl;
-	std::cout << "Mouth: " << mouth << std::endl;
-	std::cout << "Season: " << season << "\n";
-	std::cout << "Temperature: " << temp << "\n\n";
-}
 
 unsigned short int sumOfPopulation(std::vector<CountObjects> counterInSimulation, int key)
 {
@@ -105,9 +84,10 @@ std::vector<std::string> objectFeelingByTempeture(std::vector<Object> objects, i
 						feeling.push_back("cold");
 					}
 					else {
-						feeling.push_back("too cold");
+						feeling.push_back("too hot");
 					}
 				}
+
 			}
 		}
 	}
@@ -365,13 +345,11 @@ void pregnancyObjectInSimulation(std::vector<Object>& objectsInSimulation, std::
 
 }
 
-void time(unsigned short& days, unsigned short& daysTimer, std::string& mouth, size_t& choice, int& tempeture, std::string& season)
+void time(unsigned short& days, std::string& mouth, int& tempeture, std::string& season)
 {
-
-	++days;
-	timer(daysTimer, mouth, false, choice);
+	timer(days, mouth, false);
 	tempeture = getTemperature(mouth);
-	season = getSeason(daysTimer, mouth);
+	season = getSeason(days, mouth);
 }
 
 std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, std::vector<unsigned short int>& active, size_t choice, unsigned short int days, int& temp)
@@ -392,7 +370,14 @@ std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std
 	return objectsInSimulation;
 }
 
-void simulation() {
+void simulation(bool start, unsigned short int& days, std::string& mouth, std::string& season, int& temp) {
+
+	time(days, mouth, temp, season);
+
+	std::cout << days << " - " << mouth << " - " << season << " - " << temp << "\n";
+
+	/*
+	size_t choice = -1;
 	std::vector<Object> objects = infoObjects();
 	std::vector<Object> objectsInSimulation;
 	std::vector<CountObjects> counterInSimulation;
@@ -402,17 +387,12 @@ void simulation() {
 	active.resize(objects.size(), { 0 });
 
 	size_t choice = -1;
-	bool start = true;
 	unsigned short int days = 1, daysTimer = days;
 	std::string mouth = "January";
 	std::string season = "Winter";
 	int tempeture = 1;
 
-	while (start) {
-
-		displayObjects(objectsInSimulation, objects, counterInSimulation, active, daysTimer, mouth, season, tempeture);
 		time(days, daysTimer, mouth, choice, tempeture, season);
-
 
 		//choice = getId(choice);
 		//active[choice] = 1;
@@ -422,8 +402,6 @@ void simulation() {
 			active[choice] = 1;
 		}
 
-
 		objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, active, choice, days, tempeture);
-		system("CLS");
-	}
+		*/
 }

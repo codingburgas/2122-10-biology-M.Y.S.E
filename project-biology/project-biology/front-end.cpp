@@ -1,6 +1,11 @@
 #include "front-end.h"
 #include "front-to-back-end.h"
 
+unsigned short int days = 1;
+std::string mouth = "January";
+std::string season = "Winter";
+int tempeture = 1;
+
 void updateTextSize(tgui::BackendGui& gui)
 {
     const float windowHeight = gui.getView().getRect().height;
@@ -17,11 +22,6 @@ size_t getId(size_t id)
     return id;
 }
 
-bool startSimulation(bool start) 
-{
-    return start;
-}
-
 void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, tgui::Layout2d pos, std::string theme, size_t id)
 {
     tgui::Theme objectsTheme{ "../src/objects/objects.txt" };
@@ -36,7 +36,6 @@ void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, t
 }
 
 void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool& start)
-
 {
     gui.removeAllWidgets();
 
@@ -57,18 +56,7 @@ void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool& st
     buttonStart->setSize({ "8.85%", "17.17%" });
     buttonStart->setPosition({ "1.25%", "80.10%" });
     buttonStart->setRenderer(menuTheme.getRenderer("ButtonStart"));
-
-    if (start)
-        start = true;
-    else 
-        start = false;
-    
-    buttonStart->onPress([&start] {
-            if (start == false)
-                start = true;
-            else
-                start = false;
-            startSimulation(start); });
+    buttonStart->onPress([=] { simulation(true, days, mouth, season, tempeture); });
 
     gui.add(buttonStart);
 

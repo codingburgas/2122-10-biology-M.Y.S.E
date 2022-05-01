@@ -4,7 +4,7 @@
 
 void switchDate(unsigned short int&, std::string&);
 
-void timer(unsigned short int& day, std::string& month, bool isPaused, size_t& choice);
+void timer(unsigned short int& day, std::string& month, bool isPaused);
 
 int getIndex(std::vector<std::string>, std::string);
 

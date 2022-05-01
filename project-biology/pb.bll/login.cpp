@@ -7,9 +7,7 @@ void loginUser(std::string username, std::string password)
 
 	if (userExists(username, password))
 	{
-		std::cout << "You are logged in!\n";
 		addCurrentUser(username);
 		return;
 	}
-	std::cout << "There is no such user!\n";
 }
