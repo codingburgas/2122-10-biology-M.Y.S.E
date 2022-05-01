@@ -5,10 +5,8 @@ std::vector<Object> infoObjects() {
 
 	std::vector<Object> objects
 
-	/*Tuka vzimash tvoq fail ot papkite i vzimash dannite za jivotnite*/
-
 	= {
-		{"Grass", "Grass is a plant with narrow leaves growing from the base. A common kind of grass is used to cover the ground in a lawn and other places. Grass gets water from the roots in the ground.", "", 0.05, 0, {}, NULL, NULL, NULL, NULL, 0.04, 0},
+		{"Grass", "Grass is a plant with narrow leaves growing from the base. A common kind of grass is used to cover the ground in a lawn and other places. Grass gets water from the roots in the ground.", "", 0.6, 0, {}, NULL, NULL, NULL, NULL, 0.04, 0},
 		{"Blueberry bushes", "They are an upright bush with a relatively shallow, fibrous root system and woody canes. Fruit is borne on buds formed during the previous growing season in late summer. Highbush blueberry plants leaf, flower, and fruit in June.", "", 40, 0, {}, NULL, NULL, NULL, NULL, 0.5, 0},
 		{"Flowers", "The primary purpose of the flower is reproduction. Since the flowers are the reproductive organs of the plant, they mediate the joining of the sperm, contained within pollen, to the ovules — contained in the ovary.", "", 12, 0, {}, NULL, NULL, NULL, NULL, 0.4, 0},
 		{"Grasshoppers", "grasshopper, any of a group of jumping insects that are found in a variety of habitats. Grasshoppers occur in greatest numbers in lowland tropical forests, semiarid regions, and grasslands.", "", 1, 0, { "Grass" }, 25, -6, 2, 0, 0.5, 0},
@@ -22,12 +20,6 @@ std::vector<Object> infoObjects() {
 		{"Bees", "Like all insects, a bee's body is divided into three parts: a head with two antennae, a thorax with six legs, and an abdomen. All bees have branched hairs somewhere on their bodies and two pairs of wings. Only female bees have stingers.", "", 0.1, 0, { "Flowers" }, 28, -5, 3, 0, 0.65, 0},
 		{"Bears", "Bears are mammals that belong to the family Ursidae. They can be as small as four feet long and about 60 pounds (the sun bear) to as big as eight feet long and more than a thousand pounds.", "", 20, 0, { "Foxes" }, 70, -10, 3, 0, 0.9, 0}
 	};
-
-	/*objects.push_back(funckiq za kavalcho)*/
-	
-	/*kakvoGoQdeKavalcho*/
-
-	/*Tuka se zapazvat novite promeni ot kavalcho v faila*/
 
 	return objects;
 }
