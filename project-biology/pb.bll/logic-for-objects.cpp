@@ -7,11 +7,6 @@ void displayObjects(std::vector<Object> objectsInSimulation, std::vector<Object>
 {
 	for (int count = 0; count < 4; count++) {
 		std::cout << "Name: " << objects[count].name << "\n";
-		//if (active[count] == 1) {
-			//std::cout << "Live: " << objects[count].lifeExpInWeeks << "\n"; // How much time he leaves them to live
-			//std::cout << "Hunger: " << objectsInSimulation[count].hungerRateByDays << "\n"; // How hungry they are
-			//std::cout << "Weather: " << objects[count].lifeExpInWeeks << "\n"; // How it feels about the weather
-			//std::cout << "Born: " << objectsInSimulation[count].pregnancy << "\n"; //     How much time is left for a new generation to be born
 		if (objects[count].food.empty()) {
 			std::cout << "Plants: " << counterInSimulation[count].maleCount << "\n\n";
 		}
@@ -21,10 +16,6 @@ void displayObjects(std::vector<Object> objectsInSimulation, std::vector<Object>
 		}
 
 	}
-	//else {
-		//std::cout << "You can't see this information\n\n";
-	//}
-//}
 
 	std::cout << "Days: " << days << std::endl;
 	std::cout << "Mouth: " << mouth << std::endl;
@@ -32,20 +23,71 @@ void displayObjects(std::vector<Object> objectsInSimulation, std::vector<Object>
 	std::cout << "Temperature: " << temp << "\n\n";
 }
 
-/**
-std::string objectByHungerRateByDays(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation) {
+unsigned short int sumOfPopulation(std::vector<CountObjects> counterInSimulation, int key)
+{
+	return counterInSimulation[key].femaleCount + counterInSimulation[key].maleCount;
+}
 
-	std::vector<Object>::iterator it;
-	std::vector<std::string> hunger;
+std::vector<std::string> objectFeelingByHunger(std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation)
+{
+	std::vector<std::string> feeling;
 
-	for (int i = 0; i < objectsInSimulation.size(); i++) {
-		if (!(objectsInSimulation[i].food.empty())) {
+	unsigned short int firstPopulation = 0;
+	unsigned short int secondPopulation = 0;
+	unsigned short int helper;
 
+	for (int i = 0; i < objects.size(); i++)
+	{
+		if (!(objects[i].food.empty())) {
+			firstPopulation = sumOfPopulation(counterInSimulation, i);
+
+			for (int j = 0; j < objects.size(); j++)
+			{
+				if (objects[i].food[0] == objects[j].name)
+				{
+					secondPopulation = sumOfPopulation(counterInSimulation, j);
+					break;
+				}
+			}
+
+			helper = firstPopulation * 2;
+			if (firstPopulation < secondPopulation && helper < secondPopulation) {
+				feeling.push_back("satisfied");
+			}
+			else {
+				if (firstPopulation < secondPopulation) {
+					feeling.push_back("well");
+				}
+				else {
+					helper = firstPopulation / 2;
+					if (firstPopulation > secondPopulation && secondPopulation > helper) {
+						feeling.push_back("hungry");
+					}
+					else {
+						feeling.push_back("too hungry");
+					}
+				}
+			}
 		}
 	}
 
+
+
+	return feeling;
 }
-*/
+
+std::vector<std::string> objectFeelingByTempeture(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, int temp)
+{
+	std::vector<std::string> feeling;
+
+	for (int i = 0; i < objects.size(); i++)
+	{
+
+	}
+
+	return feeling;
+}
+
 void removeObjectByFood(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation) {
 
 	std::vector<bool> eat;
@@ -355,26 +397,6 @@ void simulation() {
 
 
 		objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, active, choice, days, tempeture);
-
-		/*
-		for (auto i = 0; i < objectsInSimulation.size(); i++) {
-				for (auto j = 0; j < objectsInSimulation.size(); j++) {
-					for (auto k = 0; k < objects[j].food.size(); k++) {
-						for (auto m = 0; m < objectsInSimulation.size(); m++) {
-							if (!(objectsInSimulation[i].name == objects[j].name && objects[j].food.size() == 0)) {
-								if (objectsInSimulation[i].name == objects[j].name && objects[j].food[k] == objectsInSimulation[m].name) {
-									removeObject(objectsInSimulation, j);
-								}
-							}
-							else {
-								removeObject(objectsInSimulation, i);
-								break;
-							}
-						}
-					}
-				}
-			}
-			*/
 		system("CLS");
 	}
 }
