@@ -38,6 +38,23 @@ void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, t
 void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool& start)
 {
 
+    unsigned short int days = 1;
+    std::string month = "January";
+    std::string season = "Winter";
+    int temp = 1;
+
+    if (days == 1) 
+    {
+        std::ofstream timeFile("../pb.dal/files/time.txt");
+
+        timeFile << days << "|";
+        timeFile << month << "|";
+        timeFile << season << "|";
+        timeFile << temp;
+
+        timeFile.close();
+    }
+
     gui.removeAllWidgets();
 
     updateTextSize(gui);

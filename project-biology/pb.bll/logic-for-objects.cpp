@@ -345,11 +345,11 @@ void pregnancyObjectInSimulation(std::vector<Object>& objectsInSimulation, std::
 
 }
 
-void time(unsigned short int& days, std::string& mouth, std::string& season, int& tempeture)
+void time(unsigned short int& days, std::string& month, std::string& season, int& tempeture)
 {
-	timer(days, mouth, false);
-	tempeture = getTemperature(mouth);
-	season = getSeason(days, mouth);
+	timer(days, month, false);
+	tempeture = getTemperature(month);
+	season = getSeason(days, month);
 }
 
 std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, std::vector<unsigned short int>& active, size_t choice, unsigned short int days, int& temp)
@@ -370,11 +370,31 @@ std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std
 	return objectsInSimulation;
 }
 
-void simulation(bool start, unsigned short int& days, std::string& mouth, std::string& season, int& temp) {
+void simulation(bool start) {
+
+	std::string textTime;
+	int i = 0;
+	unsigned short int days;
+	std::string month;
+	std::string season;
+	int temp;
+
+	std::ifstream timeFile;
+	timeFile.open("../pb.dal/files/time.txt");
+
+	while (getline(timeFile, textTime, '|')) {
+		switch (i) {
+		case 0: days = stoi(textTime); break;
+		case 1: month = textTime; break;
+		case 2: season = textTime; break;
+		case 3: temp = stoi(textTime); break;
+		}
+		++i;
+	}
 
 	if (start) {
-		time(days, mouth, season, temp);
-		std::cout << days << " - " << mouth << " - " << season << " - " << temp << "\n";
+		time(days, month, season, temp);
+		std::cout << days << " - " << month << " - " << season << " - " << temp << "\n";
 	}
 
 	/*
@@ -389,11 +409,11 @@ void simulation(bool start, unsigned short int& days, std::string& mouth, std::s
 
 	size_t choice = -1;
 	unsigned short int days = 1, daysTimer = days;
-	std::string mouth = "January";
+	std::string month = "January";
 	std::string season = "Winter";
 	int tempeture = 1;
 
-	time(days, daysTimer, mouth, choice, tempeture, season);
+	time(days, daysTimer, month, choice, tempeture, season);
 
 	//choice = getId(choice);
 	//active[choice] = 1;

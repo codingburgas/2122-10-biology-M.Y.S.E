@@ -2,16 +2,11 @@
 
 int main()
 {
-    sf::RenderWindow window{ {1920, 990}, "Ecosystem Symolation" };
+    sf::RenderWindow window{ {1920, 990}, "Ecosystem Simolation" };
 
     tgui::Gui gui{ window };
 
     bool start = false;
-
-    unsigned short int days = 1;
-    std::string mouth = "January";
-    std::string season = "Winter";
-    int temp = 1;
 
     if (runExample(gui, start))
         while (window.isOpen())
@@ -25,7 +20,7 @@ int main()
                     window.close();
             }
 
-            simulation(start, days, mouth, season, temp);
+            simulation(start);
 
             window.clear();
 

@@ -4,8 +4,8 @@
 #include "../pb.dal/info-for-objects.h"
 #include "../pb.bll/simulation-date.h"
 
-void simulation(bool, unsigned short int&, std::string&, std::string&, int&);
-void time(unsigned short int& days, std::string& mouth, std::string& season, int& tempeture);
+void simulation(bool);
+void time(unsigned short int& days, std::string& month, std::string& season, int& tempeture);
 void removeObjectByLifeExpInYears(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation);
 void removeObjectByTempeture(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, int temp);
 void removeObjectByFood(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation);
