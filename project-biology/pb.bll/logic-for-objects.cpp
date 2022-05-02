@@ -345,7 +345,7 @@ void pregnancyObjectInSimulation(std::vector<Object>& objectsInSimulation, std::
 
 }
 
-void time(unsigned short& days, std::string& mouth, int& tempeture, std::string& season)
+void time(unsigned short int& days, std::string& mouth, std::string& season, int& tempeture)
 {
 	timer(days, mouth, false);
 	tempeture = getTemperature(mouth);
@@ -372,9 +372,10 @@ std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std
 
 void simulation(bool start, unsigned short int& days, std::string& mouth, std::string& season, int& temp) {
 
-	time(days, mouth, temp, season);
-
-	std::cout << days << " - " << mouth << " - " << season << " - " << temp << "\n";
+	if (start) {
+		time(days, mouth, season, temp);
+		std::cout << days << " - " << mouth << " - " << season << " - " << temp << "\n";
+	}
 
 	/*
 	size_t choice = -1;
@@ -392,16 +393,16 @@ void simulation(bool start, unsigned short int& days, std::string& mouth, std::s
 	std::string season = "Winter";
 	int tempeture = 1;
 
-		time(days, daysTimer, mouth, choice, tempeture, season);
+	time(days, daysTimer, mouth, choice, tempeture, season);
 
-		//choice = getId(choice);
-		//active[choice] = 1;
+	//choice = getId(choice);
+	//active[choice] = 1;
 
-		if (choice != 3) {
-			++choice;
-			active[choice] = 1;
-		}
+	if (choice != 3) {
+		++choice;
+		active[choice] = 1;
+	}
 
-		objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, active, choice, days, tempeture);
-		*/
+	objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, active, choice, days, tempeture);
+	*/
 }

@@ -12,3 +12,4 @@ void registerScreen(tgui::BackendGui& gui, bool& start);
 void logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password);
 void removeLockedOverlay(tgui::BackendGui& gui, tgui::Picture::Ptr pic);
 bool runExample(tgui::BackendGui& gui, bool &start);
+bool startSimulation(bool start);
