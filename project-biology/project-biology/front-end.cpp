@@ -35,7 +35,7 @@ void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, t
     gui.add(buttonObject);
 }
 
-void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool& start)
+void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool& start)
 {
 
     unsigned short int days = 1;
@@ -79,7 +79,7 @@ void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool& st
     gui.add(buttonStart);
 
     auto label = tgui::Label::create();
-    label->setText("Time is:");
+    label->setText(std::to_string(days) + "-"  + month + "-" + season + "-" + std::to_string(temp));
     label->setPosition({ "10.25%", "81.84%" });
     label->setRenderer(menuTheme.getRenderer("LabelTime"));
     label->setTextSize(16);
@@ -88,7 +88,7 @@ void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool& st
     auto buttonExit = tgui::Button::copy(buttonStart);
     buttonExit->setPosition({ "78.95%", "80.10%" });
     buttonExit->setRenderer(menuTheme.getRenderer("ButtonExit"));
-    buttonExit->onPress([&gui, userName, &start] { mainMenu(gui, userName, start); });
+    buttonExit->onPress([&gui, &window, userName, &start] { mainMenu(gui, window, userName, start); });
     gui.add(buttonExit);
 
     // Locked items
@@ -174,7 +174,7 @@ void simulationScreen(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool& st
     displayObjectButton(gui, bearLocked, { "89.37%", "64.14%" }, "ButtonObjBear", 13);
 }
 
-void mainMenu(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool &start)
+void mainMenu(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool &start)
 {
     updateTextSize(gui);
 
@@ -193,7 +193,7 @@ void mainMenu(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool &start)
     auto buttonPlay = tgui::Button::create("");
     buttonPlay->setSize({ "18.7%", "33.3%" });
     buttonPlay->setPosition({ "30.9%", "16%" });
-    buttonPlay->onPress([&gui, userName, &start] { simulationScreen(gui, userName, start); });
+    buttonPlay->onPress([&gui, &window, userName, &start] { simulationScreen(gui, window, userName, start); });
     buttonPlay->setRenderer(menuTheme.getRenderer("ButtonPlay"));
     gui.add(buttonPlay);
 
@@ -210,13 +210,13 @@ void mainMenu(tgui::BackendGui& gui, tgui::Label::Ptr userName, bool &start)
     auto buttonQuit = tgui::Button::copy(buttonPlay);
     buttonQuit->setPosition({ "50.4%", "50.7%" });
     buttonQuit->setRenderer(menuTheme.getRenderer("ButtonQuit"));
-    buttonQuit->onPress([] { return; });
+    buttonQuit->onPress([&] { window.close(); });
     gui.add(buttonQuit);
 
     gui.add(userName);
 }
 
-void registerScreen(tgui::BackendGui& gui, bool& start)
+void registerScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start)
 {
     updateTextSize(gui);
 
@@ -256,7 +256,7 @@ void registerScreen(tgui::BackendGui& gui, bool& start)
     gui.add(buttonConfirm);
 
     buttonConfirm->onPress([=] { userName->setText(registerUsername->getText()); });
-    buttonConfirm->onPress([&gui, userName, &start] { mainMenu(gui, userName, start); });
+    buttonConfirm->onPress([&gui, &window, userName, &start] { mainMenu(gui, window, userName, start); });
 }
 
 void logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password)
@@ -270,7 +270,7 @@ void logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password)
     loginUser(loginUsername, loginPassword);
 }
 
-void logInScreen(tgui::BackendGui& gui, bool& start)
+void logInScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start)
 {
     updateTextSize(gui);
 
@@ -306,7 +306,7 @@ void logInScreen(tgui::BackendGui& gui, bool& start)
 
     buttonLogin->onPress([=] { userName->setText(logInUsername->getText()); });
     buttonLogin->onPress(&logIn, logInUsername, logInPassword);
-    buttonLogin->onPress([&gui, userName, &start] { mainMenu(gui, userName, start); });
+    buttonLogin->onPress([&gui, &window, userName, &start] { mainMenu(gui, window, userName, start); });
 
     auto buttonRegister = tgui::Button::create("REGISTER");
     buttonRegister->setSize({ "15.3%", "5.5%" });
@@ -314,14 +314,14 @@ void logInScreen(tgui::BackendGui& gui, bool& start)
     buttonRegister->setRenderer(menuTheme.getRenderer("RegisterButton"));
     gui.add(buttonRegister);
 
-    buttonRegister->onPress([&gui, &start] { registerScreen(gui, start); });
+    buttonRegister->onPress([&gui, &window, &start] { registerScreen(gui, window, start); });
 }
 
-bool runExample(tgui::BackendGui& gui, bool& start)
+bool displayWindow(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start)
 {
     try
     {
-        logInScreen(gui, start);
+        logInScreen(gui, window, start);
         return true;
     }
     catch (const tgui::Exception& e)

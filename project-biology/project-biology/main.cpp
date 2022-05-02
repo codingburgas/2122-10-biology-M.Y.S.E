@@ -2,13 +2,13 @@
 
 int main()
 {
-    sf::RenderWindow window{ {1920, 990}, "Ecosystem Simolation" };
+    sf::RenderWindow window{ {1920, 990}, "Ecosystem Simulation" };
 
     tgui::Gui gui{ window };
 
     bool start = false;
 
-    if (runExample(gui, start))
+    if (displayWindow(gui, window, start))
         while (window.isOpen())
         {
             sf::Event event;
