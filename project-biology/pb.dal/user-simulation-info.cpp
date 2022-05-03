@@ -3,7 +3,7 @@
 
 bool accIsSaved()
 {
-	std::ifstream simulationFile("simulationInfo.txt");
+	std::ifstream simulationFile("../pb.dal/file/simulationInfo.txt");
 	std::string line;
 	std::string user = getCurrentUser();
 
@@ -24,7 +24,7 @@ void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<C
 
 	if (!accIsSaved())
 	{
-		simulationFile.open("simulationInfo.txt", std::ios::app);
+		simulationFile.open("../pb.dal/file/simulationInfo.txt", std::ios::app);
 		
 		simulationFile << "User:" + username << "\n";
 
@@ -63,13 +63,13 @@ void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<C
 
 	if (!simulationFile.is_open())
 	{
-		simulationFile.open("simulationInfo.txt");
+		simulationFile.open("../pb.dal/file/simulationInfo.txt");
 	}
 
-	simulationFile.open("simulationInfo.txt");
+	simulationFile.open("../pb.dal/file/simulationInfo.txt");
 	std::string line;
 
-	std::fstream tempFile("temp.txt", std::ios::trunc);
+	std::fstream tempFile("../pb.dal/file/temp.txt", std::ios::trunc);
 	while (line != username)
 	{
 		getline(simulationFile, line);
@@ -122,7 +122,7 @@ void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<C
 	simulationFile.seekg(0, std::ios::beg);
 
 	simulationFile.close();
-	simulationFile.open("simulationInfo.txt", std::ios::trunc);
+	simulationFile.open("../pb.dal/file/simulationInfo.txt", std::ios::trunc);
 
 	while (getline(tempFile, line))
 	{

@@ -3,7 +3,7 @@
 
 std::string getCurrentUser()
 {
-	std::ifstream currentUser("currentUser.txt");
+	std::ifstream currentUser("../pb.dal/file/currentUser.txt");
 	std::string line;
 	getline(currentUser, line);
 
@@ -12,7 +12,7 @@ std::string getCurrentUser()
 
 void addCurrentUser(std::string username)
 {
-	std::ofstream currentUser("currentUser.txt", std::ios::trunc);
+	std::ofstream currentUser("../pb.dal/file/currentUser.txt", std::ios::trunc);
 
 	currentUser << username << "\n";
 
@@ -21,7 +21,7 @@ void addCurrentUser(std::string username)
 
 int getId(std::string username, std::string password)
 {
-	std::ifstream userFile("userInfo.txt");
+	std::ifstream userFile("../pb.dal/file/userInfo.txt");
 	std::string line;
 	int id = 0;
 
@@ -41,7 +41,7 @@ int getId(std::string username, std::string password)
 
 bool userExists(std::string username, std::string password)
 {
-	std::ifstream userFile("userInfo.txt");
+	std::ifstream userFile("../pb.dal/file/userInfo.txt");
 	std::string line;
 
 	while (getline(userFile, line))
