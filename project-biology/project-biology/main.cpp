@@ -7,8 +7,9 @@ int main()
     tgui::Gui gui{ window };
 
     bool start = false;
+    bool backEndRun = false;
 
-    if (displayWindow(gui, window, start))
+    if (displayWindow(gui, window, start, backEndRun))
         while (window.isOpen())
         {
             sf::Event event;
@@ -20,7 +21,7 @@ int main()
                     window.close();
             }
 
-            simulation(start);
+            simulation(start, backEndRun);
 
             window.clear();
 

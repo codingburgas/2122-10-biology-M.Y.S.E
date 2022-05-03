@@ -345,10 +345,10 @@ void pregnancyObjectInSimulation(std::vector<Object>& objectsInSimulation, std::
 
 }
 
-void time(unsigned short int& days, std::string& month, std::string& season, int& tempeture)
+void time(unsigned short int& days, std::string& month, std::string& season, int& temp)
 {
 	timer(days, month, false);
-	tempeture = getTemperature(month);
+	temp = getTemperature(month);
 	season = getSeason(days, month);
 }
 
@@ -370,31 +370,45 @@ std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std
 	return objectsInSimulation;
 }
 
-void simulation(bool start) {
+void simulation(bool &start, bool &backEndRun) {
 
 	std::string textTime;
-	int i = 0;
 	unsigned short int days;
 	std::string month;
 	std::string season;
-	int temp;
+	int temp, i = 0;
 
-	std::ifstream timeFile;
+	std::fstream timeFile;
 	timeFile.open("../pb.dal/files/time.txt");
 
 	while (getline(timeFile, textTime, '|')) {
 		switch (i) {
-		case 0: days = stoi(textTime); break;
-		case 1: month = textTime; break;
-		case 2: season = textTime; break;
-		case 3: temp = stoi(textTime); break;
+			case 0: days = stoi(textTime); break;
+			case 1: month = textTime; break;
+			case 2: season = textTime; break;
+			case 3: temp = stoi(textTime); break;
 		}
 		++i;
 	}
 
+	timeFile.close();
+
 	if (start) {
+
 		time(days, month, season, temp);
+
 		std::cout << days << " - " << month << " - " << season << " - " << temp << "\n";
+
+		timeFile.open("../pb.dal/files/time.txt", std::fstream::out | std::fstream::trunc);
+
+		timeFile << days << "|";
+		timeFile << month << "|";
+		timeFile << season << "|";
+		timeFile << temp << std::endl;
+
+		timeFile.close();
+
+		backEndRun = true;
 	}
 
 	/*
