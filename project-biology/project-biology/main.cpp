@@ -23,6 +23,8 @@ int main()
 
             simulation(start, backEndRun);
 
+            updateScreen(gui, start);
+
             window.clear();
 
             gui.draw();

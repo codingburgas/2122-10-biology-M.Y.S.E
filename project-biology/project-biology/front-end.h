@@ -13,3 +13,5 @@ void logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password);
 void removeLockedOverlay(tgui::BackendGui& gui, tgui::Picture::Ptr pic);
 bool displayWindow(tgui::BackendGui& gui, sf::RenderWindow& window, bool &start, bool& backEndRun);
 bool startSimulation(bool start);
+std::string giveTimeText();
+void updateScreen(tgui::BackendGui& gui, bool& start);

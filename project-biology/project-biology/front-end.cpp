@@ -22,6 +22,53 @@ bool startSimulation(bool start)
     return !start;
 }
 
+std::string giveTimeText()
+{
+    unsigned short int days = 1;
+    std::string month = "1";
+    std::string season = "1";
+    std::string textTime;
+    int i = 0, temp = 1;
+    std::fstream fileTime;
+
+    fileTime.open("../pb.dal/files/time.txt");
+
+    while (getline(fileTime, textTime, '|')) {
+        switch (i) {
+        case 0: days = stoi(textTime); break;
+        case 1: month = textTime; break;
+        case 2: season = textTime; break;
+        case 3: temp = stoi(textTime); break;
+        }
+        ++i;
+    }
+
+    fileTime.close();
+
+    std::string timeText = std::to_string(days) + "-" + month + "-" + season + "-" + std::to_string(temp);
+
+    return timeText;
+}
+
+void updateScreen(tgui::BackendGui& gui, bool& start)
+{
+    tgui::Theme menuTheme{ "../src/theme-menu.txt" };
+
+    gui.remove(gui.get("LabelTime"));
+
+    auto label = tgui::Label::create();
+    label->setText("");
+
+    if (start)
+    {
+        label->setText(giveTimeText());
+        label->setPosition({ "10.25%", "81.84%" });
+        label->setRenderer(menuTheme.getRenderer("LabelTime"));
+        label->setTextSize(16);
+        gui.add(label, "LabelTime");
+    }
+}
+
 void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, tgui::Layout2d pos, std::string theme, size_t id)
 {
     tgui::Theme objectsTheme{ "../src/objects/objects.txt" };
@@ -77,8 +124,6 @@ void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Lab
 
     tgui::Theme menuTheme{ "../src/theme-menu.txt" };
 
-    tgui::Theme objectsTheme{ "../src/objects/objects.txt" };
-
     auto symulationBackground = tgui::Picture::create("../src/sym-ui.png");
     symulationBackground->setSize({ "100%", "100%" });
     gui.add(symulationBackground);
@@ -91,13 +136,6 @@ void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Lab
     buttonStart->onPress([&start] { start = startSimulation(start); });
 
     gui.add(buttonStart);
-
-    auto label = tgui::Label::create();
-    label->setText(std::to_string(days) + "-"  + month + "-" + season + "-" + std::to_string(temp));
-    label->setPosition({ "10.25%", "81.84%" });
-    label->setRenderer(menuTheme.getRenderer("LabelTime"));
-    label->setTextSize(16);
-    gui.add(label);
 
     auto buttonExit = tgui::Button::copy(buttonStart);
     buttonExit->setPosition({ "78.95%", "80.10%" });
