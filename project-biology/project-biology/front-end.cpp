@@ -82,6 +82,14 @@ void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, t
     gui.add(buttonObject);
 }
 
+tgui::Picture::Ptr createLockedOverlay(tgui::BackendGui& gui, tgui::Layout2d pos)
+{
+    auto lockedOverlay = tgui::Picture::create("../src/objects/locked.png");
+    lockedOverlay->setSize({ "21.61%", "12.62%" });
+    lockedOverlay->setPosition(pos);
+    return lockedOverlay;
+}
+
 void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool& start, bool& backEndRun)
 {
 
@@ -146,60 +154,46 @@ void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Lab
     // Locked items
 
     // First column
-    auto grassLocked = tgui::Picture::create("../src/objects/locked.png");
-    grassLocked->setSize({ "21.61%", "12.62%" });
-    grassLocked->setPosition({ "0.52%", "10.60%" });
+    auto grassLocked = createLockedOverlay(gui, { "0.52%", "10.60%" });
     gui.add(grassLocked);
 
-    auto blueberryLocked = tgui::Picture::copy(grassLocked);
-    blueberryLocked->setPosition({ "0.52%", "24.24%" });
+    auto blueberryLocked = createLockedOverlay(gui, { "0.52%", "24.24%" });
     gui.add(blueberryLocked);
 
-    auto flowerLocked = tgui::Picture::copy(grassLocked);
-    flowerLocked->setPosition({ "0.52%", "37.87%" });
+    auto flowerLocked = createLockedOverlay(gui, { "0.52%", "37.87%" });
     gui.add(flowerLocked);
 
     // Second column
-    auto grasshopperLocked = tgui::Picture::copy(grassLocked);
-    grasshopperLocked->setPosition({ "22.65%", "10.60%" });
+    auto grasshopperLocked = createLockedOverlay(gui, { "22.65%", "10.60%" });
     gui.add(grasshopperLocked);
 
-    auto butterflyLocked = tgui::Picture::copy(grassLocked);
-    butterflyLocked->setPosition({ "22.65%", "24.24%" });
+    auto butterflyLocked = createLockedOverlay(gui, { "22.65%", "24.24%" });
     gui.add(butterflyLocked);
 
-    auto rabbitLocked = tgui::Picture::copy(grassLocked);
-    rabbitLocked->setPosition({ "22.65%", "37.87%" });
+    auto rabbitLocked = createLockedOverlay(gui, { "22.65%", "37.87%" });
     gui.add(rabbitLocked);
 
-    auto beeLocked = tgui::Picture::copy(grassLocked);
-    beeLocked->setPosition({ "22.65%", "51.51%" });
+    auto beeLocked = createLockedOverlay(gui, { "22.65%", "51.51%" });
     gui.add(beeLocked);
 
     // Third column
-    auto mouseLocked = tgui::Picture::copy(grassLocked);
-    mouseLocked->setPosition({ "44.79%", "10.60%" });
+    auto mouseLocked = createLockedOverlay(gui, { "44.79%", "10.60%" });
     gui.add(mouseLocked);
 
-    auto lizardLocked = tgui::Picture::copy(grassLocked);
-    lizardLocked->setPosition({ "44.79%", "24.24%" });
+    auto lizardLocked = createLockedOverlay(gui, { "44.79%", "24.24%" });
     gui.add(lizardLocked);
 
-    auto owlLocked = tgui::Picture::copy(grassLocked);
-    owlLocked->setPosition({ "44.79%", "37.87%" });
+    auto owlLocked = createLockedOverlay(gui, { "44.79%", "37.87%" });
     gui.add(owlLocked);
 
-    auto foxLocked = tgui::Picture::copy(grassLocked);
-    foxLocked->setPosition({ "44.79%", "51.51%" });
+    auto foxLocked = createLockedOverlay(gui, { "44.79%", "51.51%" });
     gui.add(foxLocked);
 
-    auto snakeLocked = tgui::Picture::copy(grassLocked);
-    snakeLocked->setPosition({ "44.79%", "65.15%" });
+    auto snakeLocked = createLockedOverlay(gui, { "44.79%", "65.15%" });
     gui.add(snakeLocked);
 
     // Fourth column
-    auto bearLocked = tgui::Picture::copy(grassLocked);
-    bearLocked->setPosition({ "66.92%", "10.60%" });
+    auto bearLocked = createLockedOverlay(gui, { "66.92%", "10.60%" });
     gui.add(bearLocked);
 
     // Object buttons
