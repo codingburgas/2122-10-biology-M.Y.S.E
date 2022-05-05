@@ -5,6 +5,6 @@
 
 bool passwordHasNumbers(std::string);
 bool passwordHasSymbols(std::string);
-bool passwordIsGood(std::string);
+bool passwordIsGood(std::string, std::string);
 
 void registerUser();

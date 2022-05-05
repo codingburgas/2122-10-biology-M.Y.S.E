@@ -2,7 +2,7 @@
 
 int main()
 {
-    sf::RenderWindow window{ {1920, 990}, "Ecosystem Simulation" };
+    /*sf::RenderWindow window{ {1920, 990}, "Ecosystem Simulation" };
 
     tgui::Gui gui{ window };
 
@@ -30,5 +30,7 @@ int main()
             gui.draw();
 
             window.display();
-        }
+        }*/
+
+    registerUser();
 }

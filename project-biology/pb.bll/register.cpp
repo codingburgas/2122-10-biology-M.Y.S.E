@@ -36,7 +36,7 @@ bool passwordHasSymbols(std::string password)
 		);
 }
 
-bool passwordIsGood(std::string password)
+bool passwordIsGood(std::string password, std::string confirmPass)
 {
 	while (password.length() < 8)
 	{
@@ -53,6 +53,11 @@ bool passwordIsGood(std::string password)
 		std::cout << "Password needs to have symbols(~`!@#$%^&*()_-+={[}]|:;\'<,>.?/\")!\n";
 		return false;
 	}
+	while (password != confirmPass)
+	{
+		std::cout << "Password's don't match\n";
+		return false;
+	}
 	return true;
 }
 
@@ -63,19 +68,14 @@ void registerUser()
 
 	std::cin >> username >> password >> confirmPass;
 
-	while (!passwordIsGood(password))
+	while (!passwordIsGood(password, confirmPass))
+	{
 		std::cin >> password;
-
-	if (password == confirmPass)
-	{
-		//TODO: password = Call passwording hashing function(password)
-
-		USER tempUser = { id, username, password };
-
-		addUserInfo(tempUser);
+		std::cin >> confirmPass;
 	}
-	else
-	{
-		std::cout << "Password's don't match\n";
-	}
+	//TODO: password = Call passwording hashing function(password)
+
+	USER tempUser = { id, username, password };
+
+	addUserInfo(tempUser);
 }
