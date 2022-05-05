@@ -64,7 +64,7 @@ void registerUser()
 		std::cin >> password;
 		std::cin >> confirmPass;
 	}
-	//TODO: password = Call passwording hashing function(password)
+	// TODO: password = hash(password)
 
 	USER tempUser = { id, username, password };
 

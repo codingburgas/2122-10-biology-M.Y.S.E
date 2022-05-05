@@ -15,5 +15,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <thread>
+#include <cstring>
+#include <cstdio>
 
 #endif //PCH_H

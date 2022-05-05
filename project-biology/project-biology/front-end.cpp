@@ -311,15 +311,12 @@ void registerScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start
     buttonConfirm->onPress([&gui, &window, userName, &start, &backEndRun] { mainMenu(gui, window, userName, start, backEndRun); });
 }
 
-void logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password)
+bool logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password)
 {
-    std::cout << "Username: " << username->getText() << std::endl;
-    std::cout << "Password: " << password->getText() << std::endl;
-
     std::string loginUsername = username->getText().toStdString();
     std::string loginPassword = password->getText().toStdString();
 
-    loginUser(loginUsername, loginPassword);
+    return loginUser(loginUsername, loginPassword);
 }
 
 void logInScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start, bool& backEndRun)
