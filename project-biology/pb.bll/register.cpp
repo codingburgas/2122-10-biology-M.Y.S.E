@@ -3,37 +3,28 @@
 
 bool passwordHasNumbers(std::string password)
 {
-	return (
-		password.find('0') != std::string::npos ||
-		password.find('1') != std::string::npos ||
-		password.find('2') != std::string::npos ||
-		password.find('3') != std::string::npos ||
-		password.find('4') != std::string::npos ||
-		password.find('5') != std::string::npos ||
-		password.find('6') != std::string::npos ||
-		password.find('7') != std::string::npos ||
-		password.find('8') != std::string::npos ||
-		password.find('9') != std::string::npos
-		);
+	bool flag = false;
+
+	for (int i = 48; i <= 57; i++)
+	{
+		if (password.find(char(i)) != std::string::npos)
+			flag = true;
+	}
+
+	return flag;
 }
 
 bool passwordHasSymbols(std::string password)
 {
-	return (
-		password.find('~') != std::string::npos ||
-		password.find('!') != std::string::npos ||
-		password.find('@') != std::string::npos ||
-		password.find('#') != std::string::npos ||
-		password.find('$') != std::string::npos ||
-		password.find('%') != std::string::npos ||
-		password.find('^') != std::string::npos ||
-		password.find('&') != std::string::npos ||
-		password.find('*') != std::string::npos ||
-		password.find('_') != std::string::npos ||
-		password.find('-') != std::string::npos ||
-		password.find('=') != std::string::npos ||
-		password.find('+') != std::string::npos
-		);
+	bool flag = false;
+
+	for (int i = 33; i <= 47; i++)
+	{
+		if (password.find(char(i)) != std::string::npos)
+			flag = true;
+	}
+
+	return flag;
 }
 
 bool passwordIsGood(std::string password, std::string confirmPass)
