@@ -41,7 +41,7 @@ int passwordIsGood(std::string password, std::string confirmPass)
 	}
 	while (!passwordHasSymbols(password))
 	{
-		//std::cout << "Password needs to have symbols(~`!@#$%^&*()_-+={[}]|:;\'<,>.?/\")!\n";
+		//std::cout << "c!\n";
 		return 3;
 	}
 	while (password != confirmPass)

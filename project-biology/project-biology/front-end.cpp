@@ -343,10 +343,26 @@ void registerScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start
     gui.add(buttonConfirm);
 
     buttonConfirm->onPress([=] { userName->setText(registerUsername->getText()); });
-    buttonConfirm->onPress([&gui, &window, userName, &start, &backEndRun] 
+    buttonConfirm->onPress([registerUsername, registerPassword, confirmPassword, &gui, &window, userName, &start, &backEndRun]
         {
-            switch(regUser())
-            mainMenu(gui, window, userName, start, backEndRun); 
+            switch (regUser(registerUsername, registerPassword, confirmPassword))
+            {
+            case 0:
+                mainMenu(gui, window, userName, start, backEndRun);
+                break;
+            case 1:
+                // Write: Password is too short
+                break;
+            case 2:
+                // Write: Password needs to have numbers
+                break;
+            case 3:
+                // Write: Password needs to have symbols(~`!@#$%^&*()_-+={[}]|:;\'<,>.?/\")
+                break;
+            case 4:
+                // Write: Password's don't match
+                break;
+            }
         });
 }
 
