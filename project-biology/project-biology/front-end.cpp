@@ -47,20 +47,23 @@ std::string giveTimeText()
 
 void updateScreen(tgui::BackendGui& gui, bool& start)
 {
-    tgui::Theme menuTheme{ "../src/theme-menu.txt" };
-
     gui.remove(gui.get("LabelTime"));
 
-    auto label = tgui::Label::create();
-    label->setText("");
-
-    if (start)
+    if (gui.get("ButtonStart"))
     {
-        label->setText(giveTimeText());
+        tgui::Theme menuTheme{ "../src/theme-menu.txt" };
+
+        auto label = tgui::Label::create();
         label->setPosition({ "10.25%", "81.84%" });
+        label->setText(giveTimeText());
         label->setRenderer(menuTheme.getRenderer("LabelTime"));
         label->setTextSize(16);
         gui.add(label, "LabelTime");
+    }
+
+    if (gui.get("ButtonPlay"))
+    {
+        gui.remove(gui.get("LabelTime"));
     }
 }
 
@@ -149,7 +152,7 @@ void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Lab
     buttonStart->setRenderer(menuTheme.getRenderer("ButtonStart"));
     buttonStart->onPress([&start] { start = startSimulation(start); });
 
-    gui.add(buttonStart);
+    gui.add(buttonStart, "ButtonStart");
 
     auto buttonExit = tgui::Button::copy(buttonStart);
     buttonExit->setPosition({ "78.95%", "80.10%" });
@@ -253,6 +256,8 @@ void mainMenu(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr 
 
     gui.onViewChange([&gui] { updateTextSize(gui); });
 
+    gui.remove(gui.get("ButtonStart"));
+
     tgui::Theme menuTheme{ "../src/theme-menu.txt" };
 
     userName->setSize({ "100%", "8%" });
@@ -268,7 +273,7 @@ void mainMenu(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr 
     buttonPlay->setPosition({ "30.9%", "16%" });
     buttonPlay->onPress([&gui, &window, userName, &start, &backEndRun] { simulationScreen(gui, window, userName, start, backEndRun); });
     buttonPlay->setRenderer(menuTheme.getRenderer("ButtonPlay"));
-    gui.add(buttonPlay);
+    gui.add(buttonPlay, "ButtonPlay");
 
     auto buttonSettings = tgui::Button::copy(buttonPlay);
     buttonSettings->setPosition({ "50.4%", "16%" });
