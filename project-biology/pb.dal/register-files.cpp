@@ -25,11 +25,11 @@ int getLastId()
 
 	if (!userFile.is_open())
 	{
-		return 0;
+		return 1;
 	}
 
 	std::string line = "";
-	int lastId = 0;
+	int lastId = 1;
 
 	while (getline(userFile, line))
 	{
