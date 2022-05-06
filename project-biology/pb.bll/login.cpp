@@ -3,7 +3,7 @@
 
 bool loginUser(std::string username, std::string password)
 {
-	// TODO: password = hash(password)
+	password = sha256(password);
 
 	if (userExists(username, password))
 	{

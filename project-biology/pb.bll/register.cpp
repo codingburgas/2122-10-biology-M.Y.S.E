@@ -31,22 +31,22 @@ int passwordIsGood(std::string password, std::string confirmPass)
 {
 	while (password.length() < 8)
 	{
-		//std::cout << "Password is too short!\n";
+		std::cout << "Password is too short!\n";
 		return 1;
 	}
 	while (!passwordHasNumbers(password))
 	{
-		//std::cout << "Password needs to have numbers!\n";
+		std::cout << "Password needs to have numbers!\n";
 		return 2;
 	}
 	while (!passwordHasSymbols(password))
 	{
-		//std::cout << "c!\n";
+		std::cout << "Password needs to have symbols(~`!@#$%^&*()_-+={[}]|:;\'<,>.?/\")!\n";
 		return 3;
 	}
 	while (password != confirmPass)
 	{
-		//std::cout << "Password's don't match\n";
+		std::cout << "Password's don't match\n";
 		return 4;
 	}
 	return 0;
@@ -58,7 +58,7 @@ int registerUser(std::string username, std::string password, std::string confirm
 
 	if (passwordIsGood(password, confirmPass) == 0)
 	{
-		// TODO: password = hash(password)
+		password = sha256(password);
 
 		USER tempUser = { id, username, password };
 
