@@ -150,7 +150,7 @@ ButtonExit {
 }
 
 LabelTime {
-        TextColor = #5C7F69;
+        TextColor = #272D2A;
 }
 
 LabelUserName {

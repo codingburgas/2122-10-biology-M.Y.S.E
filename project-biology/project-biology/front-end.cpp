@@ -40,7 +40,7 @@ std::string giveTimeText()
 
     fileTime.close();
 
-    std::string timeText = std::to_string(days) + "-" + month + "-" + season + "-" + std::to_string(temp);
+    std::string timeText = std::to_string(days) + " " + month + " " + season + " " + std::to_string(temp);
 
     return timeText;
 }
@@ -54,7 +54,7 @@ void updateScreen(tgui::BackendGui& gui, bool& start)
         tgui::Theme menuTheme{ "../src/theme-menu.txt" };
 
         auto label = tgui::Label::create();
-        label->setPosition({ "10.25%", "81.84%" });
+        label->setPosition({ "10.62%", "79.89%" });
         label->setText(giveTimeText());
         label->setRenderer(menuTheme.getRenderer("LabelTime"));
         label->setTextSize(16);
