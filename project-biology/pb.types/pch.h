@@ -7,6 +7,9 @@
 #ifndef PCH_H_TYPES
 #define PCH_H_TYPES
 
+#include <fstream>
+#include <cstring>
+#include <iostream>
 #include <string>
 #include <vector>
 
