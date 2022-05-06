@@ -1,2 +1,1 @@
-1,dad,dad123231231/
-2,dawasddaw,dawasddaw1231/
+0, da, da

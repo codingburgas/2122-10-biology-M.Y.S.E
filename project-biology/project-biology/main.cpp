@@ -2,7 +2,7 @@
 
 int main()
 {
-    /*sf::RenderWindow window{ {1920, 990}, "Ecosystem Simulation" };
+    sf::RenderWindow window{ {1920, 990}, "Ecosystem Simulation" };
 
     tgui::Gui gui{ window };
 
@@ -10,6 +10,7 @@ int main()
     bool backEndRun = false;
 
     if (displayWindow(gui, window, start, backEndRun))
+    {
         while (window.isOpen())
         {
             sf::Event event;
@@ -30,7 +31,6 @@ int main()
             gui.draw();
 
             window.display();
-        }*/
-
-    registerUser();
+        }
+    }
 }

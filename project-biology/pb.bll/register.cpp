@@ -27,46 +27,44 @@ bool passwordHasSymbols(std::string password)
 	return flag;
 }
 
-bool passwordIsGood(std::string password, std::string confirmPass)
+int passwordIsGood(std::string password, std::string confirmPass)
 {
 	while (password.length() < 8)
 	{
-		std::cout << "Password is too short!\n";
-		return false;
+		//std::cout << "Password is too short!\n";
+		return 1;
 	}
 	while (!passwordHasNumbers(password))
 	{
-		std::cout << "Password needs to have numbers!\n";
-		return false;
+		//std::cout << "Password needs to have numbers!\n";
+		return 2;
 	}
 	while (!passwordHasSymbols(password))
 	{
-		std::cout << "Password needs to have symbols(~`!@#$%^&*()_-+={[}]|:;\'<,>.?/\")!\n";
-		return false;
+		//std::cout << "Password needs to have symbols(~`!@#$%^&*()_-+={[}]|:;\'<,>.?/\")!\n";
+		return 3;
 	}
 	while (password != confirmPass)
 	{
-		std::cout << "Password's don't match\n";
-		return false;
+		//std::cout << "Password's don't match\n";
+		return 4;
 	}
-	return true;
+	return 0;
 }
 
-void registerUser()
+int registerUser(std::string username, std::string password, std::string confirmPass)
 {
 	int id = getLastId();
-	std::string username, password, confirmPass;
 
-	std::cin >> username >> password >> confirmPass;
-
-	while (!passwordIsGood(password, confirmPass))
+	if (passwordIsGood(password, confirmPass) == 0)
 	{
-		std::cin >> password;
-		std::cin >> confirmPass;
+		// TODO: password = hash(password)
+
+		USER tempUser = { id, username, password };
+
+		addUserInfo(tempUser);
+		return 0;
 	}
-	// TODO: password = hash(password)
 
-	USER tempUser = { id, username, password };
-
-	addUserInfo(tempUser);
+	return passwordIsGood(password, confirmPass);
 }

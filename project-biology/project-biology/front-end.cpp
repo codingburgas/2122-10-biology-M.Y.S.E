@@ -294,6 +294,15 @@ void mainMenu(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr 
     gui.add(userName);
 }
 
+int regUser(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password, tgui::EditBox::Ptr confirmPass)
+{
+    std::string registerUsername = username->getText().toStdString();
+    std::string registerPassword = password->getText().toStdString();
+    std::string registerConfirmation = confirmPass->getText().toStdString();
+
+    return registerUser(registerUsername, registerPassword, registerConfirmation);
+}
+
 void registerScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start, bool& backEndRun)
 {
     updateTextSize(gui);
@@ -334,7 +343,11 @@ void registerScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start
     gui.add(buttonConfirm);
 
     buttonConfirm->onPress([=] { userName->setText(registerUsername->getText()); });
-    buttonConfirm->onPress([&gui, &window, userName, &start, &backEndRun] { mainMenu(gui, window, userName, start, backEndRun); });
+    buttonConfirm->onPress([&gui, &window, userName, &start, &backEndRun] 
+        {
+            switch(regUser())
+            mainMenu(gui, window, userName, start, backEndRun); 
+        });
 }
 
 bool logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password)
@@ -380,8 +393,12 @@ void logInScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start, b
     gui.add(buttonLogin);
 
     buttonLogin->onPress([=] { userName->setText(logInUsername->getText()); });
-    buttonLogin->onPress(&logIn, logInUsername, logInPassword);
-    buttonLogin->onPress([&gui, &window, userName, &start, &backEndRun] { mainMenu(gui, window, userName, start, backEndRun); });
+    buttonLogin->onPress([logInUsername, logInPassword, &gui, &window, userName, &start, &backEndRun] 
+        { 
+            if (logIn(logInUsername, logInPassword)) 
+                mainMenu(gui, window, userName, start, backEndRun);
+            /* Write: User doesn't exist!*/ 
+        });
 
     auto buttonRegister = tgui::Button::create("REGISTER");
     buttonRegister->setSize({ "15.3%", "5.5%" });
