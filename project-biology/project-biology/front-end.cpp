@@ -12,11 +12,6 @@ void removeLockedOverlay(tgui::BackendGui& gui, tgui::Picture::Ptr pic)
     gui.remove(pic);
 }
 
-size_t getId(size_t id)
-{
-    return id;
-}
-
 bool startSimulation(bool start) 
 {
     return !start;
@@ -69,16 +64,22 @@ void updateScreen(tgui::BackendGui& gui, bool& start)
     }
 }
 
-void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, tgui::Layout2d pos, std::string theme, size_t id)
+void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, tgui::Layout2d pos, std::string theme, short int id, std::vector<short int>& choice)
 {
     tgui::Theme objectsTheme{ "../src/objects/objects.txt" };
+
+    bool yes = false;
 
     auto buttonObject = tgui::Button::create();
     buttonObject->setSize({ "4.68%", "9.09%" });
     buttonObject->setPosition(pos);
     buttonObject->setRenderer(objectsTheme.getRenderer(theme));
     buttonObject->onPress([&gui, picOverlay] { removeLockedOverlay(gui, picOverlay); });
-    buttonObject->onPress([=] { getId(id); });
+    buttonObject->onPress([&yes] { yes = true; });
+
+    if (yes)
+        choice[id - 1] = id;
+
     gui.add(buttonObject);
 }
 
@@ -88,6 +89,11 @@ tgui::Picture::Ptr createLockedOverlay(tgui::BackendGui& gui, tgui::Layout2d pos
     lockedOverlay->setSize({ "21.61%", "12.62%" });
     lockedOverlay->setPosition(pos);
     return lockedOverlay;
+}
+
+bool is_empty(std::ifstream& pFile)
+{
+    return pFile.peek() == std::ifstream::traits_type::eof();
 }
 
 void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool& start, bool& backEndRun)
@@ -196,28 +202,49 @@ void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Lab
     auto bearLocked = createLockedOverlay(gui, { "66.92%", "10.60%" });
     gui.add(bearLocked);
 
+    std::ifstream choiceFiles("../pb.dal/files/choice.txt");
+    std::vector<short int> choice;
+    i = 0;
+
+    if (is_empty(choiceFiles))
+        choice.resize(13, { -1 });
+    else {
+        choice.resize(13, {});
+        while (getline(choiceFiles, textTime, '|')) {
+            choice[i] = stoi(textTime);
+            ++i;
+        }
+    }
+
+    choiceFiles.close();
     // Object buttons
 
     // First column
-    displayObjectButton(gui, grassLocked, { "89.37%", "4.74%" }, "ButtonObjGrass", 1);
-    displayObjectButton(gui, blueberryLocked, { "94.47%", "4.74%" }, "ButtonObjBlueberry", 2);
-    displayObjectButton(gui, flowerLocked, { "89.37%", "14.64%" }, "ButtonObjFlower", 3);
+    displayObjectButton(gui, grassLocked, { "89.37%", "4.74%" }, "ButtonObjGrass", 1, choice);
+    displayObjectButton(gui, blueberryLocked, { "94.47%", "4.74%" }, "ButtonObjBlueberry", 2, choice);
+    displayObjectButton(gui, flowerLocked, { "89.37%", "14.64%" }, "ButtonObjFlower", 3, choice);
 
     // Second column
-    displayObjectButton(gui, grasshopperLocked, { "94.47%", "14.64%" }, "ButtonObjGrasshopper", 4);
-    displayObjectButton(gui, butterflyLocked, { "89.37%", "24.54%" }, "ButtonObjButterfly", 5);
-    displayObjectButton(gui, rabbitLocked, { "94.47%", "24.54%" }, "ButtonObjRabbit", 6);
-    displayObjectButton(gui, beeLocked, { "89.37%", "34.44%" }, "ButtonObjBee", 7);
+    displayObjectButton(gui, grasshopperLocked, { "94.47%", "14.64%" }, "ButtonObjGrasshopper", 4, choice);
+    displayObjectButton(gui, butterflyLocked, { "89.37%", "24.54%" }, "ButtonObjButterfly", 5, choice);
+    displayObjectButton(gui, rabbitLocked, { "94.47%", "24.54%" }, "ButtonObjRabbit", 6, choice);
+    displayObjectButton(gui, beeLocked, { "89.37%", "34.44%" }, "ButtonObjBee", 7, choice);
 
     // Third column
-    displayObjectButton(gui, mouseLocked, { "94.47%", "34.44%" }, "ButtonObjMouse", 8);
-    displayObjectButton(gui, lizardLocked, { "89.37%", "44.34%" }, "ButtonObjLizard", 9);
-    displayObjectButton(gui, owlLocked, { "94.47%", "44.34%" }, "ButtonObjOwl", 10);
-    displayObjectButton(gui, foxLocked, { "89.37%", "54.24%" }, "ButtonObjFox", 11);
-    displayObjectButton(gui, snakeLocked, { "94.47%", "54.24%" }, "ButtonObjSnake", 12);
+    displayObjectButton(gui, mouseLocked, { "94.47%", "34.44%" }, "ButtonObjMouse", 8, choice);
+    displayObjectButton(gui, lizardLocked, { "89.37%", "44.34%" }, "ButtonObjLizard", 9, choice);
+    displayObjectButton(gui, owlLocked, { "94.47%", "44.34%" }, "ButtonObjOwl", 10, choice);
+    displayObjectButton(gui, foxLocked, { "89.37%", "54.24%" }, "ButtonObjFox", 11, choice);
+    displayObjectButton(gui, snakeLocked, { "94.47%", "54.24%" }, "ButtonObjSnake", 12, choice);
 
     // Fourth column
-    displayObjectButton(gui, bearLocked, { "89.37%", "64.14%" }, "ButtonObjBear", 13);
+    displayObjectButton(gui, bearLocked, { "89.37%", "64.14%" }, "ButtonObjBear", 13, choice);
+
+    std::fstream choiceFileS("../pb.dal/files/choice.txt");
+    for (int i = 0; i < choice.size(); i++)
+        choiceFileS << choice[i] << '|';
+
+    choiceFileS.close();
 }
 
 void mainMenu(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool &start, bool& backEndRun)
