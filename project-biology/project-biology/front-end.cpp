@@ -67,21 +67,20 @@ void updateScreen(tgui::BackendGui& gui, bool& start)
     }
 }
 
-void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, tgui::Layout2d pos, std::string theme, short int id, short int& choice)
+void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, tgui::Layout2d pos, std::string theme, short int id)
 {
     tgui::Theme objectsTheme{ "../src/objects/objects.txt" };
-
-    bool yes = false;
 
     auto buttonObject = tgui::Button::create();
     buttonObject->setSize({ "4.68%", "9.09%" });
     buttonObject->setPosition(pos);
     buttonObject->setRenderer(objectsTheme.getRenderer(theme));
-    buttonObject->onPress([&gui, picOverlay] { removeLockedOverlay(gui, picOverlay); });
-    buttonObject->onPress([&yes] { yes = true; });
-
-    if (yes)
-        choice = id;
+    buttonObject->onPress([&gui, picOverlay ] { removeLockedOverlay(gui, picOverlay); });
+    buttonObject->onPress([id] {
+        std::ofstream choiceFileS("../pb.dal/files/choice.txt", std::ios::trunc);
+        choiceFileS << id;
+        choiceFileS.close();
+        });
 
     gui.add(buttonObject);
 }
@@ -204,39 +203,28 @@ void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Lab
     // Fourth column
     auto bearLocked = createLockedOverlay(gui, { "66.92%", "10.60%" });
     gui.add(bearLocked);
-
-    std::ifstream choiceFiles("../pb.dal/files/choice.txt");
-    short int choice = -1;
-    i = 0;
-
-    choiceFiles.close();
     // Object buttons
 
     // First column
-    displayObjectButton(gui, grassLocked, { "89.37%", "4.74%" }, "ButtonObjGrass", 1, choice);
-    displayObjectButton(gui, blueberryLocked, { "94.47%", "4.74%" }, "ButtonObjBlueberry", 2, choice);
-    displayObjectButton(gui, flowerLocked, { "89.37%", "14.64%" }, "ButtonObjFlower", 3, choice);
+    displayObjectButton(gui, grassLocked, { "89.37%", "4.74%" }, "ButtonObjGrass", 1);
+    displayObjectButton(gui, blueberryLocked, { "94.47%", "4.74%" }, "ButtonObjBlueberry", 2);
+    displayObjectButton(gui, flowerLocked, { "89.37%", "14.64%" }, "ButtonObjFlower", 3);
 
     // Second column
-    displayObjectButton(gui, grasshopperLocked, { "94.47%", "14.64%" }, "ButtonObjGrasshopper", 4, choice);
-    displayObjectButton(gui, butterflyLocked, { "89.37%", "24.54%" }, "ButtonObjButterfly", 5, choice);
-    displayObjectButton(gui, rabbitLocked, { "94.47%", "24.54%" }, "ButtonObjRabbit", 6, choice);
-    displayObjectButton(gui, beeLocked, { "89.37%", "34.44%" }, "ButtonObjBee", 7, choice);
+    displayObjectButton(gui, grasshopperLocked, { "94.47%", "14.64%" }, "ButtonObjGrasshopper", 4);
+    displayObjectButton(gui, butterflyLocked, { "89.37%", "24.54%" }, "ButtonObjButterfly", 5);
+    displayObjectButton(gui, rabbitLocked, { "94.47%", "24.54%" }, "ButtonObjRabbit", 6);
+    displayObjectButton(gui, beeLocked, { "89.37%", "34.44%" }, "ButtonObjBee", 7);
 
     // Third column
-    displayObjectButton(gui, mouseLocked, { "94.47%", "34.44%" }, "ButtonObjMouse", 8, choice);
-    displayObjectButton(gui, lizardLocked, { "89.37%", "44.34%" }, "ButtonObjLizard", 9, choice);
-    displayObjectButton(gui, owlLocked, { "94.47%", "44.34%" }, "ButtonObjOwl", 10, choice);
-    displayObjectButton(gui, foxLocked, { "89.37%", "54.24%" }, "ButtonObjFox", 11, choice);
-    displayObjectButton(gui, snakeLocked, { "94.47%", "54.24%" }, "ButtonObjSnake", 12, choice);
+    displayObjectButton(gui, mouseLocked, { "94.47%", "34.44%" }, "ButtonObjMouse", 8);
+    displayObjectButton(gui, lizardLocked, { "89.37%", "44.34%" }, "ButtonObjLizard", 9);
+    displayObjectButton(gui, owlLocked, { "94.47%", "44.34%" }, "ButtonObjOwl", 10);
+    displayObjectButton(gui, foxLocked, { "89.37%", "54.24%" }, "ButtonObjFox", 11);
+    displayObjectButton(gui, snakeLocked, { "94.47%", "54.24%" }, "ButtonObjSnake", 12);
 
     // Fourth column
-    displayObjectButton(gui, bearLocked, { "89.37%", "64.14%" }, "ButtonObjBear", 13, choice);
-
-
-    std::fstream choiceFileS("../pb.dal/files/choice.txt");
-    choiceFileS << choice;
-    choiceFileS.close();
+    displayObjectButton(gui, bearLocked, { "89.37%", "64.14%" }, "ButtonObjBear", 13);
 }
 
 void aboutUsScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool& start, bool& backEndRun)

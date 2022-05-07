@@ -19,7 +19,13 @@ bool accIsSaved()
 
 void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<CountObjects> counterInSimulation, std::vector<Object> objectsOrder)
 {
-	std::ofstream simulationFile("../pb.dal/files/simulationInfo.txt");
+	std::fstream timeFile("../pb.dal/files/time.txt", std::ios::out | std::ios::in);
+	std::string line;
+	getline(timeFile, line);
+
+	std::ofstream simulationFile("../pb.dal/files/simulationInfo.txt", std::ios::trunc);
+
+	simulationFile << line << std::endl;
 
 	for (size_t i = 0; i < objectsInSimulation.size(); i++)
 	{

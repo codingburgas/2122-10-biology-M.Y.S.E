@@ -433,7 +433,12 @@ void simulation(bool &start, bool &backEndRun) {
 	}
 	*/
 
-	if (start) {
+	if (start) 
+	{
+		if (!backEndRun)
+		{
+			choice = 5;
+		}
 
 		time(days, month, season, temp);
 
