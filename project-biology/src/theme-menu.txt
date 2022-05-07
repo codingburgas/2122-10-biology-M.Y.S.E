@@ -156,3 +156,16 @@ LabelTime {
 LabelUserName {
 	TextColor = #FFFFFF;
 }
+
+ButtonBack-AboutUs {
+        Borders = (0, 0, 0, 0);
+        TextColorDown = rgba(255, 255, 255, 235);
+        TextColorHover = rgba(255, 255, 255, 235);
+        Texture = "about-us-go-back.png" Smooth;
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "about-us-go-back-hover.png" Smooth;
+}

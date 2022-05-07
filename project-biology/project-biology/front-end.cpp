@@ -12,7 +12,7 @@ void removeLockedOverlay(tgui::BackendGui& gui, tgui::Picture::Ptr pic)
     gui.remove(pic);
 }
 
-bool startSimulation(bool start) 
+bool startSimulation(bool start)
 {
     return !start;
 }
@@ -117,16 +117,16 @@ void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Lab
         timeFile << temp;
 
         timeFile.close();
-    } 
+    }
 
     timeFile.open("../pb.dal/files/time.txt");
 
     while (getline(timeFile, textTime, '|')) {
         switch (i) {
-            case 0: days = stoi(textTime); break;
-            case 1: month = textTime; break;
-            case 2: season = textTime; break;
-            case 3: temp = stoi(textTime); break;
+        case 0: days = stoi(textTime); break;
+        case 1: month = textTime; break;
+        case 2: season = textTime; break;
+        case 3: temp = stoi(textTime); break;
         }
         ++i;
     }
@@ -239,7 +239,29 @@ void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Lab
     choiceFileS.close();
 }
 
-void mainMenu(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool &start, bool& backEndRun)
+void aboutUsScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool& start, bool& backEndRun)
+{
+    gui.removeAllWidgets();
+
+    updateTextSize(gui);
+
+    gui.onViewChange([&gui] { updateTextSize(gui); });
+
+    tgui::Theme menuTheme{ "../src/theme-menu.txt" };
+
+    auto aboutUsBackground = tgui::Picture::create("../src/about-us.png");
+    aboutUsBackground->setSize({ "100%", "100%" });
+    gui.add(aboutUsBackground);
+
+    auto buttonBack = tgui::Button::create();
+    buttonBack->setSize({ "18.22%", "6.06%" });
+    buttonBack->setPosition({ "77.86%", "61.71%" });
+    buttonBack->setRenderer(menuTheme.getRenderer("ButtonBack-AboutUs"));
+    buttonBack->onPress([&gui, &window, userName, &start, &backEndRun] { mainMenu(gui, window, userName, start, backEndRun); });
+    gui.add(buttonBack);
+}
+
+void mainMenu(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool& start, bool& backEndRun)
 {
     updateTextSize(gui);
 
@@ -264,10 +286,11 @@ void mainMenu(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr 
     buttonPlay->setRenderer(menuTheme.getRenderer("ButtonPlay"));
     gui.add(buttonPlay, "ButtonPlay");
 
-    auto buttonSettings = tgui::Button::copy(buttonPlay);
-    buttonSettings->setPosition({ "50.4%", "16%" });
-    buttonSettings->setRenderer(menuTheme.getRenderer("ButtonSettings"));
-    gui.add(buttonSettings);
+    auto buttonAboutUs = tgui::Button::copy(buttonPlay);
+    buttonAboutUs->setPosition({ "50.4%", "16%" });
+    buttonAboutUs->setRenderer(menuTheme.getRenderer("ButtonSettings"));
+    buttonAboutUs->onPress([&gui, &window, userName, &start, &backEndRun] { aboutUsScreen(gui, window, userName, start, backEndRun); });
+    gui.add(buttonAboutUs);
 
     auto buttonHelp = tgui::Button::copy(buttonPlay);
     buttonHelp->setPosition({ "30.9%", "50.7%" });
@@ -398,11 +421,11 @@ void logInScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start, b
     gui.add(buttonLogin);
 
     buttonLogin->onPress([=] { userName->setText(logInUsername->getText()); });
-    buttonLogin->onPress([logInUsername, logInPassword, &gui, &window, userName, &start, &backEndRun] 
-        { 
-            if (logIn(logInUsername, logInPassword)) 
+    buttonLogin->onPress([logInUsername, logInPassword, &gui, &window, userName, &start, &backEndRun]
+        {
+            if (logIn(logInUsername, logInPassword))
                 mainMenu(gui, window, userName, start, backEndRun);
-            /* Write: User doesn't exist!*/ 
+            /* Write: User doesn't exist!*/
         });
 
     auto buttonRegister = tgui::Button::create("REGISTER");
