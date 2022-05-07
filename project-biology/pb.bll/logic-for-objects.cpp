@@ -263,6 +263,8 @@ void removeObjectByTempeture(std::vector<Object>& objectsInSimulation, std::vect
 
 void startingAddObjectInSimulation(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, short int choice, unsigned short int days) {
 
+
+
 	if (objects[choice].food.empty()) {
 		if (objects[choice].name == "Grass")
 			counterInSimulation[choice].maleCount += 20;
@@ -402,43 +404,52 @@ void simulation(bool &start, bool &backEndRun) {
 
 	std::ifstream choiceFile("../pb.dal/files/choice.txt");
 
-	while (getline(choiceFile, textTime))
-	{
-		if(textTime != "")
-			choice = stoi(textTime);
-	}
+	getline(choiceFile, textTime);
+	if(textTime != "")
+		choice = stoi(textTime);
 
 	choiceFile.close();
 	
-	/*
 	if (choice != -1) {
-		std::fstream choicesFile("../pb.dal/files/choices.txt");
+		std::fstream choicesFile("../pb.dal/files/choices.txt", std::ios::in);
 
-		while (getline(choicesFile, textTime, '|'))
+		bool flag = true;
+
+		while(getline(choicesFile, textTime, '|'))
+			if(stoi(textTime) == choice)
+				flag = false;
+
+		choicesFile.close();
+		choicesFile.open("../pb.dal/files/choices.txt", std::ios::out);
+
+		if (flag)
+		{
+			choicesFile << choice << '|';
+		}
+
+		/*while (getline(choicesFile, textTime, '|'))
 		{
 			choices.push_back(stoi(textTime));
 		}
 
-		for (int i = 0; i < choices.size(); i++) {
-			if (choice == choices[i]) {
-				choice = -1;
-			}
-		}
+		choicesFile.close();
+		choicesFile.open("../pb.dal/files/choices.txt", std::ios::out);
 
-		if (choice != -1) {
-
+		if (std::find(choices.begin(), choices.end(), choice) != choices.end())
+		{
+			choices.push_back(choice);
+			choicesFile << choice << '|';
 		}
+		else
+		{
+			choice = -1;
+		}*/
 
 		choicesFile.close();
 	}
-	*/
 
 	if (start) 
 	{
-		if (!backEndRun)
-		{
-			choice = 5;
-		}
 
 		time(days, month, season, temp);
 
