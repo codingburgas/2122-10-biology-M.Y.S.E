@@ -2,6 +2,7 @@
 
 #include "pch.h"
 #include "../pb.dal/info-for-objects.h"
+#include "../pb.dal/user-simulation-info.h"
 #include "../pb.bll/simulation-date.h"
 
 void simulation(bool&, bool&);

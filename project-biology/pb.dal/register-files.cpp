@@ -3,7 +3,7 @@
 
 void addUserInfo(USER user)
 {
-	std::ofstream userFile("userInfo.txt", std::ios::out | std::ios::app);
+	std::ofstream userFile("../pb.dal/files/userInfo.txt", std::ios::out | std::ios::app);
 
 	std::string Id = std::to_string(user.id);
 	std::string username = user.username;
@@ -21,7 +21,7 @@ void addUserInfo(USER user)
 
 int getLastId()
 {
-	std::ifstream userFile("userInfo.txt");
+	std::ifstream userFile("../pb.dal/files/userInfo.txt");
 
 	if (!userFile.is_open())
 	{

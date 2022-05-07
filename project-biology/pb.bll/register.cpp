@@ -63,6 +63,7 @@ int registerUser(std::string username, std::string password, std::string confirm
 		USER tempUser = { id, username, password };
 
 		addUserInfo(tempUser);
+		addCurrentUser(username);
 		return 0;
 	}
 

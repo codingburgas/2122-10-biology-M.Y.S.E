@@ -21,7 +21,7 @@ void addCurrentUser(std::string username)
 
 int getId(std::string username, std::string password)
 {
-	std::ifstream userFile("userInfo.txt");
+	std::ifstream userFile("../pb.dal/files/userInfo.txt");
 	std::string line;
 	int id = 0;
 
@@ -41,7 +41,7 @@ int getId(std::string username, std::string password)
 
 bool userExists(std::string username, std::string password)
 {
-	std::ifstream userFile("userInfo.txt");
+	std::ifstream userFile("../pb.dal/files/userInfo.txt");
 	std::string line;
 
 	while (getline(userFile, line))

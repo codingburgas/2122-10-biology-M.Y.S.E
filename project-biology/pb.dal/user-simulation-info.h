@@ -5,4 +5,4 @@
 #include "../pb.dal/login-files.h"
 
 bool accIsSaved();
-void saveSimulationToFile(std::vector<Object>, std::vector<CountObjects>);
+void saveSimulationToFile(std::vector<Object>, std::vector<CountObjects>, std::vector<Object>);

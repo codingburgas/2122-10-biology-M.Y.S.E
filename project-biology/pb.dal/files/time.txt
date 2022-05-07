@@ -1,1 +1,1 @@
-1|January|Winter|1
+9|February|Winter|-1

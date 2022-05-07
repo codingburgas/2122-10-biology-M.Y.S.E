@@ -447,6 +447,7 @@ void simulation(bool &start, bool &backEndRun) {
 		timeFile.close();
 
 		objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, choice, days, temp);
+		saveSimulationToFile(objectsInSimulation, counterInSimulation, objects);
 
 		backEndRun = true;
 	}
