@@ -261,7 +261,7 @@ void removeObjectByTempeture(std::vector<Object>& objectsInSimulation, std::vect
 
 }
 
-void startingAddObjectInSimulation(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, int choice, unsigned short int days) {
+void startingAddObjectInSimulation(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, short int choice, unsigned short int days) {
 
 	if (objects[choice].food.empty()) {
 		if (objects[choice].name == "Grass")
@@ -352,13 +352,12 @@ void time(unsigned short int& days, std::string& month, std::string& season, int
 	season = getSeason(days, month);
 }
 
-std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, std::vector<short int>& choice, unsigned short int days, int& temp)
+std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, short int choice, unsigned short int days, int& temp)
 {
 
 	for (int i = 0; i < objects.size(); i++) {
-		if (choice[i] != -1) {
-			int index = choice[i];
-			startingAddObjectInSimulation(objectsInSimulation, objects, counterInSimulation, index, days);
+		if (choice != -1) {
+			startingAddObjectInSimulation(objectsInSimulation, objects, counterInSimulation, choice, days);
 		}
 	}
 
@@ -393,23 +392,46 @@ void simulation(bool &start, bool &backEndRun) {
 
 	timeFile.close();
 
-	std::vector<short int> choice;
+	std::vector<short int> choices;
+	short int choice = -1;
 	std::vector<Object> objects = infoObjects();
 	std::vector<Object> objectsInSimulation;
 	std::vector<CountObjects> counterInSimulation;
 
-
 	counterInSimulation.resize(objects.size(), { 0, 0, 0 });
-	choice.resize(objects.size(), { -1 });
 
-	std::fstream choiceFile("../pb.dal/files/choice.txt");
+	std::ifstream choiceFile("../pb.dal/files/choice.txt");
 
-	while (getline(timeFile, textTime, '|'))
+	while (getline(choiceFile, textTime))
 	{
-		choice[j++] = stoi(textTime);
+		if(textTime != "")
+			choice = stoi(textTime);
 	}
 
 	choiceFile.close();
+	
+	/*
+	if (choice != -1) {
+		std::fstream choicesFile("../pb.dal/files/choices.txt");
+
+		while (getline(choicesFile, textTime, '|'))
+		{
+			choices.push_back(stoi(textTime));
+		}
+
+		for (int i = 0; i < choices.size(); i++) {
+			if (choice == choices[i]) {
+				choice = -1;
+			}
+		}
+
+		if (choice != -1) {
+
+		}
+
+		choicesFile.close();
+	}
+	*/
 
 	if (start) {
 

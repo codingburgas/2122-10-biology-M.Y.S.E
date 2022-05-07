@@ -67,7 +67,7 @@ void updateScreen(tgui::BackendGui& gui, bool& start)
     }
 }
 
-void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, tgui::Layout2d pos, std::string theme, short int id, std::vector<short int>& choice)
+void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, tgui::Layout2d pos, std::string theme, short int id, short int& choice)
 {
     tgui::Theme objectsTheme{ "../src/objects/objects.txt" };
 
@@ -81,7 +81,7 @@ void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, t
     buttonObject->onPress([&yes] { yes = true; });
 
     if (yes)
-        choice[id - 1] = id;
+        choice = id;
 
     gui.add(buttonObject);
 }
@@ -206,18 +206,8 @@ void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Lab
     gui.add(bearLocked);
 
     std::ifstream choiceFiles("../pb.dal/files/choice.txt");
-    std::vector<short int> choice;
+    short int choice = -1;
     i = 0;
-
-    if (is_empty(choiceFiles))
-        choice.resize(13, { -1 });
-    else {
-        choice.resize(13, {});
-        while (getline(choiceFiles, textTime, '|')) {
-            choice[i] = stoi(textTime);
-            ++i;
-        }
-    }
 
     choiceFiles.close();
     // Object buttons
@@ -243,10 +233,9 @@ void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Lab
     // Fourth column
     displayObjectButton(gui, bearLocked, { "89.37%", "64.14%" }, "ButtonObjBear", 13, choice);
 
-    std::fstream choiceFileS("../pb.dal/files/choice.txt");
-    for (int i = 0; i < choice.size(); i++)
-        choiceFileS << choice[i] << '|';
 
+    std::fstream choiceFileS("../pb.dal/files/choice.txt");
+    choiceFileS << choice;
     choiceFileS.close();
 }
 
