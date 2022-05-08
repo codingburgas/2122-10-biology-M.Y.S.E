@@ -47,5 +47,18 @@ namespace unittests
 			//Assert
 			Assert::AreEqual(true, result);
 		}
+
+
+		TEST_METHOD(TestRegister4)
+		{
+			// Arrange
+			bool result;
+
+			//Act
+			result = passwordHasSymbols("password");
+
+			//Assert
+			Assert::AreEqual(false, result);
+		}
 	};
 }
