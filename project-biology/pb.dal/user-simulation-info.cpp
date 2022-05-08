@@ -1,11 +1,6 @@
 #include "pch.h"
 #include "user-simulation-info.h"
 
-bool is_empty(std::ifstream& pFile)
-{
-	return pFile.peek() == std::ifstream::traits_type::eof();
-}
-
 bool accIsSaved()
 {
 	std::ifstream simulationFile("../pb.dal/files/simulationInfo.txt");

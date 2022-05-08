@@ -369,47 +369,16 @@ std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std
 	return objectsInSimulation;
 }
 
-void simulation(bool &start, bool &backEndRun) {
-
-	std::string textTime;
-	unsigned short int days;
-	std::string month;
-	std::string season;
-	int temp, i = 0, j = 0;
-
-	std::fstream timeFile;
-	timeFile.open("../pb.dal/files/time.txt");
-
-	while (getline(timeFile, textTime, '|')) {
-		switch (i) {
-			case 0: days = stoi(textTime); break;
-			case 1: month = textTime; break;
-			case 2: season = textTime; break;
-			case 3: temp = stoi(textTime); break;
-		}
-		++i;
-	}
-
-	textTime = "";
-
-	timeFile.close();
-
-	std::vector<short int> choices;
-	short int choice = -1;
-	std::vector<Object> objects = infoObjects();
-	std::vector<Object> objectsInSimulation;
-	std::vector<CountObjects> counterInSimulation;
-
-	counterInSimulation.resize(objects.size(), { 0, 0, 0 });
-
+void choiceSystem(std::string& textTime, short& choice)
+{
 	std::ifstream choiceFile("../pb.dal/files/choice.txt");
 
 	getline(choiceFile, textTime);
-	if(textTime != "")
+	if (textTime != "")
 		choice = stoi(textTime);
 
 	choiceFile.close();
-	
+
 	choiceFile.open("../pb.dal/files/choice.txt", std::fstream::out | std::fstream::trunc);
 	choiceFile.close();
 
@@ -419,8 +388,8 @@ void simulation(bool &start, bool &backEndRun) {
 
 		bool flag = true;
 
-		while(getline(choicesFile, textTime, '|'))
-			if(stoi(textTime) == choice)
+		while (getline(choicesFile, textTime, '|'))
+			if (stoi(textTime) == choice)
 				flag = false;
 
 		choicesFile.close();
@@ -438,7 +407,45 @@ void simulation(bool &start, bool &backEndRun) {
 
 		choicessFile.close();
 	}
+}
 
+void timeSystem(std::fstream& timeFile, std::string& textTime, int& i, unsigned short& days, std::string& month, std::string& season, int& temp)
+{
+	timeFile.open("../pb.dal/files/time.txt");
+
+	while (getline(timeFile, textTime, '|')) {
+		switch (i) {
+		case 0: days = stoi(textTime); break;
+		case 1: month = textTime; break;
+		case 2: season = textTime; break;
+		case 3: temp = stoi(textTime); break;
+		}
+		++i;
+	}
+
+	textTime = "";
+
+	timeFile.close();
+}
+
+void simulation(bool &start, bool &backEndRun) {
+
+	std::string textTime;
+	unsigned short int days;
+	std::string month;
+	std::string season;
+	int temp, i = 0;
+	std::vector<short int> choices;
+	short int choice = -1;
+	std::vector<Object> objects = infoObjects();
+	std::vector<Object> objectsInSimulation;
+	std::vector<CountObjects> counterInSimulation;
+
+	counterInSimulation.resize(objects.size(), { 0, 0, 0 });
+
+	std::fstream timeFile;
+	timeSystem(timeFile, textTime, i, days, month, season, temp);
+	choiceSystem(textTime, choice);
 
 	objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, choice, temp, start);
 	saveSimulationToFile(objectsInSimulation, counterInSimulation, objects);
