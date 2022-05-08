@@ -27,6 +27,7 @@ int getId(std::string username, std::string password)
 
 	while (getline(userFile, line))
 	{
+		id++;
 		if (line.find(username) != std::string::npos)
 		{
 			if (line.find(password) != std::string::npos)
@@ -34,7 +35,6 @@ int getId(std::string username, std::string password)
 				return id;
 			}
 		}
-		id++;
 	}
 	return 0;
 }

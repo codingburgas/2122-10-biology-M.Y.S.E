@@ -108,9 +108,7 @@ LoginAsGuestButton {
 
 
 ConfirmButton {
-        BackgroundColor = #349C85;
         Borders = (0, 0, 0, 0);
-        TextColor = #FFFFFF;
         Texture = "button-confirm.png" Smooth;
         TextureDisabled = None;
         TextureDown = None;
@@ -118,6 +116,17 @@ ConfirmButton {
         TextureDownHover = None;
         TextureFocused = None;
         TextureHover = "button-confirm-hover.png" Smooth;
+}
+
+RegisterBackButton {
+        Borders = (0, 0, 0, 0);
+        Texture = "register-back.png" Smooth;
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "register-back-hover.png" Smooth;
 }
 
 ButtonStart {
