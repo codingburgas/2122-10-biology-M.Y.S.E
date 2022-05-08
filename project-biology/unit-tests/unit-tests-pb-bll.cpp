@@ -100,5 +100,16 @@ namespace unittests
 			Assert::AreEqual(3, result);
 		}
 
+		TEST_METHOD(TestRegister8)
+		{
+			// Arrange
+			int result;
+
+			//Act
+			result = passwordIsGood("password123$", "password123");
+
+			//Assert
+			Assert::AreEqual(4, result);
+		}
 	};
 }
