@@ -67,7 +67,7 @@ void updateScreen(tgui::BackendGui& gui, bool& start)
     }
 }
 
-void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, tgui::Layout2d pos, std::string theme, short int id)
+void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, tgui::Layout2d pos, tgui::Layout2d statsPos, std::string objectName, std::string theme, short int id)
 {
     tgui::Theme objectsTheme{ "../src/objects/objects.txt" };
 
@@ -76,6 +76,7 @@ void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, t
     buttonObject->setPosition(pos);
     buttonObject->setRenderer(objectsTheme.getRenderer(theme));
     buttonObject->onPress([&gui, picOverlay ] { removeLockedOverlay(gui, picOverlay); });
+    buttonObject->onPress([&gui, statsPos, objectName ] { displayObjectStats(gui, statsPos, objectName); });
     buttonObject->onPress([id] {
         std::ofstream choiceFileS("../pb.dal/files/choice.txt", std::ios::trunc);
         choiceFileS << id;
@@ -83,6 +84,53 @@ void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, t
         });
 
     gui.add(buttonObject);
+}
+
+void displayObjectStats(tgui::BackendGui& gui, tgui::Layout2d pos, std::string objectName)
+{
+    tgui::Theme menuTheme{ "../src/theme-menu.txt" };
+
+    auto labelPop = tgui::Label::create();
+    auto labelMale = tgui::Label::create();
+    auto labelFemale = tgui::Label::create();
+    auto labelDead = tgui::Label::create();
+    auto labelTemp = tgui::Label::create();
+    auto labelHgr = tgui::Label::create();
+
+    labelPop->setPosition("48.19%", "31.20");
+    labelMale->setPosition("48.19%", "61.20");
+    labelFemale->setPosition("48.19%", "91.20");
+    labelDead->setPosition("79.27%", "31.20");
+    labelTemp->setPosition("79.27%", "61.20");
+    labelHgr->setPosition("79.27%", "91.20");
+
+    labelPop->setText("asd");
+    labelMale->setText("asd1");
+    labelFemale->setText("asd2");
+    labelDead->setText("asd");
+    labelTemp->setText("asd1");
+    labelHgr->setText("asd2");
+
+    auto panel = tgui::Panel::create();
+    panel->setSize({ "21.61%", "12.62%" });
+    panel->setPosition(pos);
+    panel->setRenderer(menuTheme.getRenderer("PanelStats"));
+
+    panel->add(labelPop);
+    panel->add(labelMale);
+    panel->add(labelFemale);
+    panel->add(labelDead);
+    panel->add(labelTemp);
+    panel->add(labelHgr);
+
+    labelPop->getRenderer()->setTextSize(23);
+    labelMale->getRenderer()->setTextSize(23);
+    labelFemale->getRenderer()->setTextSize(23);
+    labelDead->getRenderer()->setTextSize(23);
+    labelTemp->getRenderer()->setTextSize(23);
+    labelHgr->getRenderer()->setTextSize(23);
+
+    gui.add(panel, objectName);
 }
 
 tgui::Picture::Ptr createLockedOverlay(tgui::BackendGui& gui, tgui::Layout2d pos)
@@ -206,25 +254,25 @@ void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Lab
     // Object buttons
 
     // First column
-    displayObjectButton(gui, grassLocked, { "89.37%", "4.74%" }, "ButtonObjGrass", 0);
-    displayObjectButton(gui, blueberryLocked, { "94.47%", "4.74%" }, "ButtonObjBlueberry", 1);
-    displayObjectButton(gui, flowerLocked, { "89.37%", "14.64%" }, "ButtonObjFlower", 2);
+    displayObjectButton(gui, grassLocked, { "89.37%", "4.74%" }, { "0.52%", "10.60%" }, "Grass", "ButtonObjGrass", 0);
+    displayObjectButton(gui, blueberryLocked, { "94.47%", "4.74%" }, { "0.52%", "24.24%" }, "Blueberry", "ButtonObjBlueberry", 1);
+    displayObjectButton(gui, flowerLocked, { "89.37%", "14.64%" }, { "0.52%", "37.87%" }, "Flower", "ButtonObjFlower", 2);
 
     // Second column
-    displayObjectButton(gui, grasshopperLocked, { "94.47%", "14.64%" }, "ButtonObjGrasshopper", 3);
-    displayObjectButton(gui, butterflyLocked, { "89.37%", "24.54%" }, "ButtonObjButterfly", 4);
-    displayObjectButton(gui, rabbitLocked, { "94.47%", "24.54%" }, "ButtonObjRabbit", 5);
-    displayObjectButton(gui, beeLocked, { "89.37%", "34.44%" }, "ButtonObjBee", 6);
+    displayObjectButton(gui, grasshopperLocked, { "94.47%", "14.64%" }, { "22.65%", "10.60%" }, "Grasshopper", "ButtonObjGrasshopper", 3);
+    displayObjectButton(gui, butterflyLocked, { "89.37%", "24.54%" }, { "22.65%", "24.24%" }, "Butterfly", "ButtonObjButterfly", 4);
+    displayObjectButton(gui, rabbitLocked, { "94.47%", "24.54%" }, { "22.65%", "37.87%" }, "Rabbit", "ButtonObjRabbit", 5);
+    displayObjectButton(gui, beeLocked, { "89.37%", "34.44%" }, { "22.65%", "51.51%" }, "Bee", "ButtonObjBee", 6);
 
     // Third column
-    displayObjectButton(gui, mouseLocked, { "94.47%", "34.44%" }, "ButtonObjMouse", 7);
-    displayObjectButton(gui, lizardLocked, { "89.37%", "44.34%" }, "ButtonObjLizard", 8);
-    displayObjectButton(gui, owlLocked, { "94.47%", "44.34%" }, "ButtonObjOwl", 9);
-    displayObjectButton(gui, foxLocked, { "89.37%", "54.24%" }, "ButtonObjFox", 10);
-    displayObjectButton(gui, snakeLocked, { "94.47%", "54.24%" }, "ButtonObjSnake", 11);
+    displayObjectButton(gui, mouseLocked, { "94.47%", "34.44%" }, { "44.79%", "10.60%" }, "Mouse", "ButtonObjMouse", 7);
+    displayObjectButton(gui, lizardLocked, { "89.37%", "44.34%" }, { "44.79%", "24.24%" }, "Lizard", "ButtonObjLizard", 8);
+    displayObjectButton(gui, owlLocked, { "94.47%", "44.34%" }, { "44.79%", "37.87%" }, "Owl", "ButtonObjOwl", 9);
+    displayObjectButton(gui, foxLocked, { "89.37%", "54.24%" }, { "44.79%", "51.51%" }, "Fox", "ButtonObjFox", 10);
+    displayObjectButton(gui, snakeLocked, { "94.47%", "54.24%" }, { "44.79%", "65.15%" }, "Snake", "ButtonObjSnake", 11);
 
     // Fourth column
-    displayObjectButton(gui, bearLocked, { "89.37%", "64.14%" }, "ButtonObjBear", 12);
+    displayObjectButton(gui, bearLocked, { "89.37%", "64.14%" }, { "66.92%", "10.60%" }, "Bear", "ButtonObjBear", 12);
 }
 
 void aboutUsScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool& start, bool& backEndRun)

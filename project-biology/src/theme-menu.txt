@@ -169,3 +169,7 @@ ButtonBack-AboutUs {
         TextureFocused = None;
         TextureHover = "about-us-go-back-hover.png" Smooth;
 }
+
+PanelStats {
+        BackgroundColor = rgba(255, 255, 255, 0);
+}

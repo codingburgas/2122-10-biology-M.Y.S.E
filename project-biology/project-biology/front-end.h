@@ -13,6 +13,8 @@ void registerScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start
 bool logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password);
 void removeLockedOverlay(tgui::BackendGui& gui, tgui::Picture::Ptr pic);
 bool displayWindow(tgui::BackendGui& gui, sf::RenderWindow& window, bool &start, bool& backEndRun);
+void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, tgui::Layout2d pos, tgui::Layout2d statsPos, std::string objectName, std::string theme, short int id);
+void displayObjectStats(tgui::BackendGui& gui, tgui::Layout2d pos, std::string objectName);
 bool startSimulation(bool start);
 std::string giveTimeText();
 void updateScreen(tgui::BackendGui& gui, bool& start);
