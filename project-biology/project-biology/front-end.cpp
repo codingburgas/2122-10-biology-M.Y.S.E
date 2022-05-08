@@ -206,25 +206,25 @@ void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Lab
     // Object buttons
 
     // First column
-    displayObjectButton(gui, grassLocked, { "89.37%", "4.74%" }, "ButtonObjGrass", 1);
-    displayObjectButton(gui, blueberryLocked, { "94.47%", "4.74%" }, "ButtonObjBlueberry", 2);
-    displayObjectButton(gui, flowerLocked, { "89.37%", "14.64%" }, "ButtonObjFlower", 3);
+    displayObjectButton(gui, grassLocked, { "89.37%", "4.74%" }, "ButtonObjGrass", 0);
+    displayObjectButton(gui, blueberryLocked, { "94.47%", "4.74%" }, "ButtonObjBlueberry", 1);
+    displayObjectButton(gui, flowerLocked, { "89.37%", "14.64%" }, "ButtonObjFlower", 2);
 
     // Second column
-    displayObjectButton(gui, grasshopperLocked, { "94.47%", "14.64%" }, "ButtonObjGrasshopper", 4);
-    displayObjectButton(gui, butterflyLocked, { "89.37%", "24.54%" }, "ButtonObjButterfly", 5);
-    displayObjectButton(gui, rabbitLocked, { "94.47%", "24.54%" }, "ButtonObjRabbit", 6);
-    displayObjectButton(gui, beeLocked, { "89.37%", "34.44%" }, "ButtonObjBee", 7);
+    displayObjectButton(gui, grasshopperLocked, { "94.47%", "14.64%" }, "ButtonObjGrasshopper", 3);
+    displayObjectButton(gui, butterflyLocked, { "89.37%", "24.54%" }, "ButtonObjButterfly", 4);
+    displayObjectButton(gui, rabbitLocked, { "94.47%", "24.54%" }, "ButtonObjRabbit", 5);
+    displayObjectButton(gui, beeLocked, { "89.37%", "34.44%" }, "ButtonObjBee", 6);
 
     // Third column
-    displayObjectButton(gui, mouseLocked, { "94.47%", "34.44%" }, "ButtonObjMouse", 8);
-    displayObjectButton(gui, lizardLocked, { "89.37%", "44.34%" }, "ButtonObjLizard", 9);
-    displayObjectButton(gui, owlLocked, { "94.47%", "44.34%" }, "ButtonObjOwl", 10);
-    displayObjectButton(gui, foxLocked, { "89.37%", "54.24%" }, "ButtonObjFox", 11);
-    displayObjectButton(gui, snakeLocked, { "94.47%", "54.24%" }, "ButtonObjSnake", 12);
+    displayObjectButton(gui, mouseLocked, { "94.47%", "34.44%" }, "ButtonObjMouse", 7);
+    displayObjectButton(gui, lizardLocked, { "89.37%", "44.34%" }, "ButtonObjLizard", 8);
+    displayObjectButton(gui, owlLocked, { "94.47%", "44.34%" }, "ButtonObjOwl", 9);
+    displayObjectButton(gui, foxLocked, { "89.37%", "54.24%" }, "ButtonObjFox", 10);
+    displayObjectButton(gui, snakeLocked, { "94.47%", "54.24%" }, "ButtonObjSnake", 11);
 
     // Fourth column
-    displayObjectButton(gui, bearLocked, { "89.37%", "64.14%" }, "ButtonObjBear", 13);
+    displayObjectButton(gui, bearLocked, { "89.37%", "64.14%" }, "ButtonObjBear", 12);
 }
 
 void aboutUsScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool& start, bool& backEndRun)

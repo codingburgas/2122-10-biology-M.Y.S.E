@@ -406,7 +406,7 @@ void simulation(bool &start, bool &backEndRun) {
 
 	counterInSimulation.resize(objects.size(), { 0, 0, 0 });
 
-	std::ifstream choiceFile("../pb.dal/files/choice.txt", std::fstream::out | std::fstream::trunc);
+	std::ifstream choiceFile("../pb.dal/files/choice.txt");
 
 	getline(choiceFile, textTime);
 	if(textTime != "")
@@ -414,6 +414,9 @@ void simulation(bool &start, bool &backEndRun) {
 
 	choiceFile.close();
 	
+	choiceFile.open("../pb.dal/files/choice.txt", std::fstream::out | std::fstream::trunc);
+	choiceFile.close();
+
 	if (choice != -1) {
 		std::fstream choicesFile("../pb.dal/files/choices.txt", std::ios::in);
 
