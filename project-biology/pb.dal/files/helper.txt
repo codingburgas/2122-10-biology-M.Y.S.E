@@ -1,0 +1,1 @@
+Grass|Grass is a plant with narrow leaves growing from the base. A common kind of grass is used to cover the ground in a lawn and other places. Grass gets water from the roots in the ground.|Male|0.6|12|0|0|0|0|0.04|12

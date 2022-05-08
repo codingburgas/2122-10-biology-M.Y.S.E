@@ -21,20 +21,20 @@ void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<C
 		simulationFile << objectsInSimulation[i].hunger << "|";
 		simulationFile << objectsInSimulation[i].hungerRateByDays << "|";
 		simulationFile << objectsInSimulation[i].pregnancy << "|";
-		simulationFile << objectsInSimulation[i].remainingDaysToGiveBirth << "|";
-
-		for (size_t j = 0; j < objectsOrder.size(); j++)
-		{
-			if (objectsInSimulation[i].name == objectsOrder[j].name)
-			{
-				simulationFile << counterInSimulation[j].maleCount << "|";
-				simulationFile << counterInSimulation[j].femaleCount << "|";
-				simulationFile << counterInSimulation[j].deadCount << "\n";
-				break;
-			}
-		}
+		simulationFile << objectsInSimulation[i].remainingDaysToGiveBirth << "\n";
 	}
 	simulationFile.close();
+
+	std::ofstream counterFile("../pb.dal/files/counter.txt");
+
+	for (size_t i = 0; i < counterInSimulation.size(); i++)
+	{
+		counterFile << counterInSimulation[i].maleCount << "|";
+		counterFile << counterInSimulation[i].femaleCount << "|";
+		counterFile << counterInSimulation[i].deadCount << "\n";
+	}
+
+	counterFile.close();
 }
 
 void addSimulationDataToVariables(std::vector<Object>& objectsInSimulation, std::vector<CountObjects>& counterInSimulation, std::vector<Object> objectsOrder) 
@@ -79,26 +79,27 @@ void addSimulationDataToVariables(std::vector<Object>& objectsInSimulation, std:
 		objectsInSimulation[i].hungerRateByDays = stoi(line);
 		getline(helper, line, '|');
 		objectsInSimulation[i].pregnancy = stof(line);
-		getline(helper, line, '|');
+		getline(helper, line, '\n');
 		objectsInSimulation[i].remainingDaysToGiveBirth = stof(line);
 
-		for (size_t j = 0; j < objectsOrder.size(); j++)
-		{
-			if (objectsInSimulation[i].name == objectsOrder[j].name)
-			{
-				getline(helper, line, '|');
-				counterInSimulation[j].maleCount = stoi(line);
-				getline(helper, line, '|');
-				counterInSimulation[j].femaleCount = stoi(line);
-				getline(helper, line, '|');
-				counterInSimulation[j].deadCount = stoi(line);
-				break;
-			}
-		}
 		i++;
 		helper.close();
 		helperr.close();
 	}
 
 	file.close();
+
+	std::ifstream counterFile("../pb.dal/files/counter.txt");
+
+	for (size_t i = 0; i < counterInSimulation.size(); i++)
+	{
+		getline(counterFile, line, '|');
+		counterInSimulation[i].maleCount = stoi(line);
+		getline(counterFile, line, '|');
+		counterInSimulation[i].femaleCount = stoi(line);
+		getline(counterFile, line, '\n');
+		counterInSimulation[i].deadCount = stoi(line);
+	}
+
+	counterFile.close();
 }
