@@ -1,8 +1,8 @@
 #pragma once
 #include "pch.h"
-#include "../../2122-10-biology-SSUzunov19/project-biology/pb.bll/logic-for-objects.h"
-#include "../../2122-10-biology-SSUzunov19/project-biology/pb.bll/register.h"
-#include "../../2122-10-biology-SSUzunov19/project-biology/pb.bll/login.h"
+#include "../../2122-10-biology-M.Y.S.E/project-biology/pb.bll/logic-for-objects.h"
+#include "../../2122-10-biology-M.Y.S.E/project-biology/pb.bll/register.h"
+#include "../../2122-10-biology-M.Y.S.E/project-biology/pb.bll/login.h"
 
 void updateTextSize(tgui::BackendGui& gui);
 void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool& start, bool& backEndRun);
