@@ -157,6 +157,10 @@ LabelUserName {
 	TextColor = #FFFFFF;
 }
 
+LabelError {
+	TextColor = #C92626;
+}
+
 ButtonBack-AboutUs {
         Borders = (0, 0, 0, 0);
         TextColorDown = rgba(255, 255, 255, 235);

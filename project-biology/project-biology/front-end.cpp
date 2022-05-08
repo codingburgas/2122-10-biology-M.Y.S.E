@@ -390,8 +390,12 @@ void registerScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start
     buttonConfirm->setRenderer(menuTheme.getRenderer("ConfirmButton"));
     gui.add(buttonConfirm);
 
+    auto label = tgui::Label::create();
+    label->setPosition({ "31.77%", "13.68%" });
+    label->setRenderer(menuTheme.getRenderer("LabelError"));
+
     buttonConfirm->onPress([=] { userName->setText(registerUsername->getText()); });
-    buttonConfirm->onPress([registerUsername, registerPassword, confirmPassword, &gui, &window, userName, &start, &backEndRun]
+    buttonConfirm->onPress([registerUsername, registerPassword, confirmPassword, &gui, &window, userName, &start, &backEndRun, label]
         {
             switch (regUser(registerUsername, registerPassword, confirmPassword))
             {
@@ -399,16 +403,24 @@ void registerScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start
                 mainMenu(gui, window, userName, start, backEndRun);
                 break;
             case 1:
-                // Write: Password is too short
+                gui.remove(gui.get("LogInError"));
+                label->setText("Password is too short");
+                gui.add(label, "LogInError");
                 break;
             case 2:
-                // Write: Password needs to have numbers
+                gui.remove(gui.get("LogInError"));
+                label->setText("Password needs to have numbers");
+                gui.add(label, "LogInError");
                 break;
             case 3:
-                // Write: Password needs to have symbols(~`!@#$%^&*()_-+={[}]|:;\'<,>.?/\")
+                gui.remove(gui.get("LogInError"));
+                label->setText("Password needs to have symbols");
+                gui.add(label, "LogInError");
                 break;
             case 4:
-                // Write: Password's don't match
+                gui.remove(gui.get("LogInError"));
+                label->setText("Password's don't match");
+                gui.add(label, "LogInError");
                 break;
             }
         });
