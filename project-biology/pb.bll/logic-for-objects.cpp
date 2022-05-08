@@ -447,6 +447,7 @@ void simulation(bool &start, bool &backEndRun) {
 	timeSystem(timeFile, textTime, i, days, month, season, temp);
 	choiceSystem(textTime, choice);
 
+	addSimulationDataToVariables(objectsInSimulation, counterInSimulation, objects);
 	objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, choice, temp, start);
 	saveSimulationToFile(objectsInSimulation, counterInSimulation, objects);
 

@@ -20,8 +20,8 @@ bool startSimulation(bool start)
 std::string giveTimeText()
 {
     unsigned short int days = 1;
-    std::string month = "1";
-    std::string season = "1";
+    std::string month = "January";
+    std::string season = "Winter";
     std::string textTime;
     int i = 0, temp = 1;
     std::fstream fileTime;
