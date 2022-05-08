@@ -5,5 +5,7 @@
 #include "../pb.dal/login-files.h"
 
 bool accIsSaved();
+
 void saveSimulationToFile(std::vector<Object>, std::vector<CountObjects>, std::vector<Object>);
-void saveSimulationToData(std::vector<Object>, std::vector<CountObjects>, std::vector<Object>);
+
+void addSimulationDataToVariables(std::vector<Object>&, std::vector<CountObjects>&, std::vector<Object>);
