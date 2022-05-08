@@ -168,7 +168,7 @@ LabelError {
 	TextColor = #C92626;
 }
 
-ButtonBack-AboutUs {
+ButtonBackAboutUs {
         Borders = (0, 0, 0, 0);
         TextColorDown = rgba(255, 255, 255, 235);
         TextColorHover = rgba(255, 255, 255, 235);
@@ -179,6 +179,19 @@ ButtonBack-AboutUs {
         TextureDownHover = None;
         TextureFocused = None;
         TextureHover = "about-us-go-back-hover.png" Smooth;
+}
+
+ButtonBackHowToUse {
+        Borders = (0, 0, 0, 0);
+        TextColorDown = rgba(255, 255, 255, 235);
+        TextColorHover = rgba(255, 255, 255, 235);
+        Texture = "how-to-use-back.png" Smooth;
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "how-to-use-back-hover.png" Smooth;
 }
 
 PanelStats {

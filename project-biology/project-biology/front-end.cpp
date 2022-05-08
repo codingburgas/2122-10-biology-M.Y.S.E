@@ -292,7 +292,29 @@ void aboutUsScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label:
     auto buttonBack = tgui::Button::create();
     buttonBack->setSize({ "18.22%", "6.06%" });
     buttonBack->setPosition({ "77.86%", "61.71%" });
-    buttonBack->setRenderer(menuTheme.getRenderer("ButtonBack-AboutUs"));
+    buttonBack->setRenderer(menuTheme.getRenderer("ButtonBackAboutUs"));
+    buttonBack->onPress([&gui, &window, userName, &start, &backEndRun] { mainMenu(gui, window, userName, start, backEndRun); });
+    gui.add(buttonBack);
+}
+
+void howToUseScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool& start, bool& backEndRun)
+{
+    gui.removeAllWidgets();
+
+    updateTextSize(gui);
+
+    gui.onViewChange([&gui] { updateTextSize(gui); });
+
+    tgui::Theme menuTheme{ "../src/theme-menu.txt" };
+
+    auto howToUseBackground = tgui::Picture::create("../src/how-to-use.png");
+    howToUseBackground->setSize({ "100%", "100%" });
+    gui.add(howToUseBackground);
+
+    auto buttonBack = tgui::Button::create();
+    buttonBack->setSize({ "8.85%", "17.17%" });
+    buttonBack->setPosition({ "89.84%", "80.20%" });
+    buttonBack->setRenderer(menuTheme.getRenderer("ButtonBackHowToUse"));
     buttonBack->onPress([&gui, &window, userName, &start, &backEndRun] { mainMenu(gui, window, userName, start, backEndRun); });
     gui.add(buttonBack);
 }
@@ -331,6 +353,7 @@ void mainMenu(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr 
     auto buttonHelp = tgui::Button::copy(buttonPlay);
     buttonHelp->setPosition({ "30.9%", "50.7%" });
     buttonHelp->setRenderer(menuTheme.getRenderer("ButtonHelp"));
+    buttonHelp->onPress([&gui, &window, userName, &start, &backEndRun] { howToUseScreen(gui, window, userName, start, backEndRun); });
     gui.add(buttonHelp);
 
     auto buttonQuit = tgui::Button::copy(buttonPlay);
