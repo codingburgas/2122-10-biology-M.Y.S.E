@@ -61,6 +61,27 @@ void updateScreen(tgui::BackendGui& gui, bool& start)
         gui.add(label, "LabelTime");
     }
 
+    std::fstream file;
+
+    file.open("../pb.dal/files/objectsInRealTime.txt");
+
+    std::string object[] = { "Grass", "Blueberry", "Flower", "Grasshopper", "Butterfly", "Rabbit", "Bee", "Mouse", "Lizard", "Owl", "Fox", "Snake", "Bear"};
+    std::string textLine;
+    int j = 0;
+
+    for (int i = 0; i < 12; i++)
+    {
+        if (i < 3)
+        {
+            while (getline(file, textLine, '|')) {
+                switch (j) {
+                case 0: gui.remove(gui.get(object[i] + "Pop")); auto label = tgui::Label::create(); label->setPosition({ "10.62%", "79.89%" }); label->setText(textLine); break;
+                }
+                ++j;
+            }
+        }
+    }
+
     if (gui.get("ButtonPlay"))
     {
         gui.remove(gui.get("LabelTime"));
@@ -104,24 +125,17 @@ void displayObjectStats(tgui::BackendGui& gui, tgui::Layout2d pos, std::string o
     labelTemp->setPosition("79.27%", "61.20");
     labelHgr->setPosition("79.27%", "91.20");
 
-    labelPop->setText("asd");
-    labelMale->setText("asd1");
-    labelFemale->setText("asd2");
-    labelDead->setText("asd");
-    labelTemp->setText("asd1");
-    labelHgr->setText("asd2");
-
     auto panel = tgui::Panel::create();
     panel->setSize({ "21.61%", "12.62%" });
     panel->setPosition(pos);
     panel->setRenderer(menuTheme.getRenderer("PanelStats"));
 
-    panel->add(labelPop);
-    panel->add(labelMale);
-    panel->add(labelFemale);
-    panel->add(labelDead);
-    panel->add(labelTemp);
-    panel->add(labelHgr);
+    panel->add(labelPop, objectName + "Pop");
+    panel->add(labelMale, objectName + "Male");
+    panel->add(labelFemale, objectName + "Femal");
+    panel->add(labelDead, objectName + "Dead");
+    panel->add(labelTemp, objectName + "Temp");
+    panel->add(labelHgr, objectName + "Hgr");
 
     labelPop->getRenderer()->setTextSize(23);
     labelMale->getRenderer()->setTextSize(23);
@@ -130,7 +144,7 @@ void displayObjectStats(tgui::BackendGui& gui, tgui::Layout2d pos, std::string o
     labelTemp->getRenderer()->setTextSize(23);
     labelHgr->getRenderer()->setTextSize(23);
 
-    gui.add(panel, objectName);
+    gui.add(panel, objectName + "Panel");
 }
 
 tgui::Picture::Ptr createLockedOverlay(tgui::BackendGui& gui, tgui::Layout2d pos)
