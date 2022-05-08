@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "../pb.dal/register-files.h"
 
+// Add user info to file
 void addUserInfo(USER user)
 {
 	std::ofstream userFile("../pb.dal/files/userInfo.txt", std::ios::out | std::ios::app);
@@ -19,6 +20,7 @@ void addUserInfo(USER user)
 	userFile.close();
 }
 
+// Get last user Id
 int getLastId()
 {
 	std::ifstream userFile("../pb.dal/files/userInfo.txt");

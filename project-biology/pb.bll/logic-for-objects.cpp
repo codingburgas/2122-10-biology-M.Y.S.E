@@ -2,11 +2,13 @@
 #include "logic-for-objects.h"
 #include "../project-biology/front-to-back-end.h"
 
+// Combines the male and the female objects
 unsigned short int sumOfPopulation(std::vector<CountObjects> counterInSimulation, int key)
 {
 	return counterInSimulation[key].femaleCount + counterInSimulation[key].maleCount;
 }
 
+// For every object looks how hungry it is
 std::vector<std::string> objectFeelingByHunger(std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation)
 {
 	std::vector<std::string> feeling;
@@ -53,6 +55,7 @@ std::vector<std::string> objectFeelingByHunger(std::vector<Object> objects, std:
 	return feeling;
 }
 
+// For every object looks what the temreture is it
 std::vector<std::string> objectFeelingByTemperature(std::vector<Object> objects, int temp)
 {
 	std::vector<std::string> feeling;
@@ -95,6 +98,7 @@ std::vector<std::string> objectFeelingByTemperature(std::vector<Object> objects,
 	return feeling;
 }
 
+// Remove the object if it is eaten or there is no food
 void removeObjectByFood(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation) {
 
 	std::vector<bool> eat;
@@ -187,6 +191,7 @@ void removeObjectByFood(std::vector<Object>& objectsInSimulation, std::vector<Ob
 	}
 }
 
+// Remove the object if it exceeds the lifespan
 void removeObjectByLifeExpInYears(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation)
 {
 	float life;
@@ -217,6 +222,7 @@ void removeObjectByLifeExpInYears(std::vector<Object>& objectsInSimulation, std:
 	}
 }
 
+// This is creating a initial number of objects
 void removeObjectByTempeture(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, int temp)
 {
 	std::vector<std::string> deadObjects;
@@ -261,6 +267,7 @@ void removeObjectByTempeture(std::vector<Object>& objectsInSimulation, std::vect
 
 }
 
+// This is creating a initial number of objects
 void startingAddObjectInSimulation(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, short int choice) {
 
 	if (objects[choice].food.empty()) {
@@ -291,6 +298,7 @@ void startingAddObjectInSimulation(std::vector<Object>& objectsInSimulation, std
 	}
 }
 
+// From what period of time does the object give birth
 void pregnancyObjectInSimulation(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation)
 {
 	srand(time(NULL));
@@ -345,6 +353,7 @@ void pregnancyObjectInSimulation(std::vector<Object>& objectsInSimulation, std::
 
 }
 
+// Represents the ogranization of calling other fucntions about time
 void time(unsigned short int& days, std::string& month, std::string& season, int& temp)
 {
 	timer(days, month, false);
@@ -352,6 +361,7 @@ void time(unsigned short int& days, std::string& month, std::string& season, int
 	season = getSeason(days, month);
 }
 
+// Connects a number of functions together for simulation
 std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, short int choice, int& temp, bool start)
 {
 
@@ -369,6 +379,7 @@ std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std
 	return objectsInSimulation;
 }
 
+// Add object information on screen
 void choiceSystem(std::string& textTime, short& choice)
 {
 	std::ifstream choiceFile("../pb.dal/files/choice.txt");

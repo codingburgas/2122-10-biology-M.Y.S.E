@@ -1,22 +1,26 @@
 #include "front-end.h"
 #include "front-to-back-end.h"
 
+// Changes the text size from how big the window is
 void updateTextSize(tgui::BackendGui& gui)
 {
     const float windowHeight = gui.getView().getRect().height;
     gui.setTextSize(static_cast<unsigned int>(0.04f * windowHeight));
 }
 
+// Removes the locked overlay of an object
 void removeLockedOverlay(tgui::BackendGui& gui, tgui::Picture::Ptr pic)
 {
     gui.remove(pic);
 }
 
+// Return whether the start button has been pressed
 bool startSimulation(bool start)
 {
     return !start;
 }
 
+// Returns time text
 std::string giveTimeText()
 {
     unsigned short int days = 1;
@@ -45,6 +49,7 @@ std::string giveTimeText()
     return timeText;
 }
 
+// Updates information on screen
 void updateScreen(tgui::BackendGui& gui, bool& start)
 {
     gui.remove(gui.get("LabelTime"));
@@ -88,6 +93,7 @@ void updateScreen(tgui::BackendGui& gui, bool& start)
     }
 }
 
+// Display an object button
 void displayObjectButton(tgui::BackendGui& gui, tgui::Picture::Ptr picOverlay, tgui::Layout2d pos, tgui::Layout2d statsPos, std::string objectName, std::string theme, short int id)
 {
     tgui::Theme objectsTheme{ "../src/objects/objects.txt" };
@@ -147,6 +153,7 @@ void displayObjectStats(tgui::BackendGui& gui, tgui::Layout2d pos, std::string o
     gui.add(panel, objectName + "Panel");
 }
 
+// Creates a locked overlay
 tgui::Picture::Ptr createLockedOverlay(tgui::BackendGui& gui, tgui::Layout2d pos)
 {
     auto lockedOverlay = tgui::Picture::create("../src/objects/locked.png");
@@ -160,6 +167,7 @@ bool is_empty(std::ifstream& pFile)
     return pFile.peek() == std::ifstream::traits_type::eof();
 }
 
+// Display the simulation screen
 void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool& start, bool& backEndRun)
 {
 
@@ -289,6 +297,7 @@ void simulationScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Lab
     displayObjectButton(gui, bearLocked, { "89.37%", "64.14%" }, { "66.92%", "10.60%" }, "Bear", "ButtonObjBear", 12);
 }
 
+// Display the about us screen
 void aboutUsScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool& start, bool& backEndRun)
 {
     gui.removeAllWidgets();
@@ -311,6 +320,7 @@ void aboutUsScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label:
     gui.add(buttonBack);
 }
 
+// Display the tutorial menu
 void howToUseScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool& start, bool& backEndRun)
 {
     gui.removeAllWidgets();
@@ -333,6 +343,7 @@ void howToUseScreen(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label
     gui.add(buttonBack);
 }
 
+// Display the main menu
 void mainMenu(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr userName, bool& start, bool& backEndRun)
 {
     updateTextSize(gui);
@@ -379,6 +390,7 @@ void mainMenu(tgui::BackendGui& gui, sf::RenderWindow& window, tgui::Label::Ptr 
     gui.add(userName);
 }
 
+// Call register function on click
 int regUser(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password, tgui::EditBox::Ptr confirmPass)
 {
     std::string registerUsername = username->getText().toStdString();
@@ -388,6 +400,7 @@ int regUser(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password, tgui::Edit
     return registerUser(registerUsername, registerPassword, registerConfirmation);
 }
 
+// Displays register screen
 void registerScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start, bool& backEndRun)
 {
     updateTextSize(gui);
@@ -470,6 +483,7 @@ void registerScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start
         });
 }
 
+// Displays on console user input
 bool logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password)
 {
     std::string loginUsername = username->getText().toStdString();
@@ -478,6 +492,7 @@ bool logIn(tgui::EditBox::Ptr username, tgui::EditBox::Ptr password)
     return loginUser(loginUsername, loginPassword);
 }
 
+// Display the log in screen
 void logInScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start, bool& backEndRun)
 {
     updateTextSize(gui);
@@ -538,6 +553,7 @@ void logInScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start, b
     gui.add(buttonLoginAsGuest);
 }
 
+// Returns whether the window has been display
 bool displayWindow(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start, bool& backEndRun)
 {
     try

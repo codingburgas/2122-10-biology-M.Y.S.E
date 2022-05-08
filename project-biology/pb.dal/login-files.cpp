@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "login-files.h"
 
+// Get current user from file
 std::string getCurrentUser()
 {
 	std::ifstream currentUser("currentUser.txt");
@@ -10,6 +11,7 @@ std::string getCurrentUser()
 	return line;
 }
 
+// Add current user to file
 void addCurrentUser(std::string username)
 {
 	std::ofstream currentUser("currentUser.txt", std::ios::trunc);
@@ -19,6 +21,7 @@ void addCurrentUser(std::string username)
 	currentUser.close();
 }
 
+// Get user's Id
 int getId(std::string username, std::string password)
 {
 	std::ifstream userFile("../pb.dal/files/userInfo.txt");
@@ -39,6 +42,7 @@ int getId(std::string username, std::string password)
 	return 0;
 }
 
+// Check if user is registered
 bool userExists(std::string username, std::string password)
 {
 	std::ifstream userFile("../pb.dal/files/userInfo.txt");

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "info-for-objects.h"
 
+// Gives a special values to the objects
 std::vector<Object> infoObjects() {
 
 	std::vector<Object> objects

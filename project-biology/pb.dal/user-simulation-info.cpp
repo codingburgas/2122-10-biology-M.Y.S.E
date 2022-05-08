@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "user-simulation-info.h"
 
+// Saves simulations to file
 void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<CountObjects> counterInSimulation, std::vector<Object> objectsOrder)
 {
 	std::ofstream simulationFile("../pb.dal/files/simulationInfo.txt");
@@ -37,6 +38,7 @@ void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<C
 	counterFile.close();
 }
 
+// Get info from files and transfer it to variable
 void addSimulationDataToVariables(std::vector<Object>& objectsInSimulation, std::vector<CountObjects>& counterInSimulation, std::vector<Object> objectsOrder) 
 {
 	std::ifstream file("../pb.dal/files/simulationInfo.txt");

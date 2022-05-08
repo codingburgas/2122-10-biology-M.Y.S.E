@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "simulation-date.h"
 
+// Increments date
 void switchDate(unsigned short int& day, std::string& month)
 {
     std::vector<std::string> months = {
@@ -37,13 +38,15 @@ void switchDate(unsigned short int& day, std::string& month)
     day++;
 }
 
+// Switch date every 5 seconds
 void timer(unsigned short int& day, std::string& month, bool isPaused)
 {
     using namespace std::literals::chrono_literals;
     switchDate(day, month);
-    std::this_thread::sleep_for(0.01s);
+    std::this_thread::sleep_for(5s);
 }
 
+// Get months order
 int getMonthsIndex(std::vector<std::string> months, std::string month)
 {
     std::vector<std::string>::iterator it;
@@ -52,6 +55,7 @@ int getMonthsIndex(std::vector<std::string> months, std::string month)
     return std::distance(months.begin(), it);
 }
 
+// Gets season from date
 std::string getSeason(unsigned short int day, std::string month)
 {
     std::vector<std::string> months = {
@@ -87,6 +91,7 @@ std::string getSeason(unsigned short int day, std::string month)
     return "Winter";
 }
 
+// Gets temperature from month
 int getTemperature(std::string month)
 {
     srand(time(NULL) + rand());

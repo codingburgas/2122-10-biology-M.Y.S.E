@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "register.h"
 
+// Check if password has numbers
 bool passwordHasNumbers(std::string password)
 {
 	bool flag = false;
@@ -14,6 +15,7 @@ bool passwordHasNumbers(std::string password)
 	return flag;
 }
 
+// Check if password has symbols
 bool passwordHasSymbols(std::string password)
 {
 	bool flag = false;
@@ -27,6 +29,7 @@ bool passwordHasSymbols(std::string password)
 	return flag;
 }
 
+// Check if all password requirements are met
 int passwordIsGood(std::string password, std::string confirmPass)
 {
 	while (password.length() < 8)
@@ -52,6 +55,7 @@ int passwordIsGood(std::string password, std::string confirmPass)
 	return 0;
 }
 
+// Register user
 int registerUser(std::string username, std::string password, std::string confirmPass)
 {
 	int id = getLastId();
