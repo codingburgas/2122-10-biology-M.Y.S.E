@@ -3,8 +3,7 @@
 </p>
 
 <div align = "center">
-    <img src = "https://img.shields.io/github/languages/count/codingburgas/2122-10-biology-M.Y.S.E
-?style=for-the-badge">
+    <img src = "https://img.shields.io/github/languages/count/codingburgas/2122-10-biology-M.Y.S.E?style=for-the-badge">
     <img src = "https://img.shields.io/github/contributors/codingburgas/2122-10-biology-M.Y.S.E?style=for-the-badge">
     <img src = "https://img.shields.io/github/repo-size/codingburgas/2122-10-biology-M.Y.S.E?style=for-the-badge">
   <img src = "https://img.shields.io/github/last-commit/codingburgas/2122-10-biology-M.Y.S.E?style=for-the-badge">
@@ -40,14 +39,20 @@ This is a C++ project, made for a school project. It's main goal is to teach peo
 + <a href = "https://codingburgas-my.sharepoint.com/:x:/g/personal/vlmladenov19_codingburgas_bg/EVW6aeq0eqtOqdmL3zHF0u4BE_aZrdrRtKRhO8NDQ95YIg?e=ZxVUZf">QA Documentation</a>
 
 ## ⚙️ How to set up Project <a name="set_up"></a>
+- Download the program from the green button or clone it by using this command:
+<pre>git clone https://github.com/codingburgas/2122-10-biology-M.Y.S.E.git</pre>
 - Follow this link, to install SMFL - <a href="https://github.com/SFML/SFML">Here</a> 
 - Follow this link, to install TGUI Nightly build - <a href="https://github.com/texus/TGUI">Here</a>
-- Download SFML and TGUI in the directory where you have cloned your program
+- Download SFML and TGUI in the directory where you have downloaded your program
 - Rename **TGUI-0.10-nightly** to **TGUI-0.10**
+<img src = "https://cdn.discordapp.com/attachments/958758286902063155/972956081288536114/unknown.png" width = 600>
 - Open the project, to the **project-biology** folder and open the solution file
 - Right click **project-biology** 
-- Go to **Properties->Configuration Properties->General->Environment** and type:
-<pre>PATH=$(SolutionDir)..\..\\TGUI-0.10\\\bin;$(SolutionDir)..\..\SFML-2.5.1\bin**</pre>
+- Go to **Properties->Configuration Properties->Debugging->Environment** and type:
+<pre>PATH=$(SolutionDir)..\..\\TGUI-0.10\\\bin;$(SolutionDir)..\..\SFML-2.5.1\bin</pre>
+<img src = "https://cdn.discordapp.com/attachments/958758286902063155/972956618234933298/unknown.png" width = 600>
+
+- Change the solution platform to **x86**
 - Now you can run the project
 
 ## 🖼️ Interface of Project <a name="interface"></a>
@@ -56,16 +61,21 @@ This is a C++ project, made for a school project. It's main goal is to teach peo
      * About Us - Information about the creators of the project
      * Help - Shows information about the simulation and how to operate it                   
      * Quit - Еxit the program
+
     <div align="center">
     <br>                                 
     <img src="https://cdn.discordapp.com/attachments/958758286902063159/972941932282126367/unknown.png" width=600>
     <br>
     <h1>  Simulation Tab  </h1>
     <br> 
-   <img src="https://cdn.discordapp.com/attachments/958758286902063159/972941730687107103/unknown.png" width=600>
+    <img src="https://cdn.discordapp.com/attachments/958758286902063159/972941730687107103/unknown.png" width=600>
     <br>
     <h1> About Us Tab </h1>
-     <br>
-     <img src= "https://cdn.discordapp.com/attachments/958758286902063159/972950033861320704/about-us.png" width=600>
-       <br>
-       </div>
+    <br>
+    <img src= "https://cdn.discordapp.com/attachments/958758286902063159/972950033861320704/about-us.png" width=600>
+    <br>
+    <h1> Help Tab </h1>
+    <br>
+    <img src= "https://cdn.discordapp.com/attachments/958758286902063159/972951761331585064/unknown.png" width=600>
+    <br>
+    </div>
