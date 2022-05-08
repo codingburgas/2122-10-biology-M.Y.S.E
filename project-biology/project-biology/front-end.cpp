@@ -413,6 +413,13 @@ void registerScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start
     buttonConfirm->setRenderer(menuTheme.getRenderer("ConfirmButton"));
     gui.add(buttonConfirm);
 
+    auto buttonBack = tgui::Button::create();
+    buttonBack->setSize({ "8.85%", "3.93%" });
+    buttonBack->setPosition({ "45.57%", "83.12%" });
+    buttonBack->setRenderer(menuTheme.getRenderer("RegisterBackButton"));
+    buttonBack->onPress([&gui, &window, &start, &backEndRun] { logInScreen(gui, window, start, backEndRun); });
+    gui.add(buttonBack);
+
     auto label = tgui::Label::create();
     label->setPosition({ "31.77%", "13.68%" });
     label->setRenderer(menuTheme.getRenderer("LabelError"));
