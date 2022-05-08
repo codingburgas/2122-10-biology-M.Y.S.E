@@ -3,7 +3,6 @@
 
 void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<CountObjects> counterInSimulation, std::vector<Object> objectsOrder)
 {
-
 	std::ofstream simulationFile("../pb.dal/files/simulationInfo.txt");
 
 	for (size_t i = 0; i < objectsInSimulation.size(); i++)
@@ -13,31 +12,29 @@ void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<C
 		simulationFile << objectsInSimulation[i].gender << "|";
 		simulationFile << objectsInSimulation[i].lifeExpInYears << "|";
 		simulationFile << objectsInSimulation[i].remainingDaysToDead << "|";
-
-		for (size_t j = 0; j < objectsInSimulation[i].food.size(); j++)
+		if (!(objectsInSimulation[i].food.empty()))
 		{
-			simulationFile << objectsInSimulation[i].food[j] << "_";
+			simulationFile << objectsInSimulation[i].food[0] << "|";
 		}
-
 		simulationFile << objectsInSimulation[i].maxTemp << "|";
 		simulationFile << objectsInSimulation[i].minTemp << "|";
 		simulationFile << objectsInSimulation[i].hunger << "|";
 		simulationFile << objectsInSimulation[i].hungerRateByDays << "|";
 		simulationFile << objectsInSimulation[i].pregnancy << "|";
-		simulationFile << objectsInSimulation[i].remainingDaysToGiveBirth << "|";
-
-		for (size_t j = 0; j < objectsOrder.size(); j++)
-		{
-			if (objectsInSimulation[i].name == objectsOrder[j].name)
-			{
-				simulationFile << counterInSimulation[j].maleCount << "|";
-				simulationFile << counterInSimulation[j].femaleCount << "|";
-				simulationFile << counterInSimulation[j].deadCount << "\n";
-				break;
-			}
-		}
+		simulationFile << objectsInSimulation[i].remainingDaysToGiveBirth << "\n";
 	}
 	simulationFile.close();
+
+	std::ofstream counterFile("../pb.dal/files/counter.txt");
+
+	for (size_t i = 0; i < counterInSimulation.size(); i++)
+	{
+		counterFile << counterInSimulation[i].maleCount << "|";
+		counterFile << counterInSimulation[i].femaleCount << "|";
+		counterFile << counterInSimulation[i].deadCount << "\n";
+	}
+
+	counterFile.close();
 }
 
 void addSimulationDataToVariables(std::vector<Object>& objectsInSimulation, std::vector<CountObjects>& counterInSimulation, std::vector<Object> objectsOrder) 
@@ -59,40 +56,50 @@ void addSimulationDataToVariables(std::vector<Object>& objectsInSimulation, std:
 				break;
 			}
 		}
-
 		getline(helper, line, '|');
+		objectsInSimulation[i].information = line;
 		getline(helper, line, '|');
 		objectsInSimulation[i].gender = line;
 		getline(helper, line, '|');
+		objectsInSimulation[i].lifeExpInYears = stof(line);
 		getline(helper, line, '|');
 		objectsInSimulation[i].remainingDaysToDead = stof(line);
-		getline(helper, line, '_');
+		if (!(objectsInSimulation[i].food.empty()))
+		{
+			getline(helper, line, '|');
+			objectsInSimulation[i].food.push_back(line);
+		}
 		getline(helper, line, '|');
+		objectsInSimulation[i].maxTemp = stoi(line);
 		getline(helper, line, '|');
+		objectsInSimulation[i].minTemp = stoi(line);
 		getline(helper, line, '|');
+		objectsInSimulation[i].hunger = stoi(line);
 		getline(helper, line, '|');
 		objectsInSimulation[i].hungerRateByDays = stoi(line);
 		getline(helper, line, '|');
-		getline(helper, line, '|');
+		objectsInSimulation[i].pregnancy = stof(line);
+		getline(helper, line, '\n');
 		objectsInSimulation[i].remainingDaysToGiveBirth = stof(line);
 
-		for (size_t j = 0; j < objectsOrder.size(); j++)
-		{
-			if (objectsInSimulation[i].name == objectsOrder[j].name)
-			{
-				getline(helper, line, '|');
-				counterInSimulation[j].maleCount = stoi(line);
-				getline(helper, line, '|');
-				counterInSimulation[j].femaleCount = stoi(line);
-				getline(helper, line, '|');
-				counterInSimulation[j].deadCount = stoi(line);
-				break;
-			}
-		}
 		i++;
 		helper.close();
 		helperr.close();
 	}
 
 	file.close();
+
+	std::ifstream counterFile("../pb.dal/files/counter.txt");
+
+	for (size_t i = 0; i < counterInSimulation.size(); i++)
+	{
+		getline(counterFile, line, '|');
+		counterInSimulation[i].maleCount = stoi(line);
+		getline(counterFile, line, '|');
+		counterInSimulation[i].femaleCount = stoi(line);
+		getline(counterFile, line, '\n');
+		counterInSimulation[i].deadCount = stoi(line);
+	}
+
+	counterFile.close();
 }
