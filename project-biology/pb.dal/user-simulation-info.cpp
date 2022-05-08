@@ -1,22 +1,6 @@
 #include "pch.h"
 #include "user-simulation-info.h"
 
-bool accIsSaved()
-{
-	std::ifstream simulationFile("../pb.dal/files/simulationInfo.txt");
-	std::string line;
-	std::string user = getCurrentUser();
-
-	while (getline(simulationFile, line))
-	{
-		if (line.find(user) != std::string::npos)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
 void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<CountObjects> counterInSimulation, std::vector<Object> objectsOrder)
 {
 	std::ifstream currentUserFile("currentUser.txt");
@@ -63,16 +47,56 @@ void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<C
 	simulationFile.close();
 }
 
-void saveSimulationToData(std::vector<Object> objectsInSimulation, std::vector<CountObjects> counterInSimulation, std::vector<Object> objectsOrder) {
+void addSimulationDataToVariables(std::vector<Object>& objectsInSimulation, std::vector<CountObjects>& counterInSimulation, std::vector<Object> objectsOrder) 
+{
+	std::ifstream file("../pb.dal/files/simulationInfo.txt");
+	std::string line;
+	int i = 0;
 
-	std::string text;
-
-	std::ifstream simulationFile("../pb.dal/files/simulationInfo.txt");
-
-	while (getline(simulationFile, text, '|'))
+	while(!file.eof())
 	{
-		
+		getline(file, line, '|');
+		objectsInSimulation[i].name = line;
+		getline(file, line, '|');
+		objectsInSimulation[i].information = line;
+		getline(file, line, '|');
+		objectsInSimulation[i].gender = line;
+		getline(file, line, '|');
+		objectsInSimulation[i].lifeExpInYears = stof(line);
+		getline(file, line, '|');
+		objectsInSimulation[i].remainingDaysToDead = stof(line);
+
+		getline(file, line, '_');
+		objectsInSimulation[i].food.push_back(line);
+
+		getline(file, line, '|');
+		objectsInSimulation[i].maxTemp = stoi(line);
+		getline(file, line, '|');
+		objectsInSimulation[i].minTemp = stoi(line);
+		getline(file, line, '|');
+		objectsInSimulation[i].hunger = stoi(line);
+		getline(file, line, '|');
+		objectsInSimulation[i].hungerRateByDays = stoi(line);
+		getline(file, line, '|');
+		objectsInSimulation[i].pregnancy = stof(line);
+		getline(file, line, '|');
+		objectsInSimulation[i].remainingDaysToGiveBirth = stof(line);
+
+		for (size_t j = 0; j < objectsOrder.size(); j++)
+		{
+			if (objectsInSimulation[i].name == objectsOrder[j].name)
+			{
+				getline(file, line, '|');
+				counterInSimulation[j].maleCount = stoi(line);
+				getline(file, line, '|');
+				counterInSimulation[j].femaleCount = stoi(line);
+				getline(file, line, '|');
+				counterInSimulation[j].deadCount = stoi(line);
+				break;
+			}
+		}
+		i++;
 	}
 
-	simulationFile.close();
+	file.close();
 }
