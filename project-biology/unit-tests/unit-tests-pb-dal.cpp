@@ -20,7 +20,20 @@ namespace unittests
 			result = getId("VRKirov19", password);
 
 			//Assert
-			Assert::AreEqual(4, result);
+			Assert::AreEqual(6, result);
+		}
+
+
+		TEST_METHOD(TestLoginFiles2)
+		{
+			// Arrange
+			bool result;
+			std::string password = sha256("password1234$");
+			//Act
+			result = userExists("VRKirov19", password);
+
+			//Assert
+			Assert::AreEqual(true, result);
 		}
 	};
 }
