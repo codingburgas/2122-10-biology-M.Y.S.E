@@ -483,6 +483,13 @@ void logInScreen(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start, b
     gui.add(buttonRegister);
 
     buttonRegister->onPress([&gui, &window, &start, &backEndRun] { registerScreen(gui, window, start, backEndRun); });
+
+    auto buttonLoginAsGuest = tgui::Button::create("LOG IN AS GUEST");
+    buttonLoginAsGuest->setSize({ "15.3%", "5.5%" });
+    buttonLoginAsGuest->setPosition({ "42.3%", "75.92%" });
+    buttonLoginAsGuest->setRenderer(menuTheme.getRenderer("LoginAsGuestButton"));
+    buttonLoginAsGuest->getRenderer()->setTextSize(35);
+    gui.add(buttonLoginAsGuest);
 }
 
 bool displayWindow(tgui::BackendGui& gui, sf::RenderWindow& window, bool& start, bool& backEndRun)

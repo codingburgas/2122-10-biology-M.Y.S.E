@@ -89,16 +89,23 @@ LoginField{
 }
 
 LoginButton {
-        BackgroundColor = #364741;
+        BackgroundColor = rgba(255, 255, 255, 0);
         Borders = (0, 0, 0, 0);
         TextColor = #FFFFFF;
 }
 
 RegisterButton {
-        BackgroundColor = #349C85;
+        BackgroundColor = rgba(255, 255, 255, 0);
         Borders = (0, 0, 0, 0);
         TextColor = #FFFFFF;
 }
+
+LoginAsGuestButton {
+        BackgroundColor = rgba(255, 255, 255, 0);
+        Borders = (0, 0, 0, 0);
+        TextColor = #1F352F;
+}
+
 
 ConfirmButton {
         BackgroundColor = #349C85;
