@@ -1,22 +1,6 @@
 #include "pch.h"
 #include "user-simulation-info.h"
 
-bool accIsSaved()
-{
-	std::ifstream simulationFile("../pb.dal/files/simulationInfo.txt");
-	std::string line;
-	std::string user = getCurrentUser();
-
-	while (getline(simulationFile, line))
-	{
-		if (line.find(user) != std::string::npos)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
 void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<CountObjects> counterInSimulation, std::vector<Object> objectsOrder)
 {
 	std::ifstream currentUserFile("currentUser.txt");
