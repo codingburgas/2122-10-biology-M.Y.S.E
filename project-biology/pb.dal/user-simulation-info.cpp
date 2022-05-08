@@ -19,6 +19,14 @@ bool accIsSaved()
 
 void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<CountObjects> counterInSimulation, std::vector<Object> objectsOrder)
 {
+	std::ifstream currentUserFile("currentUser.txt");
+	if (!currentUserFile.good())
+	{
+		currentUserFile.close();
+		return;
+	}
+	currentUserFile.close();
+
 	std::ofstream simulationFile("../pb.dal/files/simulationInfo.txt", std::ios::trunc);
 
 	for (size_t i = 0; i < objectsInSimulation.size(); i++)

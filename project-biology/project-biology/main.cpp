@@ -34,4 +34,5 @@ int main()
             window.display();
         }
     }
+    remove("currentUser.txt");
 }
