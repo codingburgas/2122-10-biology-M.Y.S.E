@@ -139,5 +139,19 @@ namespace unittests
 			//Assert
 			Assert::AreEqual(0, result);
 		}
+
+
+		TEST_METHOD(TestSimulationData1)
+		{
+			// Arrange
+			std::string result;
+			std::string expected = "Spring";
+			unsigned short int day = 85;
+			//Act
+			result = getSeason(day, "March");
+
+			//Assert
+			Assert::AreEqual(expected, result);
+		}
 	};
 }
