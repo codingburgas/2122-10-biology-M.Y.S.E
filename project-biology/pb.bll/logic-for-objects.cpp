@@ -418,7 +418,8 @@ void simulation(bool &start, bool &backEndRun) {
 	choiceFile.close();
 
 	if (choice != -1) {
-		std::fstream choicesFile("../pb.dal/files/choices.txt", std::ios::in);
+		std::ifstream choicesFile;
+		choicesFile.open("../pb.dal/files/choices.txt");
 
 		bool flag = true;
 
@@ -427,36 +428,22 @@ void simulation(bool &start, bool &backEndRun) {
 				flag = false;
 
 		choicesFile.close();
-		choicesFile.open("../pb.dal/files/choices.txt", std::ios::out);
+
+		std::fstream choicessFile;
+		choicessFile.open("../pb.dal/files/choices.txt", std::ios::app);
 
 		if (flag)
 		{
-			choicesFile << choice << '|';
+			choicessFile << choice << '|';
 		}
-
-		/*while (getline(choicesFile, textTime, '|'))
-		{
-			choices.push_back(stoi(textTime));
-		}
-
-		choicesFile.close();
-		choicesFile.open("../pb.dal/files/choices.txt", std::ios::out);
-
-		if (std::find(choices.begin(), choices.end(), choice) != choices.end())
-		{
-			choices.push_back(choice);
-			choicesFile << choice << '|';
-		}
-		else
-		{
+		else {
 			choice = -1;
-		}*/
+		}
 
-		choicesFile.close();
+		choicessFile.close();
 	}
 
 	objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, choice, days, temp, start);
-	choice = -1;
 
 	if (start) 
 	{

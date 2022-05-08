@@ -8,6 +8,7 @@ int main()
 
     bool start = false;
     bool backEndRun = false;
+    std::fstream choicessFile("../pb.dal/files/choices.txt");
 
     if (displayWindow(gui, window, start, backEndRun))
     {
