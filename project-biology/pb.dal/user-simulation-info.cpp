@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "user-simulation-info.h"
 
+bool is_empty(std::ifstream& pFile)
+{
+	return pFile.peek() == std::ifstream::traits_type::eof();
+}
+
 bool accIsSaved()
 {
 	std::ifstream simulationFile("../pb.dal/files/simulationInfo.txt");
@@ -19,13 +24,7 @@ bool accIsSaved()
 
 void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<CountObjects> counterInSimulation, std::vector<Object> objectsOrder)
 {
-	std::fstream timeFile("../pb.dal/files/time.txt", std::ios::out | std::ios::in);
-	std::string line;
-	getline(timeFile, line);
-
 	std::ofstream simulationFile("../pb.dal/files/simulationInfo.txt", std::ios::trunc);
-
-	simulationFile << line << std::endl;
 
 	for (size_t i = 0; i < objectsInSimulation.size(); i++)
 	{
@@ -58,5 +57,19 @@ void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<C
 			}
 		}
 	}
+	simulationFile.close();
+}
+
+void saveSimulationToData(std::vector<Object> objectsInSimulation, std::vector<CountObjects> counterInSimulation, std::vector<Object> objectsOrder) {
+
+	std::string text;
+
+	std::ifstream simulationFile("../pb.dal/files/simulationInfo.txt");
+
+	while (getline(simulationFile, text, '|'))
+	{
+		
+	}
+
 	simulationFile.close();
 }

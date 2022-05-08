@@ -261,9 +261,7 @@ void removeObjectByTempeture(std::vector<Object>& objectsInSimulation, std::vect
 
 }
 
-void startingAddObjectInSimulation(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, short int choice, unsigned short int days) {
-
-
+void startingAddObjectInSimulation(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, short int choice) {
 
 	if (objects[choice].food.empty()) {
 		if (objects[choice].name == "Grass")
@@ -354,13 +352,11 @@ void time(unsigned short int& days, std::string& month, std::string& season, int
 	season = getSeason(days, month);
 }
 
-std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, short int choice, unsigned short int days, int& temp, bool start)
+std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, short int choice, int& temp, bool start)
 {
 
-	for (int i = 0; i < objects.size(); i++) {
-		if (choice != -1) {
-			startingAddObjectInSimulation(objectsInSimulation, objects, counterInSimulation, choice, days);
-		}
+	if (choice != -1) {
+		startingAddObjectInSimulation(objectsInSimulation, objects, counterInSimulation, choice);
 	}
 	
 	if (start) {
@@ -443,7 +439,9 @@ void simulation(bool &start, bool &backEndRun) {
 		choicessFile.close();
 	}
 
-	objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, choice, days, temp, start);
+
+	objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, choice, temp, start);
+	saveSimulationToFile(objectsInSimulation, counterInSimulation, objects);
 
 	if (start) 
 	{
@@ -458,9 +456,6 @@ void simulation(bool &start, bool &backEndRun) {
 		timeFile << temp;
 
 		timeFile.close();
-
-		
-		saveSimulationToFile(objectsInSimulation, counterInSimulation, objects);
 
 		backEndRun = true;
 	}

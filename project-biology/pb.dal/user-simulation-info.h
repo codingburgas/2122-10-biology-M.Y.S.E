@@ -6,3 +6,4 @@
 
 bool accIsSaved();
 void saveSimulationToFile(std::vector<Object>, std::vector<CountObjects>, std::vector<Object>);
+void saveSimulationToData(std::vector<Object>, std::vector<CountObjects>, std::vector<Object>);
