@@ -10,7 +10,7 @@ namespace unittests
 	{
 	public:
 		
-		TEST_METHOD(TestMethod1)
+		TEST_METHOD(TestRegister1)
 		{
 			// Arrange
 			bool result;
@@ -20,6 +20,19 @@ namespace unittests
 
 			//Assert
 			Assert::AreEqual(true, result);
+		}
+
+
+		TEST_METHOD(TestRegister2)
+		{
+			// Arrange
+			bool result;
+
+			//Act
+			result = passwordHasNumbers("password");
+
+			//Assert
+			Assert::AreEqual(false, result);
 		}
 
 	};
