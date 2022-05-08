@@ -15,4 +15,4 @@ std::vector<std::string> objectFeelingObjectByTempeture(std::vector<Object> obje
 unsigned short int sumOfPopulation(std::vector<CountObjects> counterInSimulation, int key);
 void startingAddObjectInSimulation(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, short int choice, unsigned short int days);
 void pregnancyObjectInSimulation(std::vector<Object>& objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation);
-std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, short int choice, unsigned short int days, int &temp);
+std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, short int choice, unsigned short int days, int &temp, bool start);

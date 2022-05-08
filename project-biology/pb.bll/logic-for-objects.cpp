@@ -354,7 +354,7 @@ void time(unsigned short int& days, std::string& month, std::string& season, int
 	season = getSeason(days, month);
 }
 
-std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, short int choice, unsigned short int days, int& temp)
+std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std::vector<Object> objects, std::vector<CountObjects>& counterInSimulation, short int choice, unsigned short int days, int& temp, bool start)
 {
 
 	for (int i = 0; i < objects.size(); i++) {
@@ -362,11 +362,13 @@ std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std
 			startingAddObjectInSimulation(objectsInSimulation, objects, counterInSimulation, choice, days);
 		}
 	}
-
-	pregnancyObjectInSimulation(objectsInSimulation, objects, counterInSimulation);
-	removeObjectByLifeExpInYears(objectsInSimulation, objects, counterInSimulation);
-	removeObjectByTempeture(objectsInSimulation, objects, counterInSimulation, temp);
-	removeObjectByFood(objectsInSimulation, objects, counterInSimulation);
+	
+	if (start) {
+		pregnancyObjectInSimulation(objectsInSimulation, objects, counterInSimulation);
+		removeObjectByLifeExpInYears(objectsInSimulation, objects, counterInSimulation);
+		removeObjectByTempeture(objectsInSimulation, objects, counterInSimulation, temp);
+		removeObjectByFood(objectsInSimulation, objects, counterInSimulation);
+	}
 
 	return objectsInSimulation;
 }
@@ -392,6 +394,8 @@ void simulation(bool &start, bool &backEndRun) {
 		++i;
 	}
 
+	textTime = "";
+
 	timeFile.close();
 
 	std::vector<short int> choices;
@@ -402,7 +406,7 @@ void simulation(bool &start, bool &backEndRun) {
 
 	counterInSimulation.resize(objects.size(), { 0, 0, 0 });
 
-	std::ifstream choiceFile("../pb.dal/files/choice.txt");
+	std::ifstream choiceFile("../pb.dal/files/choice.txt", std::fstream::out | std::fstream::trunc);
 
 	getline(choiceFile, textTime);
 	if(textTime != "")
@@ -448,6 +452,9 @@ void simulation(bool &start, bool &backEndRun) {
 		choicesFile.close();
 	}
 
+	objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, choice, days, temp, start);
+	choice = -1;
+
 	if (start) 
 	{
 
@@ -462,7 +469,7 @@ void simulation(bool &start, bool &backEndRun) {
 
 		timeFile.close();
 
-		objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, choice, days, temp);
+		
 		saveSimulationToFile(objectsInSimulation, counterInSimulation, objects);
 
 		backEndRun = true;
