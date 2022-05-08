@@ -3,7 +3,6 @@
 
 void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<CountObjects> counterInSimulation, std::vector<Object> objectsOrder)
 {
-
 	std::ofstream simulationFile("../pb.dal/files/simulationInfo.txt");
 
 	for (size_t i = 0; i < objectsInSimulation.size(); i++)
@@ -13,12 +12,10 @@ void saveSimulationToFile(std::vector<Object> objectsInSimulation, std::vector<C
 		simulationFile << objectsInSimulation[i].gender << "|";
 		simulationFile << objectsInSimulation[i].lifeExpInYears << "|";
 		simulationFile << objectsInSimulation[i].remainingDaysToDead << "|";
-
-		for (size_t j = 0; j < objectsInSimulation[i].food.size(); j++)
+		if (!(objectsInSimulation[i].food.empty()))
 		{
-			simulationFile << objectsInSimulation[i].food[j] << "_";
+			simulationFile << objectsInSimulation[i].food[0] << "|";
 		}
-
 		simulationFile << objectsInSimulation[i].maxTemp << "|";
 		simulationFile << objectsInSimulation[i].minTemp << "|";
 		simulationFile << objectsInSimulation[i].hunger << "|";
@@ -59,20 +56,29 @@ void addSimulationDataToVariables(std::vector<Object>& objectsInSimulation, std:
 				break;
 			}
 		}
-
 		getline(helper, line, '|');
+		objectsInSimulation[i].information = line;
 		getline(helper, line, '|');
 		objectsInSimulation[i].gender = line;
 		getline(helper, line, '|');
+		objectsInSimulation[i].lifeExpInYears = stof(line);
 		getline(helper, line, '|');
 		objectsInSimulation[i].remainingDaysToDead = stof(line);
-		getline(helper, line, '_');
+		if (!(objectsInSimulation[i].food.empty()))
+		{
+			getline(helper, line, '|');
+			objectsInSimulation[i].food.push_back(line);
+		}
 		getline(helper, line, '|');
+		objectsInSimulation[i].maxTemp = stoi(line);
 		getline(helper, line, '|');
+		objectsInSimulation[i].minTemp = stoi(line);
 		getline(helper, line, '|');
+		objectsInSimulation[i].hunger = stoi(line);
 		getline(helper, line, '|');
 		objectsInSimulation[i].hungerRateByDays = stoi(line);
 		getline(helper, line, '|');
+		objectsInSimulation[i].pregnancy = stof(line);
 		getline(helper, line, '|');
 		objectsInSimulation[i].remainingDaysToGiveBirth = stof(line);
 

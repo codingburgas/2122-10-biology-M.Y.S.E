@@ -53,7 +53,7 @@ std::vector<std::string> objectFeelingByHunger(std::vector<Object> objects, std:
 	return feeling;
 }
 
-std::vector<std::string> objectFeelingByTempeture(std::vector<Object> objects, int temp)
+std::vector<std::string> objectFeelingByTemperature(std::vector<Object> objects, int temp)
 {
 	std::vector<std::string> feeling;
 	int sum, helper;
@@ -265,9 +265,9 @@ void startingAddObjectInSimulation(std::vector<Object>& objectsInSimulation, std
 
 	if (objects[choice].food.empty()) {
 		if (objects[choice].name == "Grass")
-			counterInSimulation[choice].maleCount += 20;
+			counterInSimulation[0].maleCount = 20;
 		else
-			counterInSimulation[choice].maleCount += 10;
+			counterInSimulation[choice].maleCount = 10;
 
 		objects[choice].gender = "Male";
 
@@ -356,7 +356,7 @@ std::vector<Object> logicSimulation(std::vector<Object> objectsInSimulation, std
 {
 
 	if (choice != -1) {
-		startingAddObjectInSimulation(objectsInSimulation, objects, counterInSimulation, choice);
+ 		startingAddObjectInSimulation(objectsInSimulation, objects, counterInSimulation, choice);
 	}
 	
 	if (start) {
@@ -447,13 +447,15 @@ void simulation(bool &start, bool &backEndRun) {
 	timeSystem(timeFile, textTime, i, days, month, season, temp);
 	choiceSystem(textTime, choice);
 
+	std::ofstream objectsInRealTime("../pb.dal/files/objectsInRealTime.txt");
+	std::vector<std::string> feelingHunger, feelingTemp;
+
 	addSimulationDataToVariables(objectsInSimulation, counterInSimulation, objects);
 	objectsInSimulation = logicSimulation(objectsInSimulation, objects, counterInSimulation, choice, temp, start);
 	saveSimulationToFile(objectsInSimulation, counterInSimulation, objects);
 
 	if (start) 
 	{
-
 		time(days, month, season, temp);
 
 		timeFile.open("../pb.dal/files/time.txt", std::fstream::out | std::fstream::trunc);
@@ -464,6 +466,33 @@ void simulation(bool &start, bool &backEndRun) {
 		timeFile << temp;
 
 		timeFile.close();
+
+		feelingHunger = objectFeelingByHunger(objects, counterInSimulation);
+		feelingTemp = objectFeelingByTemperature(objects, temp);
+
+		for (size_t i = 0; i < objects.size(); i++)
+		{
+			objectsInRealTime << sumOfPopulation(counterInSimulation, i) << "|";
+			std::cout << sumOfPopulation(counterInSimulation, i) << "|";
+			if (!(objects[i].food.empty())) {
+				objectsInRealTime << counterInSimulation[i].maleCount << "|";
+				std::cout << counterInSimulation[i].maleCount << "|";
+				objectsInRealTime << counterInSimulation[i].femaleCount << "|";
+				std::cout << counterInSimulation[i].femaleCount << "|";
+			}
+			objectsInRealTime << counterInSimulation[i].deadCount << "|";
+			std::cout << counterInSimulation[i].deadCount << "|";
+			if (!(objects[i].food.empty())) {
+				objectsInRealTime << feelingHunger[i - 3] << "|";
+				std::cout << feelingHunger[i - 3] << "|";
+				objectsInRealTime << feelingTemp[i - 3] << "|\n";
+				std::cout << feelingTemp[i - 3] << "|\n";
+			}
+			else {
+				objectsInRealTime << "\n";
+				std::cout << "\n";
+			}
+		}
 
 		backEndRun = true;
 	}
