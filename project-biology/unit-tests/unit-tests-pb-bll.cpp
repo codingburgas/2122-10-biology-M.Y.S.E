@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 #include "../pb.bll/register.h"
+#include "../pb.bll/logic-for-objects.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -121,6 +122,19 @@ namespace unittests
 
 			//Act
 			result = passwordIsGood("password123$", "password123$");
+
+			//Assert
+			Assert::AreEqual(0, result);
+		}
+
+
+		TEST_METHOD(TestRegister10)
+		{
+			// Arrange
+			int result;
+
+			//Act
+			result = registerUser("VRKirov19", "password123$", "password123$");
 
 			//Assert
 			Assert::AreEqual(0, result);
