@@ -1,0 +1,64 @@
+ButtonObjGrass {
+        Texture = "grass.png" Smooth;
+        TextureHover = "grass-hover.png" Smooth;
+}
+
+ButtonObjBlueberry {
+        Texture = "blueberry.png" Smooth;
+        TextureHover = "blueberry-hover.png" Smooth;
+}
+
+ButtonObjFlower {
+        Texture = "flower.png" Smooth;
+        TextureHover = "flower-hover.png" Smooth;
+}
+
+ButtonObjGrasshopper {
+        Texture = "grasshopper.png" Smooth;
+        TextureHover = "grasshopper-hover.png" Smooth;
+}
+
+ButtonObjButterfly {
+        Texture = "butterfly.png" Smooth;
+        TextureHover = "butterfly-hover.png" Smooth;
+}
+
+ButtonObjRabbit {
+        Texture = "rabbit.png" Smooth;
+        TextureHover = "rabbit-hover.png" Smooth;
+}
+
+ButtonObjBee {
+        Texture = "bee.png" Smooth;
+        TextureHover = "bee-hover.png" Smooth;
+}
+
+ButtonObjMouse {
+        Texture = "mouse.png" Smooth;
+        TextureHover = "mouse-hover.png" Smooth;
+}
+
+ButtonObjLizard {
+        Texture = "lizard.png" Smooth;
+        TextureHover = "lizard-hover.png" Smooth;
+}
+
+ButtonObjOwl {
+        Texture = "owl.png" Smooth;
+        TextureHover = "owl-hover.png" Smooth;
+}
+
+ButtonObjFox {
+        Texture = "fox.png" Smooth;
+        TextureHover = "fox-hover.png" Smooth;
+}
+
+ButtonObjSnake {
+        Texture = "snake.png" Smooth;
+        TextureHover = "snake-hover.png" Smooth;
+}
+
+ButtonObjBear {
+        Texture = "bear.png" Smooth;
+        TextureHover = "bear-hover.png" Smooth;
+}

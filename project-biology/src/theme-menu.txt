@@ -1,0 +1,208 @@
+ButtonPlay {
+        BackgroundColor = #B4B4B400;
+        BackgroundColorDown = #96969600;
+        BackgroundColorHover = #3CE13C3C;
+        BorderColor = #F0F0F000;
+        Borders = (0, 0, 0, 0);
+        TextColor = #FFFFFF00;
+        TextColorDown = rgba(255, 255, 255, 235);
+        TextColorHover = rgba(255, 255, 255, 235);
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "button-play.png" Smooth;
+}
+
+ButtonSettings {
+        BackgroundColor = #B4B4B400;
+        BackgroundColorDown = #96969600;
+        BackgroundColorHover = #3CE13C3C;
+        BorderColor = #F0F0F000;
+        Borders = (0, 0, 0, 0);
+        TextColor = #FFFFFF00;
+        TextColorDown = rgba(255, 255, 255, 235);
+        TextColorHover = rgba(255, 255, 255, 235);
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "button-settings.png" Smooth;
+}
+
+ButtonHelp {
+        BackgroundColor = #B4B4B400;
+        BackgroundColorDown = #96969600;
+        BackgroundColorHover = #3CE13C3C;
+        BorderColor = #F0F0F000;
+        Borders = (0, 0, 0, 0);
+        TextColor = #FFFFFF00;
+        TextColorDown = rgba(255, 255, 255, 235);
+        TextColorHover = rgba(255, 255, 255, 235);
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "button-help.png" Smooth;
+}
+
+ButtonQuit {
+        BackgroundColor = #B4B4B400;
+        BackgroundColorDown = #96969600;
+        BackgroundColorHover = #3CE13C3C;
+        BorderColor = #F0F0F000;
+        Borders = (0, 0, 0, 0);
+        TextColor = #FFFFFF00;
+        TextColorDown = rgba(255, 255, 255, 235);
+        TextColorHover = rgba(255, 255, 255, 235);
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "button-quit.png" Smooth;
+}
+
+LoginField{
+        BackgroundColor = #364741;
+        BackgroundColorDisabled = #E6E6E6;
+        BackgroundColorHover = #364741;
+        BorderColor = #3C3C3C;
+        BorderColorDisabled = #7D7D7D;
+        BorderColorHover = black;
+        Borders = (0, 0, 0, 0);
+        CaretColor = black;
+        CaretWidth = 1;
+        DefaultTextColor = #ACCDB8;
+        Padding = (0, 0, 0, 0);
+        SelectedTextBackgroundColor = #006EFF;
+        SelectedTextColor = white;
+        TextColor = #FFFFFF;
+        TextColorDisabled = #7D7D7D;
+        Texture = None;
+        TextureDisabled = None;
+        TextureFocused = None;
+        TextureHover = None;
+}
+
+LoginButton {
+        BackgroundColor = rgba(255, 255, 255, 0);
+        Borders = (0, 0, 0, 0);
+        TextColor = #FFFFFF;
+}
+
+RegisterButton {
+        BackgroundColor = rgba(255, 255, 255, 0);
+        Borders = (0, 0, 0, 0);
+        TextColor = #FFFFFF;
+}
+
+LoginAsGuestButton {
+        BackgroundColor = rgba(255, 255, 255, 0);
+        Borders = (0, 0, 0, 0);
+        TextColor = #1F352F;
+}
+
+
+ConfirmButton {
+        Borders = (0, 0, 0, 0);
+        Texture = "button-confirm.png" Smooth;
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "button-confirm-hover.png" Smooth;
+}
+
+RegisterBackButton {
+        Borders = (0, 0, 0, 0);
+        Texture = "register-back.png" Smooth;
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "register-back-hover.png" Smooth;
+}
+
+ButtonStart {
+        BackgroundColor = #B4B4B400;
+        BackgroundColorDown = #96969600;
+        BackgroundColorHover = #3CE13C3C;
+        BorderColor = #F0F0F000;
+        Borders = (0, 0, 0, 0);
+        TextColor = #FFFFFF00;
+        TextColorDown = rgba(255, 255, 255, 235);
+        TextColorHover = rgba(255, 255, 255, 235);
+        Texture = "button-start.png" Smooth;
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "button-start-hover.png" Smooth;
+}
+
+ButtonExit {
+        BackgroundColor = #B4B4B400;
+        BackgroundColorDown = #96969600;
+        BackgroundColorHover = #3CE13C3C;
+        BorderColor = #F0F0F000;
+        Borders = (0, 0, 0, 0);
+        TextColor = #FFFFFF00;
+        TextColorDown = rgba(255, 255, 255, 235);
+        TextColorHover = rgba(255, 255, 255, 235);
+        Texture = "button-exit.png" Smooth;
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "button-exit-hover.png" Smooth;
+}
+
+LabelTime {
+        TextColor = #272D2A;
+}
+
+LabelUserName {
+	TextColor = #FFFFFF;
+}
+
+LabelError {
+	TextColor = #C92626;
+}
+
+ButtonBackAboutUs {
+        Borders = (0, 0, 0, 0);
+        TextColorDown = rgba(255, 255, 255, 235);
+        TextColorHover = rgba(255, 255, 255, 235);
+        Texture = "about-us-go-back.png" Smooth;
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "about-us-go-back-hover.png" Smooth;
+}
+
+ButtonBackHowToUse {
+        Borders = (0, 0, 0, 0);
+        TextColorDown = rgba(255, 255, 255, 235);
+        TextColorHover = rgba(255, 255, 255, 235);
+        Texture = "how-to-use-back.png" Smooth;
+        TextureDisabled = None;
+        TextureDown = None;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "how-to-use-back-hover.png" Smooth;
+}
+
+PanelStats {
+        BackgroundColor = rgba(255, 255, 255, 0);
+}
